@@ -1,0 +1,41 @@
+{
+  "status": "sat",
+  "endpoint_clauses": 15,
+  "total_endpoints": 15,
+  "phase_halfwidth": "1/2",
+  "radius": "1/6",
+  "candidate": {
+    "n": 5,
+    "speeds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "shift_num": [
+      934,
+      934,
+      2085,
+      736,
+      1080
+    ],
+    "shift_den": 2160
+  },
+  "verified_radius": "499997/3000000",
+  "base": "standard",
+  "speeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "original_phases": [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+  ]
+}

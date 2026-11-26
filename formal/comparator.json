@@ -1,0 +1,13 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "MathLab.Frozen.seed_parameters",
+    "MathLab.Frozen.optimum_on_circle",
+    "MathLab.Frozen.attained_by",
+    "MathLab.Frozen.barrier_under_perturbations"
+  ],
+  "definition_names": [],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

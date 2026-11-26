@@ -1,0 +1,17 @@
+{
+  "speed": 528344,
+  "phase": "4737613/31600000",
+  "radius": "1359451/79000000",
+  "base_radius": "43021/2500000",
+  "strict_improvement": "63/395000000",
+  "target_gap": "1207609/4661000000",
+  "unchanged_runners": 57,
+  "uncovered_intervals": 11,
+  "longest_interval": "53/1264000000",
+  "maximum_possible_speed": 820800,
+  "feasible_speeds": 1,
+  "feasible_phase_start": "4737613/31600000",
+  "feasible_phase_width": "178783/158000000",
+  "strict_residual_components": 12,
+  "weak_hits_on_strict_residual": 0
+}

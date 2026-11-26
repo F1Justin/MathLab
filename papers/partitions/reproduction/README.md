@@ -8,7 +8,7 @@ python3 -m venv /tmp/mathlab-partitions-venv
 /tmp/mathlab-partitions-venv/bin/python reproduce.py --out /tmp/mathlab-partitions-replay
 ```
 
-Use `--only saddle`, `--only finite`, `--only outer`, `--only inner` or `--only factorial-lift` to run one check. Replay is serial. It uses temporary copies because two historical scripts write their JSON beside their source. The full finite replay was 90.42 seconds in the frozen run; time varies by machine. The runner checks the frozen records apart from their wall times. A toolchain with different interval software or proposal heuristics can produce a different valid cover, so use the pinned versions to compare the reports exactly.
+Use `--only saddle`, `--only finite`, `--only outer`, `--only inner` or `--only factorial-lift` to run one check. Replay is serial. It uses temporary copies because two historical scripts write their JSON beside their source. The full finite replay was 90.42 seconds in the frozen run. Time varies by machine. The runner checks the frozen records apart from their wall times. A toolchain with different interval software or proposal heuristics can produce a different valid cover, so use the pinned versions to compare the reports exactly.
 
 The default source is [the frozen partition research folder](../../../snapshot/research/partitions). A differently located copy of the frozen tree can be supplied with `--snapshot`. From the frozen tree one can also check every archived file against [the manifest](../../../snapshot.sha256) using `shasum -a 256 -c ../snapshot.sha256`.
 

@@ -1,0 +1,20 @@
+{
+  "status": "unsat",
+  "endpoint_clauses": 10,
+  "total_endpoints": 10,
+  "phase_halfwidth": "1/2",
+  "radius": "1/5",
+  "base": "standard",
+  "speeds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "original_phases": [
+    "0",
+    "0",
+    "0",
+    "0"
+  ]
+}

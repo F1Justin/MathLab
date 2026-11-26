@@ -1,0 +1,22 @@
+{
+  "commit": "75a0b27a1b3e76715a45704865454b14f8f1c63d",
+  "git_blob": "fb483af965abceef35362d498bef2efd96963f55",
+  "git_content_sha256": "95621bc97c716cf6ef2c03d98db656db72b9ee0a6a7e266c64841e2dd26d66d7",
+  "prior_manifest_sha256": "bedda0f72d4924d01c5e7c4c02f5c382d296433956e985d7a314ff4ecfa15640",
+  "raw_fetch_sha256": "95621bc97c716cf6ef2c03d98db656db72b9ee0a6a7e266c64841e2dd26d66d7",
+  "parsed_raw_json_matches_git_blob": true,
+  "matched_seed_fields": [
+    "n",
+    "speeds",
+    "shift_den",
+    "shift_num",
+    "gamma"
+  ],
+  "local_metadata": [
+    "attribution",
+    "source_url"
+  ],
+  "n": 57,
+  "prior_manifest_matches_reserialized_complete_collection": true,
+  "prior_manifest_serialization": "json.dumps(parsed_collection, indent=0) followed by LF"
+}

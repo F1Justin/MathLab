@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Please cite the relevant manuscript and this version of its verification materials."
+title: "MathLab: set-partition polynomials and shifted lonely runners"
+authors:
+  - family-names: Fang
+    given-names: Chengyi
+    orcid: "https://orcid.org/0009-0006-1237-7763"
+repository-code: "https://github.com/F1Justin/MathLab"
+type: software
+version: "1.0.0"
+license:
+  - MIT
+  - CC-BY-4.0

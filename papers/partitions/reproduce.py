@@ -39,7 +39,7 @@ def replay(name, source, temporary):
         cwd=temporary,
         check=True,
         text=True,
-        capture_output=True,
+        stdout=subprocess.PIPE,
     )
     if name in {"saddle", "finite"}:
         output = json.loads(result.stdout)

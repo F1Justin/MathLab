@@ -1,0 +1,113 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: v0.4
+project:
+  name: Optimal one-runner extension of a fixed shifted configuration
+  description: >-
+    Keeping the speeds and phases of a published 57-runner shifted lonely runner
+    configuration fixed, the least covering radius attainable by adding one
+    runner of distinct positive integer speed and arbitrary real phase is
+    1359451/79000000 turns. Speed 528344 and phase 4737613/31600000 attain the
+    bound. If each of the original phases moves by at most 1207609/4661000000
+    turns on the circle while the speeds stay fixed, then every additional
+    runner of positive integer speed has a time when all 58 runners are at
+    distance at least 1/59 from the origin.
+  authors: [Chengyi Fang]
+  responsible_maintainers: [Chengyi Fang]
+  license: MIT
+classification:
+  arxiv: [math.CO]
+  msc2020: [11J71]
+sources:
+  - title: Optimal one-runner extension of a fixed shifted configuration
+    type: original-proof
+    relationship: other
+    note: The new results optimize the additional runner conditional on a fixed published seed.
+  - title: Shifted lonely runner counterexamples, published configurations for sizes 18–57
+    type: other
+    id: https://github.com/1337isnot1337/solved-conjectures/blob/75a0b27a1b3e76715a45704865454b14f8f1c63d/results/shifted-lonely-runner-counterexamples/certificates.json
+    contributors:
+      - name: tomdif
+        role: Contributed the 57-runner seed used here
+      - name: aadrianvv
+        role: Contributed the earlier configurations and search tooling
+    relationship: background
+    note: The 57-runner speeds and phases are preserved exactly.
+    license: MIT
+  - title: Coloopless zonotopes and counterexamples to the Shifted Lonely Runner Conjecture
+    type: paper
+    authors: [Mónica Blanco, Francisco Criado, Francisco Santos]
+    id: https://arxiv.org/abs/2603.24784v4
+    relationship: background
+  - title: More (shifted) runners, less loneliness
+    type: paper
+    authors: [Daria Poliakova]
+    id: https://arxiv.org/abs/2609.23952v1
+    relationship: background
+  - title: "Tight instances of the Lonely Runner Conjecture: one-entry modifications and the growth of speeds"
+    type: paper
+    authors: [Yuhan Zhang]
+    id: https://arxiv.org/abs/2608.13599v3
+    relationship: background
+related_formalizations:
+  - id: https://github.com/1337isnot1337/solved-conjectures/blob/60e47a0419d97deb104e72eb23692232430ce35f/results/shifted-lonely-runner-counterexamples/FORMALIZATION.md
+    relationship: builds-on
+    note: >
+      The upstream work verifies the seed configuration. The present proof adapts its
+      closed-arc covering checker and adds the lower certificate for an arbitrary extension.
+status:
+  scope: >-
+    The main theorem fixes all 57 original speeds and phases. The perturbation theorem
+    fixes their speeds. The classification of every attaining phase and speed is supported
+    separately by an exact integer enumeration outside Lean. The supporting library also
+    contains a generic phase-grid equivalence and the integer counting layer of a separate
+    packing result.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Quot.sound, Classical.choice]
+automation:
+  methods:
+    - method: agent
+      models: [gpt-6.2-astra]
+      framework: OpenAI API
+      tool_setup: Drafted the phase-window, witness, and stability modules from mathematical specifications.
+      cost:
+        spend_usd: 1.992664
+      prompting_notes: Three completed Lean-specific calls with recorded token usage.
+    - method: agent
+      framework: OpenAI Codex
+      tool_setup: Constructed the certificates, integrated and revised the Lean code, and ran builds and checks.
+      cost:
+        spend_usd: Subscription-based usage
+  spend_usd: "1.992664 in completed Lean-specific API calls, plus subscription-based and broader research usage"
+  notes: The maintainer directed the research and release. The formalization and mathematical checks were performed with automated assistance. Human understanding of the complete proof is recorded as none.
+fidelity:
+  divergences: >-
+    The paper and repository sources above supply context, the original seed, and a reusable
+    covering checker. The claimed exact optimum is for that seed with one additional runner.
+review:
+  status: agent-reviewed
+  reviewers: [OpenAI Codex]
+  human_understanding: none
+  notes: The release audit compared the numerical seed, quantifiers, equality cases, and source provenance with the informal claims. Human or external peer review is pending.
+alignment:
+  namespace: MathLab.Frozen
+  statements:
+    - source: Published seed's size and valid speed set
+      lean: MathLab.Frozen.seed_parameters
+      module: Solution
+      status: proved
+    - source: Sharp optimal covering radius
+      lean: MathLab.Frozen.optimum_on_circle
+      module: Solution
+      status: proved
+    - source: Explicit attaining speed and phase
+      lean: MathLab.Frozen.attained_by
+      module: Solution
+      status: proved
+    - source: Phase perturbation bound at the 58-runner target
+      lean: MathLab.Frozen.barrier_under_perturbations
+      module: Solution
+      status: proved
+acknowledgements: >
+  Thanks to tomdif and aadrianvv for publishing shifted-runner configurations
+  and to the solved-conjectures contributors for the MIT-licensed arc checker.

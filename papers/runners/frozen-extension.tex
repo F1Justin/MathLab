@@ -1,0 +1,561 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,amsthm,booktabs,needspace}
+\usepackage[margin=0.92in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={One-runner extension and phase stability of a 57-runner shifted configuration},
+           pdfauthor={Chengyi Fang}}
+\setlength{\emergencystretch}{1em}
+\allowdisplaybreaks
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\T}{\mathbb{R}/\mathbb{Z}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\DeclareMathOperator{\lcm}{lcm}
+\title{One-runner extension and phase stability of a\\
+       57-runner shifted configuration}
+\author{Chengyi Fang\\[-2pt]\small
+\href{https://orcid.org/0009-0006-1237-7763}{ORCID 0009-0006-1237-7763}}
+\date{26 November 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Fix the 57-runner configuration credited to \texttt{tomdif} in the
+public shifted lonely runner certificate collection. Over every
+additional distinct positive integer speed and arbitrary real phase,
+the optimal covering radius is \(1359451/79000000\). A single speed,
+\(528344\), attains it, with a closed interval of optimal phases.
+The exact radius and a perturbation barrier are Lean-verified.
+An independent weighted residual certificate shows that seven extra
+runners, even with repeated speeds, cannot cover the time circle at
+radius \(1/59\). Any 58-runner cover at that radius shares at most
+50 speed--phase pairs with the fixed configuration. We also give
+restricted exclusion computations for coordinated phase changes and
+for several deletion-and-insertion problems.
+\end{abstract}
+
+\section{Setup}
+
+Let \(\norm{x}=\min_{k\in\Z}|x-k|\). For a family \(C\) of
+speed--phase pairs \((v,s)\) with \(v\in\Z_{>0}\) and \(s\in\T\), define
+\[
+ d_C(t)=\min_{(v,s)\in C}\norm{vt+s},\qquad
+ \gamma(C)=\max_{t\in\T}d_C(t).
+\]
+The observer at the origin contributes no moving runner. A shifted
+lonely runner counterexample with \(n\) distinct speeds satisfies
+\(\gamma(C)<1/(n+1)\). Blanco, Criado and Santos give counterexamples
+for \(5\le n\le17\) \cite[Theorem 1.8]{BCS}, and Poliakova
+gives them for \(n\ge95\) \cite[Theorem 2]{Poliakova}. The public
+collection \cite{upstream} gives exact rational certificates at each
+\(n=18,\ldots,57\), since verified in Lean \cite{upstreamlean}.
+Zhang's Question 8.5 asks both about all sizes \(n\ge5\) and about
+global minimizers \cite{Zhang}. Here the primary results hold for one
+specified seed, and the later tests use specified speed and phase
+restrictions.
+
+Let \(B\) be the 57-runner configuration from
+\texttt{certificates.json} in the public collection at commit
+\href{https://github.com/1337isnot1337/solved-conjectures/blob/75a0b27a1b3e76715a45704865454b14f8f1c63d/results/shifted-lonely-runner-counterexamples/certificates.json}{\texttt{75a0b27a}}.
+Its coordinates are reproduced in the companion
+\texttt{known\_slr\_57.json}. The exact value
+\(\gamma(B)=43021/2500000\) comes from that certificate.
+The public verifier checks all 40 covers in rational arithmetic and
+recomputes the maximum at \(n=57\) by its full event enumeration.
+We use \(d_0=1/59\) for the 58-runner target.
+
+For time intervals at radius \(d\in(0,1/2)\), the bands of \((v,s)\)
+are \([(k-s-d)/v,(k-s+d)/v]\) with \(k\in\Z\). For strict coverage
+take the bands open. We work on \([0,1]\) with \(0\) and \(1\)
+identified. The \(v\) bands modulo one for a single runner are
+disjoint, apart from the representation at this seam.
+
+\Needspace{9\baselineskip}
+\section{Exact optimum with one extra runner}
+
+\begin{theorem}\label{thm:frozen}
+Among configurations obtained from \(B\) by adding one runner with
+a distinct positive integer speed and arbitrary real phase, the
+least covering radius is
+\[
+ d_*=\frac{1359451}{79000000}.
+\]
+The speed is uniquely \(528344\). At that speed the full set of
+optimal phases modulo one is the closed interval with left endpoint
+\(4737613/31600000\) and length \(178783/158000000\).
+\end{theorem}
+
+\begin{proof}
+For weak coverage at a specified \(d\), sweep and merge the closed
+bands of \(B\). The complement comprises the open gaps where
+\(d_B(t)>d\). A new runner covers an open gap if and only if it
+covers its closure, by continuity. For the seed here \(0\) is covered.
+At \(d=d_*\) there are eleven positive-length gaps. The longest has
+length \(53/1264000000\). Since the phase image of a time interval
+\([a,b]\) is connected, covering it requires \(v(b-a)\le2d\).
+In particular any possible speed at \(d_*\) is at most \(820800\).
+
+For each candidate speed \(v\), order the closed gaps by decreasing
+length and write the first as \([a_0,b_0]\).
+The gap \([a,b]\) restricts the phase to the circular window
+\[
+ [ -va-d,\,-vb+d]\pmod1,
+ \tag{1}\label{eq:window}
+\]
+empty when the endpoints are reversed. With
+\(u=s+va_0+d\bmod1\), the first window sets
+\(0\le u\le 2d-v(b_0-a_0)\). Every other window starts at
+\(v(a_0-a)\bmod1\) and has length \(2d-v(b-a)\).
+Choose each start in \([-1/2,1/2]\), and discard negative lengths.
+Here \(2d<1/4\), so the range of \(u\) can intersect only this
+representative, without a translate by a nonzero integer.
+Intersect the closed intervals in this coordinate.
+
+For \(d=d_*\) the finite enumeration leaves exactly one new speed
+and the stated interval of phases. The arithmetic can be reproduced
+without floating-point operations. Multiply \(d\) and the gap
+endpoints by their least common denominator \(D\). For each
+\(1\le v\le820800\) absent from the seed, initialize
+\[
+ (\ell,h)=(0,\,2dD-vD(b_0-a_0)).
+\]
+For every other gap set \(z\) to \(vD(a_0-a)\) reduced modulo \(D\)
+into \([-D/2,D/2]\). Update
+\[
+  \ell\gets\max(\ell,z),\qquad
+  h\gets\min(h,z+2dD-vD(b-a)).
+\]
+Drop the speed as soon as \(\ell>h\). The single surviving interval,
+after dividing by \(D\) and shifting by \(-va_0-d\), is as stated.
+At its left endpoint the eleven closed gaps also pass a direct
+test of (1).
+
+For the lower bound use
+\[
+ t_*=\frac{38586773}{79000000}.
+\]
+At this point all seed distances are at least \(d_*\), with equality
+for speeds \(44\) and \(114\). These inequalities are checked by
+substituting the rational seed. The distance of the only feasible
+new speed at its leftmost phase is \(66324111/158000000\) there.
+Changing the phase anywhere inside the feasible interval can
+decrease the distance by at most \(178783/158000000\), so the new
+distance is still strictly greater than \(d_*\). Thus no weak cover
+at \(d_*\) can have smaller radius. The isolated point \(t_*\)
+belongs to the complement of the \emph{open} seed bands at \(d_*\);
+the lower-bound argument uses it even though the complement of the
+closed bands has only positive-length gaps. Source and certificate
+are in \texttt{optimal\_extension.py} and
+\texttt{optimal\_extension.json}.
+\end{proof}
+
+An independent Lean proof of the radius uses six pairs of rational
+times where all seed distances are at least \(d_*\).
+For every \(1\le v\le820800\) at least one pair \((a,b)\) satisfies
+\(\norm{v(a-b)}\ge2d_*\). The Lean kernel checks the finite modular
+inequality. If the new runner had distance strictly less than \(d_*\)
+at both times, the triangle inequality on \(\T\) would contradict
+it. For larger \(v\) the proof uses two times separated by
+\(2d_*/v\) inside the longest closed gap of the seed coverage.
+The upper bound in Lean uses a chain of rational closed bands for
+the attaining configuration. This proves the radius with no bound
+on speeds and no assumption of rational phases. The uniqueness
+and phase interval in Theorem~\ref{thm:frozen} use the Python
+enumeration.
+
+\begin{corollary}\label{cor:stability}
+Keep the 57 speeds of \(B\) and move each of its phases by at most
+\(\epsilon\) in circular distance. With any additional runner the
+covering radius is at least \(d_*-\epsilon\). At
+\(\epsilon=1207609/4661000000\) this is \(1/59\).
+\end{corollary}
+\begin{proof}
+For fixed time and speed the distance to the nearest integer is
+1-Lipschitz in the phase on \(\T\). The same Lipschitz bound, in the
+maximum displacement over runners, holds after taking a minimum
+over runners and a maximum over time. Compare to the old phases
+with the extra runner unchanged. The value
+\(d_*-1/59=1207609/4661000000\) is exact.
+A common change of time origin replaces all phases by \(s_i+v_i t_0\)
+without changing the maximum. The barrier holds in any box about
+such a time translate of \(B\).
+\end{proof}
+
+\section{A weighted obstruction to seven additions}
+
+\begin{theorem}\label{thm:weights}
+If all runners of \(B\) are retained, appending any seven runners
+of positive integer speed and arbitrary real phase cannot achieve
+radius at most \(1/59\). Repeated speeds among the extra runners
+or between the extra and retained runners are allowed. Consequently
+a 58-runner configuration of radius at most \(1/59\) can contain at
+most 50 of the original 57 speed--phase pairs.
+\end{theorem}
+\begin{proof}
+Use \(Q=59000000\) and the coordinate \(x=Qt\). The open gaps
+\((a,b)\) in the closed bands of \(B\) at \(d_0\) number 207.
+In each take the integer interval
+\([\lceil Qa\rceil,\lfloor Qb\rfloor]\) and use its interior.
+The companion file \texttt{residual\_weights.json} gives the
+nonnegative integer density \(w_j\) on each, in increasing order of
+\(a\). The 121 positive-length intervals of positive weight have
+total weight \(W=\sum_j w_j=303345\) and total weighted length
+\(T=\sum_j w_j(b_j-a_j)=153120431\), where \(a_j,b_j\) are the
+integer endpoints. Normalize to probability mass by dividing the
+densities by \(T\). For each supported interval, each old runner's
+phase on it is between \(k+d_0\) and \(k+1-d_0\) for one integer
+\(k\), as a rational endpoint check confirms. Its interior lies
+outside all the old bands, and the seed covers measure zero for
+this probability measure.
+
+At speed \(v\), change coordinates again to \(y=vx\).
+Modulo \(Q\), the covered \(y\)-coordinates lie in a sliding
+window of length \(U=2d_0Q=2000000\). The contribution from
+\([a_j,b_j]\) consists of
+\(\lfloor v(b_j-a_j)/Q\rfloor\) whole periods and one remainder arc.
+Each period contributes \(U\) to the intersection length.
+The remainder contributes the arc's intersection length with the
+sliding window. The sum of these lengths, with weights \(w_j\),
+divided by \(vT\), is the covered mass.
+For fixed \(v\) the length is continuous and piecewise affine in
+the window start. Breakpoints occur where one of the window
+endpoints meets a remainder endpoint, which are integral
+coordinates modulo \(Q\).
+
+For \(1\le v\le59940\) we enumerate those breakpoints.
+A verifier forms the piecewise constant density on the residue
+circle by adding the weights of the remainder arcs, integrates it
+by a prefix sum of integer rectangle areas, and subtracts the
+values at the two window endpoints. Wrapped arcs are split at
+zero or handled by periodic extension of the integral.
+For each \(v\) we add the independent whole-period term and
+compare exact rational masses. The largest over the finite range is
+\[
+ \beta=\frac{20159589}{153120431},
+\]
+attained for speed \(160\) and window start \(9192800\).
+The second verifier computes the same maximum by accumulating
+slope changes of the window intersection function.
+For every \(v\ge59941\), the whole periods contribute at most \(U/Q\)
+to the normalized mass, and the remainders contribute at most
+\(UW/(vT)\). Thus the mass is bounded by
+\[
+ \frac UQ+\frac{UW}{vT}
+ \ \le\ \frac{7735870501306}{77359044788527}
+ \ <\ \beta .
+\]
+Seven new runners cover mass at most
+\(7\beta=141117123/153120431<1\).
+This proves the obstruction even with weak coverage.
+If a 58-runner cover kept at least 51 of the old pairs,
+restoring every missing old pair would leave all 57 old pairs and at
+most seven additional pairs, a contradiction.
+\end{proof}
+
+Linear programming proposed the weights and two exact interval
+checks reproduce the bound. With all weights equal the precursor calculation
+\texttt{residual\_mass.py} gives a weaker mass cap \(12371/51040\)
+and hence at least five extra runners. An earlier direct
+two-runner calculation uses just 20 of the seed gaps.
+
+On an interval of length \(L\), a runner of speed \(v\) covers
+measure at most \(2d_0L+2d_0/v\), by splitting into full periods and
+one remainder. For two runners with speeds \(v\le w\), the longest
+gap, of width \(26269/295000000\), forces
+\(v\le 4d_0/((1-4d_0)L)\), hence \(v\le816\).
+Divide the slower phase into 32 closed boxes of half-width \(1/64\).
+A gap with midpoint \(t\) and width \(l\) is missed throughout a box
+centred at \(s\) if
+\(\norm{vt+s}>d_0+1/64+vl/2\).
+For each of the \(26112\) speed-box pairs among the 20 widest gaps
+at least eight are missed. The fast speed has finite upper bound
+\(2d_0/l\) from the widest such gap, and for every two missed
+midpoints \(t_i,t_j\) it must satisfy
+\(\norm{w(t_i-t_j)}\le2d_0\).
+All candidate sets are empty by rational arithmetic.
+A separate single-runner check eliminates the unused speeds through
+380 at \(d_0\) using the four widest gap constraints.
+The two-runner calculation permits both speeds to coincide.
+
+\section{Deletion and insertion with fixed surviving phases}
+
+We also tested reducing each of two fixed configurations by one
+runner. The first seed is the zero-phase speed set \(1,\ldots,59\)
+and the second is Poliakova's 95-runner construction, built by
+applying rule \(A\) to \(2,4,\ldots,192\) with its phases evaluated
+at \(1/97\) \cite[Theorem 7]{Poliakova}. The target radii are
+\(1/59\) and \(1/95\), respectively. This section uses strict coverage.
+Each new speed must be distinct from the surviving speeds, and the
+two new speeds, when present, distinct from each other. A deleted
+speed may be re-used with a different phase.
+
+\subsection*{Deleting two and inserting one}
+
+Sweep the endpoints of all original open bands. Record each endpoint
+and open cell with its exact set of covering runners whenever that
+set has size at most two. At an endpoint first remove arcs ending
+there, record the endpoint, and then insert arcs starting there.
+Deleting a specified pair exposes exactly the pieces whose covering
+sets lie in the pair. The set so exposed is closed, so we can merge
+the closures of its cells and include every exposed singleton.
+If the widest residual component has positive length \(L\), the new
+speed is at most \(\lfloor 2d/L\rfloor\) and its allowable phase
+windows are the open form of (1), including the constraints of
+singletons. If the residual has only rational singletons, a multiple
+of their denominators hits all of them at phase zero. An unused such
+speed exists. The empty residual requires no phase constraint.
+The resulting complete finite computations give the following.
+\begin{center}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Target & Deletion pairs & Largest speed bound & Feasible \\
+\midrule
+58 & 1711 & 170 & 0 \\
+94 & 4465 & 580 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+See \texttt{single\_replacement.py} and its exact results.
+
+If the exposed compact set is symmetric about time zero and
+\(d<1/4\), a strict single-runner cover can be chosen at phase \(0\)
+or \(1/2\). Indeed for each exposed pair \(t,-t\), both \(s+vt\) and
+\(s-vt\) are within \(d\) of integers \(k,l\), respectively.
+The average of the signed errors is \(s-(k+l)/2\) and half their
+difference is \(vt-(k-l)/2\). Modulo one there is a unique phase in
+\(\{0,1/2\}\) within \(d\) of \(s\), independent of \(t\).
+It is the residue of both half-integers \((k+l)/2,(k-l)/2\).
+Thus the corresponding phase gives distance less than \(d\) at every
+exposed time. The computation above treats the continuous phases
+directly in both seeds.
+
+\subsection*{Deleting three and inserting two}
+
+We selected twelve triples per seed by the smallest number of exposed
+positive-length cells before merging, breaking ties by seed order.
+Sweep all open bands as above, now keeping covering sets of size up
+to three. For each triple let \(H\) be the union of closed residual
+components. We reduce the search on \(H\) as follows.
+
+Let \(v<w\) be the new speeds and let \(S=2d/v,\ F=2d/w\) be their
+band lengths. For \(d<1/4\) any complete gap between two slow
+bands is longer than a fast band. Thus each covered component of
+\(H\) can meet at most one slow band. Its two portions outside that
+band each have length strictly less than \(F\) because each is
+contained in one open fast band. If it misses the slow bands
+entirely its length is less than \(F\). Therefore the maximum length
+\(L\) of a residual component requires
+\[
+  L<S+2F<6d/v .
+\]
+This caps \(v\), and caps \(w\) whenever \(L>S\).
+When a component \([a,b]\) has length at least \(F\), it must meet
+a slow band, whose endpoints must be strictly below \(a+F\)
+and strictly above \(b-F\), respectively. This requires the slow
+phase to lie in
+\[
+   (-d-va-vF,\ d-vb+vF)\pmod1 .
+\]
+Intersect these necessary conditions from all qualifying components.
+Failure persists as \(w\) increases, since \(F\) decreases.
+Two more finite filters can be used. If \(g=\gcd(v,w)\) and
+\(gL\ge1\), then one common period \(1/g\) inside \(H\) cannot be
+covered by the two runners, whose combined covered fraction is
+at most \(4d<1\). If \(L\ge S+F\), both wings of a longest component
+require distinct fast bands. If their centers differ by \(m/w\),
+the component's endpoints force \(L<m/w+F\), while both fast bands
+meeting the respective slow-band boundaries forces \(m/w-F<S\).
+
+For each remaining fixed speed pair, split the slow and fast phase
+axes at the finitely many values where a missed time band starts
+or stops meeting a component of \(H\).
+For a speed \(v\) and phase \(s\) its closed missed band with
+index \(k\) is
+\([(k+d-s)/v,(k+1-d-s)/v]\).
+The set of relevant indices is constant on the open phase cells.
+For a fast phase \(b_0\), a missed time in one residual component
+exists precisely when that component and one closed gap from each
+runner meet pairwise. Three closed real intervals meet all together
+if they meet pairwise. The two gaps with indices \(k,j\) meet
+if and only if
+\[
+ w(k+d)-v(j+1-d)\ \le\ ws-vb_0\ \le\
+ w(k+1-d)-v(j+d).
+\]
+Thus on each open phase rectangle feasibility is the existence of
+a point in its open interval of values \(ws-vb_0\) outside a finite
+union of closed intervals. For fixed \(k\), consecutive \(j\)'s
+translate these forbidden blocks by \(v\). Their common length
+\((w+v)(1-2d)\) exceeds \(v\), so they can be merged before the
+interval-union test. A cover strict on the compact set \(H\)
+has a positive margin and persists under small phase changes.
+It is sufficient to test only open phase rectangles, with every
+time endpoint still included in \(H\).
+
+For the 24 selected triples the exact solver proved infeasibility.
+It used a fallback speed cap of 2500, but for each allowed slower
+speed either a finite analytic bound covered the entire fast range
+or the monotone phase condition excluded the entire remaining
+tail. The solver distinguishes these global exclusions from
+cap-limited negative outcomes. The exact solver is
+\texttt{two\_speed\_search.py}. The driver \texttt{triple\_replacement.py}
+selects the triples and \texttt{triple\_replacement.json} records
+each verdict. The following are the triples, listed as speeds.
+\begin{center}
+\begin{tabular}{@{}cc@{}}
+\toprule
+Target 58 & Target 94 \\
+\midrule
+\((1,2,6)\)  & \((2,3,9)\) \\
+\((1,2,59)\) & \((3,4,9)\) \\
+\((1,3,4)\)  & \((2,4,9)\) \\
+\((1,3,59)\) & \((4,6,9)\) \\
+\((1,4,6)\)  & \((2,3,4)\) \\
+\((1,4,59)\) & \((2,3,6)\) \\
+\((1,6,59)\) & \((2,6,9)\) \\
+\((2,3,59)\) & \((3,4,6)\) \\
+\((2,6,59)\) & \((3,6,9)\) \\
+\((1,2,3)\)  & \((2,3,16)\) \\
+\((1,2,4)\)  & \((2,9,16)\) \\
+\((2,3,4)\)  & \((3,9,16)\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Tests in phase boxes}
+
+For fixed distinct positive speeds and \(0<d<1/2\), the family of
+open runner bands covers \(\T\) if and only if every right endpoint
+of every band lies in another band. For necessity the band that
+ends there is open and no other band of the same runner contains
+that endpoint. For sufficiency, a proper finite nonempty union
+of open arcs has a boundary point at a right endpoint of one arc,
+including the case of a singleton complement next to it.
+By compactness pointwise strict coverage is equivalent to
+\(\gamma<d\).
+
+Let the nominal phases be \(s_i\) and vary them to \(s_i-v_i y_i\)
+with \(|v_i y_i|\le\epsilon\). For each original right endpoint
+\(e=(k+d-s_i)/v_i\), the exact condition is that at least one choice
+of \(j\ne i\) and \(l\in\Z\) satisfies
+\[
+ \frac{l-s_j-v_j e-d}{v_j}< y_i-y_j <
+ \frac{l-s_j-v_j e+d}{v_j}.
+\]
+The bounds on the delays exclude all but finitely many \(l\).
+After picking a disjunct for each endpoint, this is a system
+of strict and weak difference inequalities with a zero reference
+for the delay box.
+
+For rational nominal phases, radius and half-width let \(D\) be
+the product of their common denominator and the lcm of the speeds.
+All bounds after scaling delays by \(D\) are integral.
+A real feasible selection has nonnegative weight on every
+directed cycle and strictly positive weight on each cycle using
+a strict edge. Every simple cycle has at most \(n+1\) edges, so
+tightening each strict bound by \(1/(n+1)\) leaves all cycle weights
+nonnegative. Multiply again by \(n+1\).
+Integer shortest-path potentials then give a point satisfying the
+tightened constraints. Subtract the potential of the reference
+from every coordinate to reset it to zero. Conversely any point on
+this grid satisfying those tightened constraints solves the original
+strict ones. This reduction is exact for continuous phases and time.
+The interval and difference-constraint approach is related to
+\cite[Section 5]{BCS}.
+
+At \(d=1/59\) the exact integer-difference encoding in Z3 returned
+infeasible in the following two boxes.
+\begin{center}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Fixed speeds and nominal phases & Half-width & Endpoints \\
+\midrule
+\(1,\ldots,58\), zero phases & \(3/125\) & 1711 \\
+Stored 58-runner candidate & \(1/32\) & 3217 \\
+\bottomrule
+\end{tabular}
+\end{center}
+A separate real-arithmetic Z3 encoding independently excludes the
+standard-speed case at half-width \(1/50\) using 203 endpoints.
+The two larger results use solver verdicts from the integer encoding.
+The real encoding timed out on those larger boxes.
+The nominal phases for the second row are the exact rationals in
+\texttt{chain58\_box.json}, obtained from the stored search output.
+A common time translation of all phases preserves the conclusion for
+each box.
+
+An additional finite-menu SAT calculation used the full time circle
+at \(64/(64K+1)\), for \(K=59\), with at most \(K-1\) runners
+chosen from finite speed and phase options. The union of closed
+coverage arcs covers the circle precisely when it covers every open
+cell cut out by their rational endpoints. A clause requires at least
+one active option per cell not covered by a fixed runner. Further
+constraints allow at most one phase per speed and enforce the
+runner budget. Seven menus at \(K=59\) were infeasible at that fixed
+radius. The exact parameters and verdicts are in
+\texttt{direct\_rule\_search.log} and
+\texttt{direct\_rule\_frontier.log}. The radius is strictly smaller
+than \(1/K\), so even within a searched menu the verdict is scoped to
+that fixed radius. A global 58-runner question remains.
+
+\section*{Data, formalization and attribution}
+
+The exact data and replay commands are in the
+\href{https://github.com/F1Justin/MathLab/tree/v1.0.0}{versioned MathLab repository}.
+The \texttt{MathLab.Frozen} namespace contains
+\texttt{frozen\_optimum}, its attaining cover, and
+\texttt{perturbation\_barrier}. The formalization
+concerns extending and perturbing the already published seed.
+The seed and its exact radius are credited to \texttt{tomdif};
+\texttt{aadrianvv} provided the earlier certificates and
+the upstream public verifier. The upstream Lean cover checker,
+which was reused under its MIT license, has its separate attribution
+in the formal project. The finite phase and replacement checks
+use rational or integer arithmetic as described above.
+
+Chengyi Fang initiated and funded the project, set its objectives,
+supervised its execution and directed dissemination. Codex and
+Astra performed the principal mathematical development, computation,
+formalization and writing. Astra developed the two-runner exact
+phase solver and assisted with the formal proofs and model-based
+review. The contributor understands aspects of the research but
+has not independently checked any part of the proofs.
+
+\medskip\noindent
+This work is licensed under
+\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
+The original accompanying code is released under the MIT License.
+
+\begingroup
+\small
+\begin{thebibliography}{9}
+\setlength{\itemsep}{0pt}
+\bibitem{BCS}
+M.~Blanco, F.~Criado and F.~Santos,
+\emph{Coloopless zonotopes and counterexamples to the Shifted Lonely
+Runner Conjecture}, \href{https://arxiv.org/abs/2603.24784v4}
+{arXiv:2603.24784v4}, 2026.
+\bibitem{Poliakova}
+D.~Poliakova, \emph{More (shifted) runners, less loneliness},
+\href{https://arxiv.org/abs/2609.23952v1}{arXiv:2609.23952v1}, 2026.
+\bibitem{Zhang}
+Y.~Zhang, \emph{Tight instances of the Lonely Runner Conjecture:
+one-entry modifications and the growth of speeds},
+\href{https://arxiv.org/abs/2608.13599v3}{arXiv:2608.13599v3}, 2026.
+\bibitem{upstream}
+\texttt{aadrianvv} and \texttt{tomdif},
+\emph{Shifted Lonely Runner counterexamples for \(18\le n\le57\)},
+\href{https://github.com/1337isnot1337/solved-conjectures/issues/110}
+{solved-conjectures, issue 110}, 2026.
+\bibitem{upstreamlean}
+\texttt{1337isnot1337/solved-conjectures},
+\emph{Lean-verify the shifted Lonely Runner counterexamples for 18 through 57},
+\href{https://github.com/1337isnot1337/solved-conjectures/commit/9aefed33ac284780cf29b76d7914bc32877757af}
+{pull request 755, merged 26 November 2026}.
+\end{thebibliography}
+\endgroup
+\end{document}

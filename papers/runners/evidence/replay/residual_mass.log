@@ -1,0 +1,15 @@
+{
+  "radius": "1/59",
+  "grid_denominator": 59000000,
+  "intervals": 207,
+  "total_grid_units": 153120,
+  "speed_limit": 29678,
+  "small_speed_max": "12371/51040",
+  "maximizer_speed_and_window_start": [
+    144,
+    57982016
+  ],
+  "large_speed_upper_bound": "23274234/186196153",
+  "uniform_upper_bound": "12371/51040",
+  "additions_required_at_least": 5
+}

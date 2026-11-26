@@ -1,0 +1,9 @@
+{
+  "n": 57,
+  "certified": true,
+  "delta": "2497609/145000000",
+  "threshold": "1/58",
+  "arcs": 3068,
+  "gap": null,
+  "meaning": "gamma <= delta < threshold"
+}
