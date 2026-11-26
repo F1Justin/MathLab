@@ -1,0 +1,9 @@
+{"progress": "ordered", "parameter": 2, "n": 20, "elapsed_seconds": 0.186}
+{"progress": "ordered", "parameter": 2, "n": 40, "elapsed_seconds": 1.487}
+{"family": "ordered", "parameter": 2, "max_n": 50, "root_tests": 49, "interlacing_pairs": 13, "interlacing_through_n": 15, "failures": [], "elapsed_seconds": 8.857, "coefficients_order": "ascending", "sympy_version": "1.14.0", "python_version": "3.12.14", "script_sha256": "abe231bbc8dcd23ba09d64c57a1613d6d52bb27415f2c012b8fb2bb4d73650f1", "scope": "Finite exact computation only; no general proof or novelty claim."}
+{"progress": "ordered", "parameter": 3, "n": 20, "elapsed_seconds": 0.065}
+{"progress": "ordered", "parameter": 3, "n": 40, "elapsed_seconds": 0.28}
+{"family": "ordered", "parameter": 3, "max_n": 50, "root_tests": 48, "interlacing_pairs": 12, "interlacing_through_n": 15, "failures": [], "elapsed_seconds": 1.656, "coefficients_order": "ascending", "sympy_version": "1.14.0", "python_version": "3.12.14", "script_sha256": "abe231bbc8dcd23ba09d64c57a1613d6d52bb27415f2c012b8fb2bb4d73650f1", "scope": "Finite exact computation only; no general proof or novelty claim."}
+{"progress": "ordered", "parameter": 4, "n": 20, "elapsed_seconds": 0.045}
+{"progress": "ordered", "parameter": 4, "n": 40, "elapsed_seconds": 0.116}
+{"family": "ordered", "parameter": 4, "max_n": 50, "root_tests": 47, "interlacing_pairs": 11, "interlacing_through_n": 15, "failures": [], "elapsed_seconds": 0.417, "coefficients_order": "ascending", "sympy_version": "1.14.0", "python_version": "3.12.14", "script_sha256": "abe231bbc8dcd23ba09d64c57a1613d6d52bb27415f2c012b8fb2bb4d73650f1", "scope": "Finite exact computation only; no general proof or novelty claim."}

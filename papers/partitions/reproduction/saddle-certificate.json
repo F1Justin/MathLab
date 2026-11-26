@@ -1,0 +1,10 @@
+{
+  "counts": {
+    "verified_angle_boxes": 1973,
+    "certified_radius_slabs": 86
+  },
+  "phase_at_1": "[-0.74790665 +/- 8.36e-9]",
+  "phase_at_1_16": "[-0.7831803 +/- 1.13e-8]",
+  "phase_at_32": "[-0.09831463 +/- 8.63e-9]",
+  "asymptotic_fraction_of_degree": "[0.8270862 +/- 6.46e-8]"
+}

@@ -1,0 +1,7 @@
+{
+  "model": "gpt-6.2-astra",
+  "reasoning": {
+    "effort": "xhigh"
+  },
+  "snapshot_status": "in_progress"
+}

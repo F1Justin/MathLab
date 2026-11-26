@@ -1,0 +1,9 @@
+cycles j=3: exact rows 3..30, adjacent interleaving ending at 15
+cycles j=4: exact rows 4..30, adjacent interleaving ending at 15
+cycles j=5: exact rows 5..30, adjacent interleaving ending at 15
+ordered j=2: exact rows 2..50, adjacent interleaving ending at 15
+ordered j=3: exact rows 3..50, adjacent interleaving ending at 15
+ordered j=4: exact rows 4..50, adjacent interleaving ending at 15
+partitions j=4: exact rows 4..100, adjacent interleaving ending at 15
+partitions j=5: exact rows 5..100, adjacent interleaving ending at 15
+partitions j=6: exact rows 6..100, adjacent interleaving ending at 15

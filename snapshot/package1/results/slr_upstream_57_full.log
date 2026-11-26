@@ -1,0 +1,2 @@
+n=57  speeds=other(max 216)  gamma=43021/2500000  1/gamma-(n+1)=0.1112  gamma<1/(n+1):True  cover@delta:True  OK
+elapsed_seconds 54.333

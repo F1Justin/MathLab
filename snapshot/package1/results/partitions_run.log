@@ -1,0 +1,19 @@
+Definition-level and exact-verifier controls passed.
+{"progress": "partitions", "parameter": 4, "n": 20, "elapsed_seconds": 0.031}
+{"progress": "partitions", "parameter": 4, "n": 40, "elapsed_seconds": 0.066}
+{"progress": "partitions", "parameter": 4, "n": 60, "elapsed_seconds": 0.611}
+{"progress": "partitions", "parameter": 4, "n": 80, "elapsed_seconds": 8.341}
+{"progress": "partitions", "parameter": 4, "n": 100, "elapsed_seconds": 50.264}
+{"family": "partitions", "parameter": 4, "max_n": 100, "root_tests": 97, "interlacing_pairs": 11, "interlacing_through_n": 15, "failures": [], "elapsed_seconds": 54.34, "coefficients_order": "ascending", "sympy_version": "1.14.0", "python_version": "3.12.14", "script_sha256": "abe231bbc8dcd23ba09d64c57a1613d6d52bb27415f2c012b8fb2bb4d73650f1", "scope": "Finite exact computation only; no general proof or novelty claim."}
+{"progress": "partitions", "parameter": 5, "n": 20, "elapsed_seconds": 0.029}
+{"progress": "partitions", "parameter": 5, "n": 40, "elapsed_seconds": 0.048}
+{"progress": "partitions", "parameter": 5, "n": 60, "elapsed_seconds": 0.306}
+{"progress": "partitions", "parameter": 5, "n": 80, "elapsed_seconds": 2.253}
+{"progress": "partitions", "parameter": 5, "n": 100, "elapsed_seconds": 13.169}
+{"family": "partitions", "parameter": 5, "max_n": 100, "root_tests": 96, "interlacing_pairs": 10, "interlacing_through_n": 15, "failures": [], "elapsed_seconds": 14.361, "coefficients_order": "ascending", "sympy_version": "1.14.0", "python_version": "3.12.14", "script_sha256": "abe231bbc8dcd23ba09d64c57a1613d6d52bb27415f2c012b8fb2bb4d73650f1", "scope": "Finite exact computation only; no general proof or novelty claim."}
+{"progress": "partitions", "parameter": 6, "n": 20, "elapsed_seconds": 0.02}
+{"progress": "partitions", "parameter": 6, "n": 40, "elapsed_seconds": 0.033}
+{"progress": "partitions", "parameter": 6, "n": 60, "elapsed_seconds": 0.114}
+{"progress": "partitions", "parameter": 6, "n": 80, "elapsed_seconds": 0.844}
+{"progress": "partitions", "parameter": 6, "n": 100, "elapsed_seconds": 4.948}
+{"family": "partitions", "parameter": 6, "max_n": 100, "root_tests": 95, "interlacing_pairs": 9, "interlacing_through_n": 15, "failures": [], "elapsed_seconds": 5.341, "coefficients_order": "ascending", "sympy_version": "1.14.0", "python_version": "3.12.14", "script_sha256": "abe231bbc8dcd23ba09d64c57a1613d6d52bb27415f2c012b8fb2bb4d73650f1", "scope": "Finite exact computation only; no general proof or novelty claim."}

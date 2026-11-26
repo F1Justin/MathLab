@@ -1,0 +1,10 @@
+59 16 False 0 12 92 unsat
+59 14 False 0 18 164 unsat
+59 12 False 0 18 169 unsat
+59 10 False 0 30 305 unsat
+59 8 False 0 54 701 timeout
+59 7 False 0 66 998 timeout
+59 5 False 0 126 2546 timeout
+59 4 False 0 192 4988 timeout
+59 3 False 0 360 12800 timeout
+59 2 False 0 810 43884 timeout

@@ -1,0 +1,5 @@
+{"K": 59, "primes": [2, 3], "phase_denom": 4, "shifts": ["0", "1/2", "-1"], "odd_speed_cap": 81, "template": true, "fixed": 43, "options": 140, "distinct_cells": 1188, "row_clauses": 128, "seconds": 0.02, "state": "unsat"}
+{"K": 59, "primes": [2, 3, 5], "phase_denom": 4, "shifts": ["0"], "odd_speed_cap": 135, "template": false, "fixed": 34, "options": 148, "distinct_cells": 3602, "row_clauses": 508, "seconds": 0.01, "state": "unsat"}
+{"K": 59, "primes": [2, 3, 5], "phase_denom": 4, "shifts": ["0", "1/4", "-1/4"], "odd_speed_cap": 135, "template": true, "fixed": 34, "options": 269, "distinct_cells": 5242, "row_clauses": 888, "seconds": 0.08, "state": "unsat"}
+{"K": 59, "primes": [2, 3, 5, 7], "phase_denom": 4, "shifts": ["0"], "odd_speed_cap": 189, "template": false, "fixed": 26, "options": 216, "distinct_cells": 9704, "row_clauses": 2416, "seconds": 0.08, "state": "unsat"}
+{"K": 59, "primes": [2, 3, 5, 7], "phase_denom": 4, "shifts": ["0", "1/4", "-1/4"], "odd_speed_cap": 189, "template": true, "fixed": 26, "options": 417, "distinct_cells": 16440, "row_clauses": 3476, "seconds": 7.34, "state": "unsat"}

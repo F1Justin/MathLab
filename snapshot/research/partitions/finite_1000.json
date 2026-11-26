@@ -1,0 +1,8 @@
+{
+  "nmax": 1000,
+  "nonconstant_rows": 997,
+  "pairs_with_both_nonconstant": 996,
+  "method": "FLINT complex root isolation; exact-zero imaginary part, multiplicity one, disjoint ordered real intervals",
+  "precision_bits": 96,
+  "python_flint": "0.9.0"
+}

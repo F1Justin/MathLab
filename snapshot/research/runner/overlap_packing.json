@@ -1,0 +1,174 @@
+{
+  "recipes": [
+    {
+      "recipe": [
+        [
+          "A",
+          1,
+          0
+        ]
+      ],
+      "threshold": 96,
+      "gain": 1,
+      "primitive_cases": 184
+    },
+    {
+      "recipe": [
+        [
+          "B",
+          1,
+          0
+        ]
+      ],
+      "threshold": 120,
+      "gain": 2,
+      "primitive_cases": 536
+    },
+    {
+      "recipe": [
+        [
+          "C",
+          1,
+          0
+        ]
+      ],
+      "threshold": 216,
+      "gain": 3,
+      "primitive_cases": 882
+    },
+    {
+      "recipe": [
+        [
+          "B",
+          1,
+          0
+        ],
+        [
+          "B",
+          5,
+          1
+        ]
+      ],
+      "threshold": 600,
+      "gain": 4,
+      "primitive_cases": 2680
+    },
+    {
+      "recipe": [
+        [
+          "A",
+          1,
+          0
+        ],
+        [
+          "A",
+          9,
+          0
+        ],
+        [
+          "C",
+          5,
+          0
+        ]
+      ],
+      "threshold": 1080,
+      "gain": 5,
+      "primitive_cases": 5356
+    },
+    {
+      "recipe": [
+        [
+          "A",
+          1,
+          0
+        ],
+        [
+          "C",
+          5,
+          0
+        ],
+        [
+          "C",
+          9,
+          0
+        ]
+      ],
+      "threshold": 1944,
+      "gain": 7,
+      "primitive_cases": 9928
+    },
+    {
+      "recipe": [
+        [
+          "A",
+          1,
+          0
+        ],
+        [
+          "A",
+          5,
+          0
+        ],
+        [
+          "C",
+          25,
+          0
+        ],
+        [
+          "C",
+          27,
+          0
+        ]
+      ],
+      "threshold": 5832,
+      "gain": 8,
+      "primitive_cases": 41576
+    },
+    {
+      "recipe": [
+        [
+          "C",
+          1,
+          0
+        ],
+        [
+          "C",
+          25,
+          0
+        ],
+        [
+          "A",
+          45,
+          0
+        ],
+        [
+          "B",
+          81,
+          0
+        ]
+      ],
+      "threshold": 9720,
+      "gain": 9,
+      "primitive_cases": 65766
+    }
+  ],
+  "head": [
+    96,
+    120,
+    216,
+    600,
+    1080,
+    1944
+  ],
+  "cycle": [
+    1944,
+    5832,
+    9720
+  ],
+  "scale_ratio": 5,
+  "saved_fraction": "8011/1093500",
+  "liminf_En_over_n": "8011/1085489",
+  "all_n_denominator": 150,
+  "finite_floor_verified_through_h": 74,
+  "large_h_slope": "792599/729000"
+}

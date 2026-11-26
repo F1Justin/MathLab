@@ -1,0 +1,10 @@
+{
+  "radius": "1/59",
+  "witnesses": 20,
+  "bins": 32,
+  "slow_max": 816,
+  "phase_boxes": 26112,
+  "min_untouched": 8,
+  "unresolved_count": 0,
+  "unresolved_examples": []
+}

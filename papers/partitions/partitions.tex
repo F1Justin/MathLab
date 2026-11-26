@@ -1,0 +1,623 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,amsthm,booktabs,needspace}
+\usepackage[a4paper,margin=27mm,top=25mm,bottom=27mm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Eventual interlacing of large-block set-partition polynomials}}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\DeclareMathOperator{\Ai}{Ai}
+\DeclareMathOperator{\Rea}{Re}
+\DeclareMathOperator{\Ima}{Im}
+\newcommand{\ee}{\mathrm e}
+\newcommand{\ii}{\mathrm i}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\R}{\mathbb R}
+
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Eventual interlacing of large-block\\[2pt] set-partition polynomials\par}
+\vspace{1ex}
+Chengyi Fang\par
+\vspace{0.3ex}
+26 November 2026
+\end{center}
+
+\begin{abstract}
+Let \(P_n(t)\) count set partitions of \([n]\) by the number of blocks of size at least four. For all sufficiently large \(n\), its \(\lfloor n/4\rfloor\) zeros are simple and negative, and \(P_n\) interlaces \(P_{n+j}\) strictly in the prescribed direction for \(1\le j\le4\). The proof matches absolute zero counts at a reciprocal-polynomial limit and an Airy limit, using uniform saddle estimates between them. The global angular minimum on a bounded range of radii is certified with outward-rounded interval arithmetic. We give the limiting empirical zero distribution, fixed-rank asymptotics and adjacent-row displacement at the Airy edge, and effective bounds at both ends. Integer and interval computations certify every nonconstant row through \(2004\). We also prove a coefficient-order inequality valid for every block-size threshold.
+\end{abstract}
+
+\section{The polynomials and the interlacing problem}
+
+For \(b\ge2\) and \(n\ge0\), let
+\[
+ P^{(b)}_n(t)=\sum_{\pi\in\Pi_n}t^{\#\{C\in\pi:\,|C|\ge b\}},
+ \qquad P_n=P^{(4)}_n,
+\]
+where \(\Pi_n\) consists of all partitions of \([n]\) into unordered nonempty blocks. Every coefficient from degree zero through \(\lfloor n/b\rfloor\) is positive. Construct a partition with the chosen number of blocks of size \(b\) and leave the other elements as singletons. In particular, the leading and constant coefficients are positive. We use increasing real root lists. For \(f\) of degree \(m\), write \(f\prec g\) for strict interlacing in the order
+\[
+ \begin{array}{ll}
+ f_1<g_1<\cdots<f_m<g_m,& \deg g=m,\\
+ g_1<f_1<g_2<\cdots<f_m<g_{m+1},&\deg g=m+1.
+ \end{array}
+\]
+Constants are interpreted by their empty root lists.
+
+Zhan studied the polynomials and conjectured consecutive interlacing \cite[Thm.~3.3 and Sec.~3.1.1]{zhan}. Alexandersson posed real-rootedness and the wider window \(P^{(b)}_{n-j}\) through \(P^{(b)}_n\), \(1\le j\le b\), in 2024, using polynomials with an extra common factor \(t\) \cite{mo}. The Symmetric Functions Catalog lists \(b=4\) as the first unresolved threshold for consecutive interlacing in unrestricted partitions \cite{symcat}. It records the \(b=2\) identification with run-sorted permutation descents \cite{an} and the \(b=3\) result. It also records results for partitions restricted to large blocks, or to singletons and large blocks \cite{symcatsp}. Bóna and Mező treated the real-rootedness and extreme roots of the non-singleton restriction \cite{bm}.
+
+\begin{theorem}\label{thm:main}
+There is an integer \(N\) such that, for every \(n\ge N\), the polynomial \(P_n\) has \(\lfloor n/4\rfloor\) simple negative zeros and \(P_n\prec P_{n+j}\) for \(1\le j\le4\). Thus any five consecutive rows starting at \(n\ge N\) strictly interlace pairwise. Five is the largest such window uniform in the starting row.
+\end{theorem}
+
+The maximality follows from the degree jump of two between rows \(4m+3\) and \(4m+8\). The proof gives an existential \(N\). Establishing an explicit \(N\) which meets the finite range, or finding an argument for every row, remains open here. The coefficient result in Section~\ref{sec:coefficients} applies to every \(n\) and \(b\).
+
+\section{The coefficient integral and its angular minima}\label{sec:bulk}
+Let
+\[
+ A(z)=z+z^2/2+z^3/6,\qquad B(z)=\ee^z-1-A(z),\qquad
+ H=zB',\quad K=zH',\quad h=zA'.
+\]
+The exponential formula gives \(P_n(t)=n![z^n]\exp(A(z)+tB(z))\). With \(x>0\), a circle of radius \(R\), and \(z=R\ee^{\ii\alpha}\), write
+\[
+ I[f]=\frac{R^{-n}}{2\pi}\int_{-\pi}^{\pi}
+       \exp\{A(z)-x B(z)-\ii n\alpha\}f(z)\,\dd\alpha .
+\]
+Then \(I[1]=P_n(-x)/n!\) and
+\(I[(R/z)^j]=R^jP_{n+j}(-x)/(n+j)!\). The factors relating the integrals and polynomial values are positive. Insertions with real coefficients, or with conjugate symmetry on the circle, give real integrals.
+
+\begin{lemma}\label{lem:angular}
+On each circle \(|z|=\rho>0\), \(\Rea B\) is minimized precisely at a conjugate pair. Its upper point \(z_*=\rho\ee^{\ii\theta}\) satisfies
+\[
+ 0<\theta<\pi/4,\qquad H(z_*)\in\R_{<0},\qquad
+ \Rea K(z_*)<0,\qquad \Ima B(z_*)>0.
+\]
+\end{lemma}
+
+\begin{proof}
+For \(0<\rho\le1/16\), normalize by writing
+\[
+ 24B(\rho\ee^{\ii\alpha})/\rho^4
+ =\ee^{4\ii\alpha}+(\rho/5)\ee^{5\ii\alpha}
+  +\sum_{k\ge2} a_k\ee^{(4+k)\ii\alpha},
+ \qquad a_k=\frac{24\rho^k}{(4+k)!}.
+\]
+Geometric bounds on term ratios give
+\(\sum a_k\le\rho^2/29\), \(\sum(4+k)^2a_k\le2\rho^2\), and
+\(\sum k a_k/4\le\rho^2/30\), with all sums over \(k\ge2\).
+The test angle \(\pi/4\) excludes the complement of the two \(\pi/32\)-neighborhoods of \(\pi/4\) and \(3\pi/4\) in the upper semicircle, since \(2(\rho/5+\rho^2/29)<1-\cos(\pi/8)\). The fifth term excludes the neighborhood of \(3\pi/4\), where \(\cos(5\alpha)\ge\cos(13\pi/32)>1/4\), compared with \(-1/\sqrt2\) at \(\pi/4\). In the first neighborhood the normalized \(\Rea K\) is at most \(-16\cos(\pi/8)+5\rho+2\rho^2<0\). Since the first two angular derivatives of \(\Rea B\) are \(-\Ima H\) and \(-\Rea K\), there is one interior minimizer with \(\Ima H=0\), and the leading term of \(\Rea H\) dominates its tail. At \(\pi/4\), the normalized \(\Ima H\) is \(-\rho/\sqrt2\) with error at most \(2\rho^2\). It decreases across the neighborhood, so its zero lies below \(\pi/4\). At the zero the imaginary part of \(B\) equals that of \(B-H/4\); its normalized first term is \(-(\rho/20)\sin(5\alpha)\ge\rho/80\) and its tail has modulus at most \(\rho^2/30\).
+
+For \(1/16\le\rho\le32\), the interval certificate described below proves the five assertions over the entire closed range.
+
+For \(\rho\ge32\), write \(z=p+\ii y\) on the upper semicircle and \(M=1+\rho+\rho^2/2+\rho^3/6<\rho^3\). At the test point \(y=\pi\), \(p_\pi=\sqrt{\rho^2-\pi^2}>\rho-1/5\), so \(\Rea B\le-\ee^{p_\pi}+M\). On the left semicircle \(\Rea B\ge-1-M\). On the right with \(y\ge2\pi\), \(p_\pi-p_{2\pi}\ge3\pi^2/(2\rho)\) gives
+\(\ee^{p_\pi}-\ee^{p_{2\pi}}\ge\ee^{\rho-1/5}/(2\rho)>2M\).
+For \(0\le y\le2\pi\) outside \([3\pi/4,5\pi/4]\), \(\cos y\ge-1/\sqrt2\), again giving a strict gap to the test value. These comparisons follow at \(\rho=32\) and then from the increase of \(\ee^\rho/\rho^4\). In the remaining core, \(p>\rho-1\), \(0<\alpha<1/8\), and both \(\cos(y+\alpha)\) and \(\cos(y+2\alpha)\) are at most \(-1/2\). Thus
+\[
+ K=(z+z^2)\ee^z-(z+2z^2+3z^3/2)
+ \quad\text{has }\Rea K<0,\qquad
+ \Rea H\le-\rho\ee^{\rho-1}/3 .
+\]
+Strict convexity gives the unique upper minimum. At it \(H\) is real and \(B=H/z-z^3/6\), so
+\(\Ima B\ge\ee^{\rho-1}\sin\theta/3-\rho^3/6>0\), since
+\(\sin\theta\ge3\pi/(4\rho)\). Conjugation gives the lower minimum.
+\end{proof}
+
+\paragraph{Interval certificate.}
+The companion program \texttt{saddle\_certificate.py} covers \([1/16,32]\) by closed dyadic radius slabs. In each slab it proposes an angular core \([l,h_0]\) and an interior test angle. With Arb balls it verifies opposite signs \(+,-\) for \(\Ima H\) at the endpoints, \(\Rea K<0\) on the core, and \(\Rea B\) above the test value on a union of closed intervals covering its complement. The comparisons include the entire radius slab and each entire angular interval. One-sided bisections retaining certified endpoint signs then enclose the unique stationary point and verify \(\Rea H<0\), \(\Ima B>0\), and the upper bound \(\theta<\pi/4\). For \(\rho\le4\) the computation uses the normalized power series through the index \(k=30\). The omitted tail for \(B,H,K,B-H/4\) in that normalization is bounded by
+\[
+ \sum_{k\ge31}24(4+k)^2\,4^k/(4+k)!<10^{-15},
+\]
+because the first term is less than \(5\cdot10^{-16}\) and the subsequent ratios are below \(1/2\). The bound is added to each component. For larger radii the program evaluates after multiplication by \(\ee^{-\rho}>0\). Floating-point candidates only propose intervals. The verified cover has 86 slabs. The code also verifies the narrow stationary-point brackets used for its reported phase values. Appendix~\ref{app:replay} gives replay details.
+
+The branch is smooth by \(\partial_\alpha\Ima H=\Rea K<0\). Set
+\[
+ \tau=-1/H(z_*),\quad
+ \psi=-\tau\Ima B(z_*)-\theta,\quad
+ \phi=\Ima A(z_*)-\tfrac12\arg(-\tau K(z_*)).
+\]
+Here and in subsequent formulas the argument of a curvature with positive real part is in \((-\pi/2,\pi/2)\). Differentiation along \(\Ima H=0\) gives
+\[
+ \rho\,\frac{\dd H}{\dd\rho}=\frac{|K|^2}{\Rea K}<0,\qquad
+ \frac{\dd\psi}{\dd\tau}=-\Ima B(z_*)<0.
+\]
+For the second identity differentiate the imaginary part of the stationary action \(-\tau B(z)-\log z\), using the logarithm on the right half-plane. Thus \(t=-n\tau(\rho)\) is strictly increasing. At \(\rho\downarrow0\), \(H\sim-\rho^4/6\), \(\theta\to\pi/4\), and \(B/H\to1/4\). At \(\rho\to\infty\), \(H\to-\infty\), \(\theta=O(1/\rho)\), and \(B/H=O(1/\rho)\). The ranges of \(\tau\) and \(\psi\) are \((0,\infty)\) and \((-\pi/4,0)\), respectively.
+
+On a fixed compact radius interval, use \(x=n\tau\) and \(R=\rho\) in the integral, with phase \(F(\alpha)=-\tau B(\rho\ee^{\ii\alpha})-\ii\alpha\). The two maxima are stationary for \(F\), because \(F'=-\ii(1+\tau H)\), with curvature \(-F''=-\tau K\). The complement of fixed small neighborhoods of the two points has a uniformly positive height gap by compactness. In a neighborhood, the change of variable \(\sqrt n(\alpha-\theta)\), the uniform third derivative bound, and a Gaussian majorant give the contribution of the upper saddle
+\[
+ \frac{\rho^{-n}\ee^{nF(\theta)+A(z_*)}}
+ {\sqrt{2\pi n}\,\sqrt{-\tau K(z_*)}}\bigl(f(z_*)+o(1)\bigr)
+\]
+for any bounded smooth insertion with uniformly bounded angular derivative; the error is absolute relative to the displayed saddle scale. The lower contribution is its conjugate. Writing \(G=n\psi+\phi\) and choosing \(C>0\) twice the modulus of that scale, we obtain \(I[1]/C=\cos G+o(1)\). For the derivative of \(P_{n+j}(-n\tau)\) with respect to \(\tau\), the insertion is \(-nB\) times the corresponding later-row multiplier. If \(C_j>0\) normalizes \(P_{n+j}\) itself, this yields
+\begin{align*}
+ P_{n+j}(-n\tau)/C_j&=\cos(G-j\theta)+o(1),\\
+ \frac{\partial_\tau P_{n+j}(-n\tau)}{n C_j}
+ &=-\Rea B(z_*)\cos(G-j\theta)+\Ima B(z_*)\sin(G-j\theta)+o(1).
+\end{align*}
+On the compact interval \(G-j\theta\) increases strictly with \(\rho\) for large \(n\). Near each cosine zero, choose fixed phase brackets narrow enough that the derivative has one nonzero sign, using \(\min\Ima B(z_*)>0\). The endpoints have opposite polynomial signs, and away from these brackets the cosine excludes real zeros. Thus each complete bracket contains exactly one simple zero. The error in its phase is \(o(1)\), by taking arbitrarily narrow brackets. This proves a count \(n(\psi(\rho_2)-\psi(\rho_1))/\pi+O(1)\) on a fixed interval \([\rho_1,\rho_2]\), with the same estimate for any fixed \(j\). Since \(j\theta\) stays inside \((0,\pi)\) for \(1\le j\le4\), the cosine brackets in the two rows strictly alternate apart from endpoint cells.
+
+\begin{corollary}\label{cor:distribution}
+The empirical measures of the zeros divided by \(n\), counted with multiplicity and normalized by \(\lfloor n/4\rfloor\), converge weakly to the probability measure on \((-\infty,0)\) assigning
+\[
+ \frac4\pi\bigl(\psi(\rho_2)-\psi(\rho_1)\bigr)
+ \quad\text{to }[-\tau(\rho_1),-\tau(\rho_2)],\qquad 0<\rho_1<\rho_2.
+\]
+Its density at \(t=-\tau(\rho)\) is \(4\Ima B(z_*(\rho))/\pi\). For every \(\eta>0\) there is such a fixed interval whose dilation by \(n\) contains at least \((1-\eta)\lfloor n/4\rfloor\) simple negative zeros of each of \(P_n,P_{n+j}\) for all large \(n\) and \(1\le j\le4\), with strict alternation in the interior.
+\end{corollary}
+The count proves convergence on compact negative intervals. Exhausting the radius axis gives limiting mass one by the two limits of \(\psi\), which proves weak convergence even before Theorem~\ref{thm:main} is used. The density follows from the differentiated phase.
+
+\section{The zeros of largest modulus}\label{sec:outer}
+
+\begin{theorem}\label{thm:outer}
+Write \(n=4m+s\) with \(0\le s\le3\), and order the outer zeros from the most negative. For every fixed positive integer \(L\), the \(L\) largest-modulus zeros are simple and negative for all sufficiently large \(n\), and
+\[
+ t_{4m+s,k}\sim-\frac{24m^5}{625\cdot4x_{s,k}^4},\qquad 1\le k\le L.
+\]
+Here \(x_{0,k}=(k-\tfrac12)\pi\) and \(x_{2,k}=k\pi\).
+The unique solutions of \(\tan x=-\tanh x\) in \((x_{0,k},x_{2,k})\) and of \(\tan x=\tanh x\) in \((x_{2,k},x_{0,k+1})\) are \(x_{1,k}\) and \(x_{3,k}\), respectively. At each fixed rank the limits give the interlacing order for gaps one through three. A first-order expansion gives the same order for gap four.
+\end{theorem}
+
+Put \(c_{\mathrm o}=24/625\), \(b(z)=24B(z)/z^4=1+z/5+O(z^2)\), and \(a_j=[t^j]P_{4m+s}(t)\). The exponential formula gives
+\[
+ \frac{a_{m-\ell}}{a_m}=24^\ell(m)_\ell
+ \frac{[z^{4\ell+s}]\ee^{A(z)}b(z)^{m-\ell}}
+ {[z^s]\ee^{A(z)}b(z)^m}.
+\]
+Here \((m)_\ell=m(m-1)\cdots(m-\ell+1)\). With \(u=c_{\mathrm o}m^5/t\), the normalized reciprocal polynomial converges locally uniformly:
+\begin{equation}
+ Q_{m,s}(u)=\sum_{\ell=0}^m\frac{a_{m-\ell}}{a_m}
+       \left(\frac{u}{c_{\mathrm o}m^5}\right)^\ell
+ \ \longrightarrow\ F_s(u)=\sum_{\ell\ge0}\frac{s!u^\ell}{(4\ell+s)!}.
+ \label{eq:reciprocal}
+\end{equation}
+For fixed \(\ell,d\), expanding \(b^{m-\ell}\) in powers of \(b-1\) shows that \([z^d]\ee^A b^{m-\ell}\) is a polynomial in \(m\) with leading term \(m^d/(5^d d!)\). For uniformity use the Cauchy bound on \(|z|=M/m\). The nonnegative coefficients of \(b\) are bounded termwise by those of \(\ee^z\), so the numerator coefficient is at most \(\exp(A(M)+M)(m/M)^{4\ell+s}\). The denominator is at least \(d_s m^s\) for some \(d_s>0\) and large \(m\). On \(|u|\le V\) the absolute summands are bounded by \(C_{M,s}(625V/M^4)^\ell\); choose \(M^4>625V\).
+
+Let \(G_s(z)=z^s F_s(-4z^4)/s!\). Successive integration from zero, starting with \(G_0=\cos z\cosh z\), yields
+\[
+ G_1=\tfrac12(\sin z\cosh z+\cos z\sinh z),\quad
+ G_2=\tfrac12\sin z\sinh z,\quad
+ G_3=\tfrac14(\sin z\cosh z-\cos z\sinh z).
+\]
+The nonzero zeros of \(G_1,G_3\) satisfy the indicated tangent equations. Poles of either tangent are excluded by the original formulas. If \(z=x+\ii y\) with \(xy\ne0\), equating real and imaginary parts and multiplying the resulting ratios gives
+\(\sin(2x)\sin(2y)=\sinh(2x)\sinh(2y)\), impossible by strict domination in modulus for \(x,y\ne0\). Thus all zeros are on the coordinate axes. The real zeros in question are simple, since the derivatives \(\sec^2 x\pm\operatorname{sech}^2 x\) are positive for \(x>0\). The tangent signs and monotonicity give exactly
+\[
+ x_{0,k}<x_{1,k}<x_{2,k}<x_{3,k}<x_{0,k+1}
+\]
+and no other positive zeros. The factors of \(G_0,G_2\) give the same axis property and simplicity. Since \(G_s(\ii z)=\ii^s G_s(z)\) and \(F_s(0)=1\), the zeros of \(F_s\) are precisely the simple negative numbers \(-4x_{s,k}^4\).
+
+Choose a circle around the origin between limiting moduli \(k=L\) and \(k=L+1\), and small disjoint disks around the enclosed limiting zeros. Rouché's theorem applied to \eqref{eq:reciprocal} gives \(L\) zeros in the large circle and one in each small disk. Conjugation forces these zeros to be real. Taking reciprocals proves the asymptotic formulas. The strict order of \(x_{s,k}\) gives the fixed-rank alternating order when residues differ, also when \(m\) increases by one since \((m+1)^5/m^5\to1\).
+
+For gap four the residues coincide. On each fixed \(|u|\le V\), a first-order expansion gives
+\begin{equation}
+ Q_{m,s}(u)=F_s(u)+E_s(u)/m+o(1/m)
+ \label{eq:outerfirstorder}
+\end{equation}
+with \(E_s\) entire. To see the uniformity, use \(|w|=M\) in the rescaled numerator coefficients. Uniformly for \(0\le\ell\le m\), the analytic logarithm of \(b(w/m)\) gives
+\[
+ \ee^{A(w/m)}b(w/m)^{m-\ell}=\ee^{w/5}+O_M((1+\ell)/m),
+ \qquad
+ 0\le1-(m)_\ell/m^\ell\le\ell(\ell-1)/(2m).
+\]
+For fixed \(\ell\) both factors admit first-order expansions in \(1/m\). Cauchy's bound at degree \(4\ell+s\), and the positive limit \(5^{-s}/s!\) of the rescaled denominator, bound \(m\) times the difference of the \(\ell\)-th summands by \(C_{M,s}(1+\ell^2)(625V/M^4)^\ell\). For \(\ell>m\) use \(m\le\ell\) and the same bound for the missing summand. Dominated convergence proves \eqref{eq:outerfirstorder}. Perturbing a simple zero and taking its reciprocal now gives magnitude \(C_{s,k}m^5(1+c_{s,k}/m+o(1/m))\). The same rank in row \(n+4\) has magnitude ratio \(1+5/m+o(1/m)>1\), while different ranks are separated by their leading constants. This proves the last assertion of Theorem~\ref{thm:outer}.
+
+\section{The zeros nearest the origin}\label{sec:airy}
+
+\begin{theorem}\label{thm:airy}
+Let \(r>0\) solve \(r+r^2+r^3/2=n\), put \(c_0=3/(2\ee)\), \(a=(3/4)^{1/3}\), \(b_0=3/(2a)\), and let \(0<d_1<d_2<\cdots\) be the positive numbers with \(\Ai(-d_k)=0\). For every fixed \(L\), the \(L\) zeros of \(P_n\) nearest zero in complex modulus are simple and negative for all sufficiently large \(n\). Write them as \(-x_{n,k}\), with \(x_{n,k}\) increasing. For each fixed \(k\),
+\[
+ \begin{split}
+ x_{n,k}&=c_0 r\ee^{-r}\Bigl(1+(d_k/b_0)r^{-2/3}+O_k(r^{-1})\Bigr),\\
+ x_{n,k}-x_{n+1,k}&\sim\frac{\ee^{-r}}{\ee r}.
+ \end{split}
+\]
+\end{theorem}
+
+\paragraph{The local integral.}
+Put \(x=c r\ee^{-r}\) and integrate on \(R=r+u_0\) with angle \(v/R\), for bounded real \(u_0\). After factoring out \(\ee^{A(r)}r^{-n}\), the exponent for bounded complex \(v,c\) is
+\begin{align}
+ r S_c(w)+T_c(v)+O(r^{-1}),\quad &w=u_0+\ii v,\qquad
+ S_c(w)=\tfrac34w^2-c\ee^w,\notag\\
+ &T_c(v)=w^2-\tfrac12 v^2 S'_c(w).
+ \label{eq:innerexp}
+\end{align}
+Indeed \(R\ee^{\ii v/R}-r=w-v^2/(2r)+O(r^{-2})\). In the expansion of \(A(r+h)-A(r)-n\log(1+h/r)\), the linear coefficient vanishes and the quadratic coefficient is \(3r/4+1+1/(2r)\). The cubic coefficient is \(O(r^{-1})\) by cancellation, as are the remaining terms on bounded \(h\)-sets. Also \(xB(r+h)=cr\ee^h+O(r^4\ee^{-r})\). The corresponding expansion in the variable \(z\), on each fixed disk in \(w\), is
+\begin{equation}\label{eq:directinner}
+ A(r+w)-xB(r+w)-n\log(r+w)
+ =A(r)-n\log r+rS_c(w)+w^2+O(r^{-1}).
+\end{equation}
+All these expansions hold with derivatives on smaller complex compact sets by Cauchy's formula.
+
+The tails on the original circle can be excluded uniformly when \(u_0,c\) are bounded. At small angle the loss \(A(R)-\Rea A(R\ee^{\ii v/R})\) is at least \(c_1 r v^2\) by its cubic term. Off a fixed small angular neighborhood the quadratic and cubic terms have no common maximum, giving a loss at least \(c_2 r^2\). On the full circle \(|xB(z)|\le |x|B(R)=O(r)\), and \(A(R)-n\log R\) differs from \(A(r)-n\log r\) by \(O(r)\). Thus the part \(|v|>M\) is exponentially small relative to any bounded-parameter saddle scale below for sufficiently large fixed \(M\). Polynomial factors from angle length or insertions do not change this conclusion.
+
+\paragraph{Airy scaling.}
+Set \(c=c_0(1+\lambda r^{-2/3})\), \(u_0=1-r^{-1/3}\), \(v=s r^{-1/3}\), and \(q=-1+\ii s\). Subtract the exponent \(-3r/4-(3/2)\lambda r^{1/3}\) and multiply the integral by \(Rr^{1/3}\) to account for the measure. Denote the resulting entire function of \(\lambda\) by \(F_n(\lambda)\). The normalized integrand tends to
+\[
+ \ee\,\exp(-q^3/4-(3/2)\lambda q),
+\]
+as \(S'_{c_0}(1)=S''_{c_0}(1)=0\) and \(S'''_{c_0}(1)=-3/2\). For \(c=c_0\), the real part of \(S_c(u_0+\ii v)-S_c(u_0)\) is at most \(-\tfrac34(1-\ee^{-r^{-1/3}})v^2\), by \(1-\cos v\le v^2/2\). For bounded complex \(\lambda\) the perturbation after subtraction at \(v=0\) is \(O(r^{-2/3}|v|)\) before multiplication by \(r\). The normalized integrand is therefore bounded by \(C\exp(-c_3s^2+C|s|)\) on \(|v|\le M\), including its bounded factor at \(v=0\). The remaining arc was already controlled. Taylor expansion on this fixed \(v\)-interval bounds the exponent difference by \(C r^{-1/3}(1+|s|^4)\). Both exponentials have Gaussian majorants. Integrating their difference using
+\(|\ee^\alpha-\ee^\beta|\le|\alpha-\beta|\max(\ee^{\Rea\alpha},\ee^{\Rea\beta})\)
+gives a locally uniform error \(O(r^{-1/3})\), also for fixed derivatives by Cauchy's formula. In the limiting integral \(t=-a q\), with \(\Rea t=a\), gives the vertical contour representation \cite[Sec.~9.5]{dlmf}
+\[
+ F_n(\lambda)\ \longrightarrow\ F(\lambda)=(\ee/a)\Ai(-b_0\lambda).
+\]
+The Airy zeros are simple and negative in the argument of \(\Ai\) \cite[Sec.~9.9]{dlmf}. Rouché's theorem near each \(d_k/b_0\) gives one simple zero, which is real by symmetry. Its parameter differs from the limit by \(O_k(r^{-1/3})\).
+
+\paragraph{The complex-modulus count.}
+Fix \(L\) and a number \(M_0\) between \(d_L/b_0\) and \(d_{L+1}/b_0\). The modulus condition \(|c|\le c_0(1+M_0 r^{-2/3})\) implies \(\Rea\lambda\le M_0\), so the compact Airy limit handles any bounded sequence of \(\lambda\) in that disk. For an additional root we could therefore take a subsequence with \(|\lambda|\to\infty\) and \(c\) tending to a point in \(|c|\le c_0\).
+
+Choose the stationary point \(u=(2/3)c\ee^u\) on the branch through \(u=0\). In \(|c|<c_0\) the map is a contraction on the closed disk of radius \(\rho<1\) satisfying \(\rho\ee^{-\rho}=(2/3)|c|\), with \(u=0\) at \(c=0\). At a boundary point other than \(c_0\), a subsequential radial limit \(u\) exists in \(|u|\le1\). The modulus equation makes \(|u|=1\) possible only at \(u=1\) and \(c=c_0\). The analytic inverse at this limit therefore gives a saddle in the unit disk for nearby parameters. If \(c\to c_0\), put \(\Delta=c/c_0-1\) and \(h_1=1-u\). The relation \((1-h_1)\ee^{h_1}=1-h_1^2/2+O(h_1^3)\) gives
+\[
+ h_1=\sqrt{-2\Delta}+O(\Delta)
+\]
+with the square root of positive real part. Since \(\Rea\Delta\le M_0 r^{-2/3}\) and \(|\Delta|r^{2/3}\to\infty\), one has \(\Rea h_1\ge c_4|h_1|\), \(1-|u|\ge c_5|h_1|\), and \(r|h_1|^3\to\infty\).
+
+Take \(R=r+\Rea u\), so the line \(w=\Rea u+\ii v\) passes through \(u\). For every real \(t\),
+\[
+ \Rea(S_c(u+\ii t)-S_c(u))
+ =\Rea\{-3t^2/4-(3/2)u(\ee^{\ii t}-1-\ii t)\}
+ \le-\tfrac34(1-|u|)t^2 .
+\]
+The last step uses \(|\ee^{\ii t}-1-\ii t|\le t^2/2\). On the scale \(t=s/\sqrt{r|1-u|}\), the quadratic coefficient is \(-3(1-u)/(4|1-u|)\), with real part bounded away from zero on the negative side. The cubic error is \(O(|s|^3/\sqrt{r|1-u|^3})\) for bounded \(s\). The real-part bound and the remote-arc estimate justify the limiting nonzero Gaussian integral along any convergent subsequence of the quadratic coefficient. The bounded analytic factor \(\exp(T_c)\) contributes its nonzero value at the saddle. This contradicts a zero there and excludes additional complex roots in the full modulus disk.
+
+\paragraph{Adjacent displacement.}
+In the normalized Airy integral add the multiplier \((r+1)/z\) to obtain \(F_{n,1}\) with the zeros of \(P_{n+1}(-x)\) in the same parameter \(\lambda\). For bounded \(s\),
+\[
+ r^{4/3}\bigl((r+1)/z-1\bigr)\to-q,\qquad
+ r^{4/3}(F_{n,1}-F_n)\to\tfrac23 F'(\lambda).
+\]
+The first expression is bounded by \(C(1+|s|)\) on \(|v|\le M\), and the tails absorb the remaining polynomial scaling. Dominated convergence and differentiation of the limiting integral prove the second identity locally uniformly. This evaluates the difference before approximation. The zeros \(\lambda_n,\mu_n\) of \(F_n,F_{n,1}\) of the same fixed rank have the same simple limit, because \(r(n+1)-r(n)=O(r^{-2})\) changes the Airy parameter by \(o(1)\) there. Evaluating the difference at \(\lambda_n\) and applying the mean value theorem to \(F_{n,1}\) gives \(\mu_n-\lambda_n\sim-(2/3) r^{-4/3}\). Converting to \(x\) proves Theorem~\ref{thm:airy}. In one row successive fixed inner ranks have separation of order \(r^{1/3}\ee^{-r}\). For a gap of any fixed \(j\), summing the adjacent displacement at the same rank shows \(x_{n+j,k}<x_{n,k}<x_{n+j,k+1}\) for large \(n\).
+
+\section{Uniform estimates between the two ends}\label{sec:bridge}
+
+We use a cosine test on \(I[1]\) and a sine test at its zeros. If \(z_*=R\ee^{\ii\theta}\) is the upper saddle, the latter comes from the insertion
+\begin{equation}
+ W_j(z)=\frac{(R/z)^j-\cos(j\theta)}{\sin(j\theta)}.
+ \label{eq:centerweight}
+\end{equation}
+When \(0<j\theta<\pi\), its integral at a zero of \(I[1]\) is a positive multiple of \(P_{n+j}(-x)\). Its values at the upper and lower saddles are \(-\ii,+\ii\), so conjugate Gaussian contributions give a positive multiple of \(\sin G\) at these zeros. We prove that the errors in these tests are small relative to a single pair's amplitude, even when the cosine itself is small. For gap four at the outer end we use a different insertion.
+
+\subsection{Small outer radii and absolute numbering}\label{sec:index}
+As \(\rho\downarrow0\), the analytic saddle branch in Section~\ref{sec:bulk} gives
+\begin{equation}
+ \tau=6\rho^{-4}(1+O(\rho)),\qquad
+ \psi=-\pi/4+\rho/(20\sqrt2)+O(\rho^2),\qquad \phi=O(\rho).
+ \label{eq:smallexp}
+\end{equation}
+For the phase, use \(\psi'(\rho)=-\Ima B(z_*)\tau'(\rho)\) and
+\(\Ima B(z_*)=\Ima(B-H/4)(z_*)\sim\rho^5/(480\sqrt2)\). The expansions may be differentiated because the critical angle is analytic at \(\rho=0\), using the stationary equation after division by \(\rho^4\). For \(n=4m+s\), put
+\[
+ V_n(\rho)=m\pi+n\psi(\rho)+\phi(\rho).
+\]
+This strictly increases for large \(n\) on \((0,\rho_{\max}]\) for every fixed \(\rho_{\max}\), by \eqref{eq:smallexp} near zero and compactness further away.
+
+There is a uniform extension of the Gaussian expansion down to small radii. The real angular exponent per \(n\) tends smoothly to \(-\cos(4\alpha)/4\). The four local maxima near \(\pm\pi/4,\pm3\pi/4\) have uniformly negative real curvature. The dominant pair is near \(\pm\pi/4\) and is stationary for the complex exponent. The secondary pair loses \(\rho/(10\sqrt2)+O(\rho^2)\) in normalized height, from the fifth term of \(B\), since the shifts of the maximizers contribute only quadratically. On the secondary neighborhoods the integral of the real Gaussian bound gives \(O(n^{-1/2}\exp(n\Rea F(\theta)-c n\rho))\), before common factors. The factor \(n^{-1/2}\) is essential for a bound \(O(\exp(-c n\rho))\) relative to the primary saddle scale. Outside all four neighborhoods the height gap is uniform, and on the dominant pair the angular derivative and curvature bounds of Section~\ref{sec:bulk} persist at \(\rho=0\). For any insertion with uniformly bounded value and first derivative, the normalized error is therefore
+\begin{equation}
+ o_n(1)+O(\exp(-c n\rho)),
+ \label{eq:outererr}
+\end{equation}
+uniformly as \(0<\rho\le\rho_0\) for fixed sufficiently small \(\rho_0\). This applies to \eqref{eq:centerweight} for \(j=1,2,3\), whose denominators stay away from zero. The compact estimates handle all \(j\le4\) above \(\rho_0\).
+
+For gap four use angular integration by parts on the complete circle. With \(R=\rho\) and \(g(z)=H(z)/z^4=1/6+z/24+O(z^2)\), it gives
+\begin{equation}
+ (n+4) I[(\rho/z)^4]
+   = I[(\rho/z)^4h(z)-x\rho^4g(z)] .
+ \label{eq:lagfour}
+\end{equation}
+Indeed the angular derivative of \(z^{-n-4}\exp(A-xB)\) integrates to zero. Call the insertion on the right divided by \(n+4\) \(U(z)\). At a zero of \(I[1]\) replace it by \((U(z)-\Rea U(z_*))/\rho\), dividing by a positive scale and subtracting a term whose integral is zero. Since \(x\rho^4/(n+4)=6(1+O(\rho)+O(1/n))\), the constant term of \(g\) cancels in this new insertion. Its angular derivatives and value are uniformly bounded, using \(h(z)=O(\rho)\). Its upper value is purely imaginary and equals
+\(-\ii(1/(4\sqrt2)+O(\rho+1/n))\). The sine therefore has a positive coefficient bounded away from zero, with the error \eqref{eq:outererr}.
+
+To count outer ranks we need a derivative test. With
+\(L_j[f]=(n+j)![z^{n+j}]f(z)\exp(A-n\tau B)\), the Euler coefficient identity yields
+\begin{equation}
+ \partial_\tau L_j[1]-\frac{n+j}{4\tau}L_j[1]
+ =-n L_j\!\left[B-H/4+\frac{h}{4n\tau}\right].
+ \label{eq:derivouter}
+\end{equation}
+The bracket divided by \(\rho^5\) has uniformly bounded angular derivatives, and at the upper saddle its imaginary part tends to \(1/(480\sqrt2)>0\). The left side has the sign of \(\partial_\tau(\tau^{-(n+j)/4}L_j[1])\). Equations \eqref{eq:outererr} and \eqref{eq:derivouter} give exactly one simple root per complete narrow cosine bracket once \(n\rho\) is sufficiently large. More explicitly, the derivative is a bounded cosine coefficient plus a sine coefficient bounded below by a positive constant, with the normalized error \eqref{eq:outererr}. One fixes the bracket width to give a nonzero derivative sign and then makes the error smaller. The cosine excludes real zeros between the brackets.
+
+At the outer cut
+\[
+ \rho_J=\frac{20\sqrt2}{n}(J+s/4)\pi ,
+\]
+where \(J\) is a fixed positive integer, \(V_n(\rho_J)=J\pi+o(1)\). Its reciprocal coordinate \(c_{\mathrm o}m^5/(-n\tau(\rho_J))\) tends to \(-4[(J+s/4)\pi]^4\). In all four residues \(x_{s,J}<(J+s/4)\pi<x_{s,J+1}\). By \eqref{eq:reciprocal} and modulus counts on either side of the cut there are exactly \(J\) roots with more negative real location than the cut, and the same \(J\) account for the full exterior modulus count.
+
+In particular, for any sequence \(0<\rho_n\le\rho_{\max}\) with \(n\rho_n\to\infty\) such that the distance of \(V_n(\rho_n)\) from \(\pi(\mathbb Z+1/2)\) stays positive, the number of negative zeros to the left of \(-n\tau(\rho_n)\) is eventually
+\[
+ \left\lfloor V_n(\rho_n)/\pi+1/2\right\rfloor .
+\]
+Indeed take \(J\) sufficiently large for the cosine and derivative errors and for brackets narrower than the prescribed distance. Start at the cut of known rank, and count the complete brackets along the increasing phase. A root of rank \(k\to\infty\) with bounded radius has \(V_n=(k-\tfrac12)\pi+o(1)\) whenever \(n\rho\to\infty\), by the vanishing error there. In the regime \(k=o(n)\) the corresponding roots exist by the increasing phase and \eqref{eq:smallexp}, with \(\rho\sim20\sqrt2\pi k/n\). Consequently
+\begin{align*}
+ t_{n,k}&\sim-\frac{3n^5}{320000\pi^4 k^4}
+             && (k\to\infty,\ k=o(n)),\\
+ \left(\frac{3n^5}{320000|t_{n,k}|}\right)^{1/4}
+   &=(k-\tfrac12+s/4)\pi+o(1)
+             && (k\to\infty,\ k=o(\sqrt n)).
+\end{align*}
+The second formula follows from the \(O(n\rho^2)\) phase and scale errors in \eqref{eq:smallexp}.
+
+\subsection{The exact middle saddle}\label{sec:middle}
+Use \(r\) as in Theorem~\ref{thm:airy} and put
+\[
+ E(z)=A(z)-xB(z)-n\log z,\qquad D(z)=z(h'-xH')(z).
+\]
+The logarithm at an upper saddle is the principal one. Fix large \(P,M>0\) and parametrize by its real part \(P\le p\le r-M\). Let \(N_p=n-h(p)\ge M h'(p)\). With \(z=p+\ii y\) and \(|y-\pi|\le1/2\) we have \(h(z)-h(p)=O(p^2)\) and \(H(z)=z\ee^z(1+O(p^2\ee^{-p}))\), also with one \(y\)-derivative of their remainders. The equation making \(x=(h(z)-n)/H(z)\) positive is
+\begin{equation}
+ y+\arg z+\Ima\log(1-h(z)/(z\ee^z))-\arg(n-h(z))=\pi .
+ \label{eq:midphase}
+\end{equation}
+Its left side is \(y+O(1/p+p^2\ee^{-p}+p^2/N_p)\), and its derivative is \(1+O(1/p+p^2\ee^{-p}+p^2/N_p)\). Thus it has one smooth solution in this band for sufficiently large fixed \(P,M\). Along it \(E'(z)=0\). Put
+\[
+ \Lambda=x\ee^p\asymp N_p/p,\qquad q_0=1/p+(1+x)p/\Lambda.
+\]
+Then \(q_0\) is uniformly small, \(|y-\pi|=O(q_0)\), and \(\Lambda\to\infty\) uniformly as \(n\to\infty\) (bounded \(p\) forces \(N_p\to\infty\), and large \(p\) gives \(\Lambda\gtrsim Mp\)). The logarithmic derivative \(f(z)\) of the analytic function \((h(z)-n)/H(z)\) is \(-1+O(1/p+p^2\ee^{-p}+p^2/N_p)\). Its real part is negative. Since the imaginary part of \(f(z)(1+\ii y'(p))\) vanishes, \(\dd\log x/\dd p=|f|^2/\Rea f<0\).
+
+On the circle \(R=|z|\), the two saddles dominate uniformly in this range. To see the height gap, parameterize its right small-angle arc by \(v=\Ima z'\), with \(z'=\sqrt{R^2-v^2}+\ii v\). The angle-dependent real exponent is
+\((1+x)\Rea A(z')-x\exp(\Rea z')\cos v\).
+The upper envelope with \(\cos v\) replaced by \(-1\) is above the saddle by \(O(\Lambda q_0^2)\). From \(v=y\) to \(2\pi\) it drops by at least \(c[(1+x)p+\Lambda/p]=c\Lambda q_0\). The decrease of \(\Rea A\) is at least \(c p\) by the cubic cosine term, and the real part of \(z'\) decreases by at least \(c/p\). The envelope keeps decreasing up to any fixed sufficiently small angle. At angles bounded away from zero the exponential envelope is at most \(\Lambda\exp(-cp)\), and the possible polynomial gain is only \((1+x)(A(R)-\Rea A(z))=O((1+x)p)\). On \(0\le v\le2\pi\) away from a fixed small neighborhood of \(\pi\), the loss in \(-\cos v\) gives a gap of order \(\Lambda\). In this comparison the polynomial gain is \(O(\Lambda q_0)\) and \(\exp(R-p)=1+O(1/p)\). Choose \(P,M\) after fixing that neighborhood, so the smaller terms are dominated. The least separated gap is at least \(c\Lambda q_0\ge c\sqrt\Lambda\), since \(\Lambda q_0\ge\max(p,\Lambda/p)\). Reflection treats the lower half-circle.
+
+Near the upper saddle use arclength \(R(\arg z'-\arg z)\). The second derivative of \(E\) is \(-D(z')/R^2\); its real part in a fixed local neighborhood is at most \(-c\Lambda\). This follows from the negative real part of \(x(z'+z'^2)\ee^{z'}/R^2\) for \(v\) near \(\pi\), while the other terms are \(O((1+x)p)=O(\Lambda q_0)\). Third arclength derivatives are \(O(\Lambda)\), and the curvature modulus at the saddle is comparable to \(\Lambda\). Rescaling by \(\sqrt\Lambda\) now gives a uniform Gaussian expansion by the derivative bound and a real Gaussian majorant. The separated arcs are negligible relative to it: \(p=O(\Lambda)\), so polynomial factors in \(p,\Lambda\) are absorbed by the height gap. With
+\[
+ G=\Ima E(z)-\tfrac12\arg D(z),\qquad \theta=\arg z ,
+\]
+the tests are \(I[1]/C=\cos G+o(1)\) and \(I[W_j]/C=\sin G+o(1)\), with \(C>0\) twice the upper amplitude. For all \(1\le j\le4\), \(0<j\theta<\pi\) and the arclength derivative of \(W_j\) is \(O(1/y)=O(1)\) locally. The separated-arc bound of \(W_j\) is \(O(p)\). This proves the two estimates without subtracting independent errors divided by a small \(\sin(j\theta)\).
+
+\subsection{The approach to the Airy window}\label{sec:coalescing}
+Parameterize the upper saddle of the reduced phase \(S_c\) by
+\[
+ u=y\cot y,\qquad c=\frac{3y\ee^{-u}}{2\sin y},\qquad
+ w_*=u+\ii y,\qquad R=r+u,\qquad 0<y<\pi.
+\]
+It satisfies \(S'_c(w_*)=0\) and \(S''_c(w_*)=\tfrac32(1-u-\ii y)\), whose real part is positive. The parameter \(c\) increases strictly because
+\(y(\log c)'=(1-y\cot y)^2+y^2>0\), and tends to \(c_0\) as \(y\downarrow0\). In \eqref{eq:innerexp} take \(u_0=u\). The phase is
+\begin{equation}
+ G=r\Ima S_c(w_*)+2uy-\tfrac12\arg S''_c(w_*),
+ \qquad \theta=y/R .
+ \label{eq:innerphase}
+\end{equation}
+On compact subintervals of \((0,\pi)\) the cosine and sine tests follow by Gaussian expansion in \(v\). The two maxima of \(\Rea S_c(u+\ii v)\) on the vertical line are at \(\pm y\): reduction modulo \(2\pi\) lowers \(v^2\) without changing the cosine, and \(\sin v/v\) is strictly decreasing on \((0,\pi)\). The amplitude contributes \(\exp(w_*^2)\) since \(T_c(y)=w_*^2\). In the \(v\)-coordinate the insertions \(W_j\) have bounded local derivatives of order \(1/y\); their remote polynomial bounds are absorbed by the tails of Section~\ref{sec:airy}.
+
+For small \(y\), put \(L_0=r y^3\). We show an error \(O(L_0^{-1/2})+o_r(1)\) for both tests uniformly with \(y\) sufficiently small and \(L_0\) sufficiently large. Work in the complex \(v\)-plane where the integrand and all the insertions are analytic. On the upper side \(0\le V\le\epsilon\), for fixed sufficiently small \(\epsilon\), deform the original vertical \(w=u+\ii v\) to
+\[
+ w=u+\delta(y-V)+\ii V,\qquad \delta=\tfrac12 .
+\]
+Its reflection gives the lower side, and both meet at the same point when \(V=0\). Horizontal connectors at \(V=\pm\epsilon\) return to the original contour. Put \(d=V-y\). Direct expansion at \(w_*\) gives
+\begin{equation}
+ \frac{\Rea(S_c(w)-S_c(w_*))}{(3/2)d^2}
+   =-\delta y-\frac{3\delta-\delta^3}{6}d+O(y^2+d^2)
+   \ \le\ -c_1(y+V).
+ \label{eq:tilt}
+\end{equation}
+The last inequality holds because the coefficients of \(y\) and \(V\) after substituting \(d=V-y\) are both strictly negative, and \(\epsilon\) can be fixed small enough to absorb the remainder. The expression is interpreted by continuity at \(d=0\). On the upper horizontal connector \(\Rea S'_c>0\) for small \(y\), from the double-saddle expansion \((3/4)(\epsilon^2-(\Rea w-1)^2)+O(\epsilon^3)\) and \(|\Rea w-1|\le0.6\epsilon\). Its higher endpoint is on the original line. The inequality \(1-\cos\epsilon<\epsilon^2/2\) at \(y=0\) gives a fixed positive height gap there, which persists for small \(y\). The original line outside the connectors has a fixed gap on bounded sets by the same strict cosine bound, and the remaining tails are exponentially small. The global insertion bound on those arcs is \(O(R/y)\), polynomial when \(r y^3\) is bounded below.
+
+On each tilted ray use \(s=d\sqrt{r y}\). Equation \eqref{eq:tilt} gives the majorant \(\exp(-c_2s^2)\). The complex quadratic coefficient \((\ii-\delta)^2 S''_c(w_*)/(2y)\) has bounded modulus and uniformly negative real part. The cubic exponent error is \(O(|s|^3/\sqrt{L_0})\). The \(V=0\) truncation is at \(s=-\sqrt{L_0}\); the far endpoint is at least a positive multiple of \(\sqrt{L_0}\) once \(y\le\epsilon/2\). Both removed Gaussian tails are negligible. Use the Gaussian bounds for the exact and quadratic phases when integrating their difference, as in the Airy estimate. The amplitude \(\exp(T_c)\) varies by \(O(|d|)\) relative to its nonzero saddle value on the local ray, and \(W_j\) varies by \(O(|d|/y)=O(|s|/\sqrt{L_0})\). The analytic remainder \(O(r^{-1})\) of \eqref{eq:innerexp} remains uniform on the deformed bounded contour. Thus the required normalized errors follow. In the angular variable the upper ray tangent is \(1+\ii\delta\). Its product with the principal \(\sqrt{S''_c(w_*)}\) has positive real part, so the tangent cancels in the complex Gaussian prefactor and no extra argument occurs. This gives the unwrapped phase \eqref{eq:innerphase} and a positive sine coefficient on the whole inner range.
+
+\subsection{Matching the real phases}\label{sec:match}
+Take the fixed-width overlap \(P\le p\le P+1\). There \(x/n\) stays on a compact positive interval. To identify the pure saddle at the same \(x/n\), pass to a convergent subsequence of \(p,x/n,z\). The height comparisons of Section~\ref{sec:middle} divided by \(n\) remain strict on the separated arcs, and the normalized local curvatures stay negative in real part. The term \(A/n\) vanishes, so the limiting point is the upper global minimum of \(\Rea B\) on its circle. Lemma~\ref{lem:angular} identifies that point uniquely. At this point \(H'\ne0\). The pure stationary equation is \(H=-n/x\), whereas the exact equation differs by \(h/x=O(1/n)\). Local inversion and compactness show the two upper saddles at the same \(x/n\) differ by \(O(1/n)\). The function \(-(x/n)B-\log z\) is stationary at the pure saddle. Its change after multiplication by \(n\) is \(O(1/n)\) and the \(A\) term changes by \(O(1/n)\). Also \(D/n=-(x/n)K(z_{\rm pure})+O(1/n)\). Hence the real phases differ by \(o(1)\) uniformly on this overlap.
+
+At the other seam take \(r-M\le p\le r-M+1\), extending the middle estimates to this range using \(M-1\) in place of \(M\). Here \(c=x\ee^r/r\) stays in a positive compact interval by \(\Lambda\asymp N_p/p\). The exact stationary equation from \eqref{eq:directinner} implies that a limiting bounded local saddle solves \(S'_c(w)=0\). Its imaginary part lies near \(\pi\) and is positive. The imaginary equation for \(w=u+\ii y\) forces \(\sin y>0\), so \(y<\pi\) and the real equation gives \(u=y\cot y\). Strict monotonicity of \(c(y)\) identifies this saddle on the reduced branch of Section~\ref{sec:coalescing}. It is uniformly nondegenerate on the overlap. By the differentiated expansion and local inversion, at the same \(c\) the exact \(z-r\) differs from \(w_*\) by \(O(1/r)\). Stationarity changes \(r S_c(w_*)\) by \(O(1/r)\), and the remaining \(w^2\) term by \(O(1/r)\). At the exact saddle, \(D=z^2 E''(z)\), so \(D/(R^2 r)=S''_c(w_*)+O(1/r)\) since \(\arg z=O(1/r)\). This gives real phase agreement with \eqref{eq:innerphase}.
+
+The two overlaps are intervals in the real parameter \(x\), by the strict monotonicities of \(\tau(\rho)\), \(x(p)\), and \(c(y)\). In particular one can choose the outer fixed-radius endpoint beyond the compact set from the first seam, and the inner fixed \(y<\pi\) endpoint beyond the compact set from the second seam. The phase comparisons are between actual real values, using the same principal log and the curvature argument in the open right half-plane. Thus a continuous interpolation in each overlap differs by \(o(1)\) from the native phases. The cosine estimates hold with this phase and the local positive scales. At any zero of \(I[1]\), either native sine test in an overlap gives the sign of the later polynomial with this same \(o(1)\) phase error.
+
+\section{Counting to the degree and proving the signs}\label{sec:saturation}
+
+The outer cut \(\rho_J\) from Section~\ref{sec:index} leaves exactly \(J\) roots to its left, and its unwrapped phase is \((-m+J)\pi+o(1)\). At the inner end choose another fixed positive integer \(H_0\) and take
+\[
+ y=\left(\frac{2\pi(H_0+1/4)}{r}\right)^{1/3}.
+\]
+Since \(u=1-y^2/3+O(y^4)\) and
+\(\Ima S_c(w_*)=(3/2)y(u-1)\), its phase tends to \(-H_0\pi\), including the \(+\pi/4\) from the curvature term. As \(c/c_0=1+y^2/2+O(y^4)\), its Airy argument parameter \(b_0\lambda\) tends to \([(3\pi/2)(H_0+1/4)]^{2/3}\). The Airy asymptotic \(d_k=[(3\pi/2)(k-1/4)]^{2/3}(1+O(k^{-2}))\) places that parameter strictly between \(d_{H_0}\) and \(d_{H_0+1}\) for sufficiently large \(H_0\). Theorem~\ref{thm:airy} gives exactly \(H_0\) roots between this inner cut and zero.
+
+Fix the middle range and seams first. Then fix \(J,H_0\) sufficiently large that the separated outer estimates \(O(\exp(-cJ))\) and the inner ones \(O(H_0^{-1/2})\) are small enough for every cosine and sine sign test, including the positive coefficient in \eqref{eq:lagfour}. Finally take \(n\) large enough for the remaining \(o_n(1)\) terms and for the native endpoint phases to be within \(\pi/12\) of their prescribed levels. This yields a continuous real phase \(G\) along the negative axis between the cuts, running from \((-m+J)\pi+o(1)\) to \(-H_0\pi+o(1)\). Use the cuts and the successive first hits of the intermediate integer multiples of \(\pi\), ordered along the real axis. The cosine tests give opposite signs at the ends of each of the \(m-J-H_0\) intervals. Together with the two cut counts this forces \(m\) distinct real zeros. Since \(\deg P_n=m\), they are all simple and negative and exhaust the degree. This argument uses only continuity of the interpolated phase.
+
+In each of these intervals with levels \(\ell\pi,(\ell+1)\pi\), take the first hit of \((\ell+5/6)\pi\) and the last hit of \((\ell+1/6)\pi\) before it. The phase stays in the resulting strip between the hits, and the cosine signs force the unique interval root into the strip. There \(|\sin G|\ge1/2\) and its sign is \((-1)^\ell\). The centered insertions \eqref{eq:centerweight} and \eqref{eq:lagfour} apply at the zero itself. For the root of rank \(k\) from the left, the resulting sign in every later row with \(1\le j\le4\) is
+\begin{equation}\label{eq:sign}
+ \operatorname{sgn}P_{n+j}(t_{n,k})=(-1)^{m-k+1}.
+\end{equation}
+At the \(J\) outer ranks use Theorem~\ref{thm:outer} with a spare rank. At equal degree there are \(k-1\) later zeros to the left of the \(k\)-th old root, and when the degree jumps there are \(k\). The leading coefficient is positive in both cases, giving \eqref{eq:sign}. At the \(H_0\) inner ranks, Theorem~\ref{thm:airy} and the smaller same-rank displacement give exactly \(m-k+1\) later zeros to the right of the old root, hence the same sign. The cosine counting argument applies to every sufficiently large row, so these comparisons of fixed ranks refer to the actual ordered real roots of the later rows as well.
+
+Between successive old roots and between the last old root and zero, the alternating signs and \(P_{n+j}(0)>0\) force \(m\) later roots. At a degree jump the sign at \(-\infty\) is opposite to the sign at the first old root, forcing one extra root to the left. These roots exhaust the later degree and establish the stated direction of strict interlacing, completing the proof of Theorem~\ref{thm:main}.
+
+\section{Effective results at both ends}\label{sec:effective}
+
+The source of all finite rows is the recurrence
+\begin{equation}\label{eq:rec}
+ P_{n+1}=(1+t\partial_t)P_n+nP_{n-1}
+          +\binom n2 P_{n-2}+t\binom n3 P_{n-3},
+ \qquad P_0=1,\quad P_i=0\ (i<0).
+\end{equation}
+It follows either by differentiating the exponential formula or from the block containing the new label \cite[Thm.~3.3]{zhan}. The finite checker starts from these integers. It certifies disjoint, ordered negative brackets with opposite polynomial signs, or uses rigorous FLINT root isolation for seed rows and fallbacks. The brackets exhaust the exact degree, so each contains one simple root. Comparing bracket endpoints in the required order proves strict interlacing for every pair of nonconstant rows \(4\le n<n+j\le2004\), \(1\le j\le4\). The numbers of pairs are \(2000,1999,1998,1997\) respectively. An independent reader of all 501,501 archived dyadic intervals verifies these 7,994 pair orders and the endpoint signs without using the root predictor. The next result uses this finite range to cross the threshold of a uniform certificate.
+
+\Needspace{13\baselineskip}
+\begin{theorem}\label{thm:outereffective}
+For every \(n\ge20\), the five zeros of \(P_n\) of greatest complex modulus are simple, negative, and have distinct moduli. For \(1\le j\le4\) these five in rows \(n,n+j\) alternate strictly when each list is ordered from its most negative root. At equal degree the earlier row comes first, and at a degree jump the later row comes first.
+\end{theorem}
+
+\begin{proof}
+Write \(n=4m+s\), \(q=1/m\), \(y=500q\), \(v=4X^4\), and \(t=-c_{\mathrm o}m^5/v\). For \(m\ge500\) the certified open \(X\)-intervals have the following rational endpoints.
+\begin{center}
+\small
+\begin{tabular}{c@{\quad}ccccc}
+\toprule
+\(s\) & First & Second & Third & Fourth & Fifth\\
+\midrule
+0 & \(1.17,1.73\) & \(4.31,4.87\) & \(7.45,8.01\) & \(10.60,11.16\) & \(13.74,14.30\)\\
+1 & \(1.96,2.52\) & \(5.10,5.66\) & \(8.24,8.80\) & \(11.38,11.94\) & \(14.52,15.08\)\\
+2 & \(2.74,3.30\) & \(5.88,6.44\) & \(9.02,9.58\) & \(12.17,12.73\) & \(15.31,15.87\)\\
+3 & \(3.53,4.09\) & \(6.67,7.23\) & \(9.81,10.37\) & \(12.95,13.51\) & \(16.09,16.65\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+After removing \(t^m\) and a positive common factor the reciprocal expression is
+\[
+ S(q,v)=\sum_{\ell=0}^m(-v)^\ell p_\ell(y),\qquad
+ p_\ell(y)=\prod_{0\le h<\ell}(1-hq)\,[w^{4\ell+s}]
+                 \ee^{A(5qw)} b(5qw)^{m-\ell}.
+\]
+It need not have unit constant term. For \(d=4\ell+s\) the retained \(p_\ell\) have an exact polynomial expression in \(y\), by the binomial expansion
+\begin{equation}\label{eq:effcoef}
+ p_\ell(y)=\sum_{i=0}^d [w^d]\frac{\ee^{A(5w)}(b(5w)-1)^i}{i!}
+             q^{d-i}\prod_{0\le h<\ell+i}(1-hq).
+\end{equation}
+Retain \(\ell\le40\), where \(\ell+d<500\), and set \(q_*=1/500\), \(R_*=82\),
+\[
+ a_*=A(5q_*R_*),\qquad D_*=(b(5q_*R_*)-1)/q_*,\qquad M_*=\ee^{a_*+D_*}.
+\]
+On \(|w|=R_*\) positive coefficients give \(b(5qR_*)-1\le qD_*\), and consequently \(|p_\ell|\le M_*R_*^{-4\ell-s}\) by Cauchy's estimate, with \(p_\ell=0\) for \(\ell>m\). For \(|v|\le V<R_*^4\) the coefficient absolute sum of the omitted terms on the rescaled unit disk is at most
+\[
+ M_*R_*^{-s}\frac{(V/R_*^4)^{41}}{1-V/R_*^4}.
+\]
+
+On all of \(0\le y\le1\), the companion checker \texttt{effective\_outer.py} uses Arb to compare this error with the signed retained value at both endpoints of each window. For the complex count, let \(X_*\) be the fifth right endpoint plus one, and normalize \(|v|\le4X_*^4\) to the unit disk. If \(f(z)=f_{\rm e}(z^2)+z f_{\rm o}(z^2)\), its Graeffe transform is \(f_{\rm e}(z)^2-z f_{\rm o}(z)^2\), which squares its roots, preserving multiplicity. If the perturbation in coefficient \(\ell^1\) norm is at most \(\epsilon\), the transformed error is at most \(\epsilon(2\|f\|_1+\epsilon)\) by multiplication of \(f(w)f(-w)\). In the archived run, two transforms suffice on each slab and the checker verifies that the absolute fifth-degree coefficient of the retained transform exceeds the sum of all other absolute coefficients and the propagated error. Rouché's theorem gives exactly five roots in the disk and none on its boundary. The real sign-change windows exhaust them, so they are simple and any remaining roots have smaller original modulus. Each of the four residue checks covers the entire closed interval \(y\in[0,1]\), with \(64,128,128,256\) dyadic slabs respectively.
+
+When residues differ, comparing the rational brackets suffices, with the degree-jump rescaling \(X\mapsto X/(1+q)^{5/4}\). The checker compares fourth powers using \(0<q\le q_*\). When the residue repeats, increasing \(m\) by one at fixed \(t\) takes \((y,v)\) to \((y/(1+q),v(1+q)^5)\). Let \(S_{40}\) be the retained sum and parametrize this path by \(u\in[0,q]\) in place of \(q\) in the two denominators or factors. Its derivative is \((5v\partial_v-y\partial_y)S_{40}/(1+u)\) evaluated along the path. The following bound supplies a tail for the \emph{difference} between the two integer rows.
+
+Use the norm of the power series in \(w\) given by the sum of absolute coefficients weighted by \(R_*^h\) in degree \(h\). Set
+\[
+ D_2=\frac{b(5q_*R_*)-1-q_*R_*+\ee^{q_*R_*}-1-q_*R_*}{q_*^2}.
+\]
+The constant and linear terms cancel in \(b(5qw)-\ee^{qw}\), whose norm is bounded by \(q^2D_2\). Telescoping the \(m-\ell\) powers incurs error at most \(qD_2\ee^{D_*}\), as both powers are bounded by \(\ee^{D_*}\) and \(D_*\ge R_*\). Replacing \(\ee^{(1-\ell q)w}\) by \(\ee^w\) costs at most \(\ell q R_*\ee^{R_*}\); replacing \(\ee^{A(5qw)}\) by one costs at most \(q(a_*/q_*)\ee^{a_*}\). The falling product differs from one by at most \(q\ell(\ell-1)/2\) for \(\ell\le m\). Together these yield
+\[
+ |p_\ell(500q)-1/d!|
+ \le q M_*R_*^{-d}\bigl(a_*/q_*+D_2+\ell R_*+\ell^2/2\bigr).
+\]
+For \(\ell>m\), the same estimate bounds the zero extension since \(q\ell^2/2\ge1\) and \(R_*^d/d!\le\ee^{R_*}\). Compare both rows to \(1/d!\) and use \(((1+q)^{5\ell}-1)/q\le5\ell(1+q)^{5\ell}\). The absolute difference of omitted tails, divided by \(q\), is at most
+\[
+ T=M_*R_*^{-s}\sum_{\ell>40}
+ \left(\frac{V(1+q_*)^5}{R_*^4}\right)^\ell
+ \bigl[2(a_*/q_*+D_2+\ell R_*+\ell^2/2)+5\ell\bigr].
+\]
+The program bounds this series geometrically, as the bracketed term grows by a factor at most \((42/41)^2\) in one step.
+
+In the \(k\)-th window \((a_k,b_k)\), let \(V=4b_k^4\) and use \(4a_k^4\le v\le V(1+q_*)^5\). On 32 closed \(y\)-slabs the checker verifies that all degree-40 Bernstein coefficients in the rescaled \(v\) of
+\((-1)^k(5v\partial_v-y\partial_y)S_{40}\) exceed \((1+q_*)T\).
+The Bernstein basis is nonnegative and sums to one. Integrating along the path then shows the full neighboring expression has sign \((-1)^k\) at the old \(k\)-th reciprocal root, the sign immediately to the right of its own \(k\)-th reciprocal root. Bracket separation keeps the test point after the previous and before the next window, and inside the disk of five roots. Thus in the original variable the later root is strictly more negative at each fixed rank, and bracket separation gives the other half of the alternation. The finite check reaches \(2004\), including every comparison across \(2000\), which completes the proof.
+\end{proof}
+
+\begin{theorem}\label{thm:innereffective}
+For every \(n\ge1\), take \(r>0\) as in Theorem~\ref{thm:airy}, \(\sigma=(15/r)^{1/3}\) and \(d=1-\sigma/5\). Then
+\[
+ P_n(-x)>0\qquad
+ \left(0\le x\le\tfrac32 d\ee^{-d}\,r\ee^{-r}\right).
+\]
+For \(1\le n\le2004\) the larger endpoint \(c_0r\ee^{-r}\) also works. For \(n\ge2000\) the endpoint coefficient differs from \(c_0\) by at most \(c_0\ee^{1/5}(15/r)^{2/3}/50\).
+\end{theorem}
+
+\begin{proof}
+For \(n\ge2000\), \(r>15\), \(4/5\le d<1\). Write \(F=A-xB\), and \(F_j=(R\partial_R)^jF\). As \(h(r)=n\) and
+\[
+ h(r+d)-h(r)\ge\tfrac32dr(r+d)\ge x(r+d)\ee^{r+d},
+\]
+there is a real \(R\in[r,r+d]\) with \(F_1(R)=n\). Let \(\beta=x\ee^R/R\le3d/2\) and \(v=F_2(R)/R^3\). The identity
+\[
+ v=(1+x)(3/2+2/R+1/R^2)-\beta(1+1/R)
+\]
+implies \(v\ge 0.3\sigma\), and \(F_2\le A_2\) gives \(v<1.64\). Put \(L=\sqrt{R^3v}\), \(y=L\alpha\), and \(U=F(R\ee^{\ii\alpha})-F(R)-\ii n\alpha\). The integral of \(\Rea\exp U\) on \(0\le y\le\pi L\) has the sign of \(P_n(-x)\).
+
+The third moment bound for the sine remainder gives \(|\Ima U|\le0.56y^3\). An upper bound for the coefficient is
+\[
+ \frac{(4.5+4/R+1/R^2)/R+\beta(1+3/R+1/R^2)}
+      {6\sqrt{Rv^3}} .
+\]
+Use \(Rv^3\ge15(0.3)^3\) and \(R\ge15\). The cosine remainder costs only the negative exponential fourth moment for a lower real bound, and only the polynomial fourth moment for an upper real bound. The former yields \(\Rea U\ge-y^2/2-0.07y^4\) using \(Rv^2\ge15(0.3)^2\), since \(x B_4(R)\le\beta R^5(1+6/R+7/R^2+1/R^3)\). The latter gives \(\Rea U\le-0.42y^2\) for \(0\le\alpha\le\sqrt{\sigma}/5\), using \(A_4(R)=R^3(13.5+8/R+1/R^2)\) and \(\alpha^2/v\le 1/(25\cdot0.3)\).
+
+For \(\sqrt{\sigma}/5\le\alpha\le\pi/3\), the cubic term of \(A(R)-\Rea A(R\ee^{\ii\alpha})\) gives a loss at least \(0.029\sigma R^3\ge R^2/4\), by evaluating the cosine bound at \(3\sqrt{\sigma}/5\). From \(\pi/3\) to \(5\pi/6\) the quadratic term gives at least \(R^2/4\); on the rest the cubic gives at least \(R^3/6\). The negative term can add at most \(2\beta R\le3R\), so \(\Rea U\le-R^2/20\) on these arcs.
+
+The central region includes \(y\le4/3\) and has nonnegative real integrand there by the imaginary bound. On \(0\le y\le1\) its integral exceeds
+\((1-0.56^2/2)(1-1/6-0.07/5)>2/3\).
+The intermediate contribution past \(4/3\) is at most \(\exp(-0.42(4/3)^2)/(0.84(4/3))<0.52\) in absolute value. The remaining arc costs at most \(\pi\sqrt{1.64}R^{3/2}\exp(-R^2/20)<1/50\). These bounds yield a positive net integral. All the displayed decimals denote rationals; the separate checker verifies the numerical comparisons using outward rounding at the worst endpoints. The endpoint deficit follows from
+\(1-(1-\sigma/5)\ee^{\sigma/5}=\int_0^{\sigma/5} t\ee^t\,\dd t\).
+
+For \(1\le n\le2004\), the program \texttt{effective\_inner.py} applies \eqref{eq:rec}, brackets \(r\) by certifying signs of its cubic, and verifies every coefficient of \(P_n(t-c_0r\ee^{-r})\) is strictly positive with 192-bit Arb bounds. Consequently the claimed value is positive throughout the closed interval \(x\in[0,c_0r\ee^{-r}]\). For these \(n\), \(r>1/2\), \(d>0\), and \(d\ee^{-d}\le1/\ee\), so this also yields the smaller endpoint in the theorem.
+\end{proof}
+
+\section{A coefficient inequality for every threshold}\label{sec:coefficients}
+For nonnegative coefficient rows \(U,V\) with coefficients padded by zeros, write \(U\preceq V\) if \(u_i v_k\ge u_k v_i\) whenever \(i<k\). This is the likelihood-ratio order on the coefficient index.
+
+\begin{theorem}\label{thm:coefficients}
+For all \(b\ge2\) and \(n\le m\le n+b\),
+\[
+ (P^{(b)}_m)'\preceq P^{(b)}_n\preceq P^{(b)}_m .
+\]
+The upper bound \(b\) for the gap in the derivative comparison is sharp uniformly in \(n\). For \(a_k=[t^k]P^{(b)}_n(t)\), the sequence \(k!a_k\) is log-concave. For each \(t>0\) the expected number of large blocks under the \(t\)-tilt increases by an amount in \([0,1]\) from row \(n\) to row \(m\).
+\end{theorem}
+
+\begin{proof}
+Let \(A_b(z)=\sum_{1\le j<b}z^j/j!\), \(B_b(z)=\ee^z-1-A_b(z)\), and
+\(f_k(h)=[z^h]\ee^{A_b(z)}B_b(z)^k\).
+Then \([t^k]P^{(b)}_h(t)=h!f_k(h)/k!\).
+We first prove log-concavity of \(c_h=f_0(h)\). With \(\alpha_i=1/(i-1)!\) for \(1\le i<b\), zero beyond, the Euler identity gives \(h c_h=\sum_i \alpha_i c_{h-i}\), with \(c_\ell=0\) for negative indices. For \(h\ge1\), let \(E_h\) be the expectation of \(\alpha_{i+1}/\alpha_i\) under weights proportional to \(\alpha_i c_{h-i}\) on the nonzero indices. Then
+\[
+ c_{h+1}/c_h=(1+h E_h)/(h+1).
+\]
+The base comparison \(c_2/c_1\le c_1/c_0=1\) follows from the first two coefficients. If the ratios \(c_j/c_{j-1}\) are decreasing up to \(j=h-1\), the step from the weights at \(h-1\) to those at \(h\) reweights the old positive support by an increasing function of \(i\), namely \(c_{h-i}/c_{h-1-i}\). The newly supported indices are at the high end. The averaged variable \(\alpha_{i+1}/\alpha_i\) decreases with \(i\) and lies in \([0,1]\), so \(E_h\le E_{h-1}\le1\). The displayed ratio for \(h\) then does not exceed the preceding ratio. This proves the induction.
+
+For a nonnegative log-concave sequence with interval support, its Toeplitz matrix has nonnegative minors of order two, by monotonicity of successive ratios and the support condition. The matrix product for convolution and Cauchy--Binet therefore preserve log-concavity for these sequences. In particular \(f_k\) is log-concave in \(h\), since the coefficients of \(B_b\) form such a sequence. On \(h\ge kb\),
+\[
+ R_k(h)=\frac{f_{k+1}(h)}{f_k(h)}
+   =\sum_{\ell\ge b}[z^\ell]B_b\,
+                    \frac{f_k(h-\ell)}{f_k(h)}
+\]
+is nondecreasing in \(h\), by the decreasing adjacent ratios of \(f_k\) and the zero extension at the left. This proves \(P^{(b)}_n\preceq P^{(b)}_m\) by comparing adjacent coefficient ratios, then multiplying such comparisons on the common support.
+
+For \(k\ge1\) and \(m\ge kb\), \(R_k(m)\) is the weighted average of \(R_{k-1}(m-\ell)\) with weights \(([z^\ell]B_b) f_{k-1}(m-\ell)\). Every positive-weight argument is at most \(m-b\le n\). Thus \(R_k(m)\le R_{k-1}(n)\). This is precisely the adjacent coefficient ratio comparison between \((P^{(b)}_m)'\) and \(P^{(b)}_n\) after the factorials are cleared. Their degrees are ordered because \(m\le n+b\); the general minors follow by the successive ratios and by zero padding. When \(n=ab+b-1\) and \(m=(a+2)b\), the derivative has degree \(a+1\) and \(P^{(b)}_n\) has degree \(a\). The minor in columns \(0,a+1\) is strictly negative, proving sharpness.
+
+Taking \(m=n\) gives \(k a_k^2\ge(k+1)a_{k-1}a_{k+1}\), which is the log-concavity of \(k!a_k\). The derivative comparison also implies \(P^{(b)}_m\preceq tP^{(b)}_n\). The adjacent minors after a shift follow by dropping a factor \((k+1)/k\ge1\) from the stronger derivative comparisons, and the first column of \(tP^{(b)}_n\) is zero. Multiplying coefficients of both rows by \(t^k\) preserves the order. For any two nonzero rows in this order, the difference of their normalized means is nonnegative by summing \((k-i)(u_i v_k-u_k v_i)\) over \(i<k\). The row \(tP^{(b)}_n\) has mean exactly one larger than \(P^{(b)}_n\), proving the tilted bound.
+\end{proof}
+
+The factorial-weighted row can have nonreal zeros. The block-containing-label recurrence
+\[
+ P^{(b)}_{n+1}(t)=
+    \sum_{\ell=1}^{n+1}\binom{n}{\ell-1}
+         t^{\mathbf 1_{\{\ell\ge b\}}}P^{(b)}_{n+1-\ell}(t)
+\]
+gives the first threshold-four counterexample at \(n=11\). The factorial-weighted polynomial is
+\(312676+318671t+94446t^2\), with discriminant \(-16572783743\).
+The rows through \(7\) are linear or constant, and the discriminants for rows \(8,9,10\) are \(977225,20387812,188097001\), all positive. Thus the ordered lift that succeeds for the singleton-and-large-block restriction \cite{symcatsp} needs another idea for unrestricted partitions. The ordered-partition family, in which all blocks are ordered, has a different generating function.
+
+\appendix
+\section{Reproducing the certified computations}\label{app:replay}
+The versioned materials are available with \href{https://github.com/F1Justin/MathLab/tree/v1.0.0}{MathLab v1.0.0}. The companion \texttt{reproduce.py} runs the four certificate scripts from the archived source via temporary copies. It checks each mathematical record against the frozen output, apart from timing fields. See \texttt{reproduction/README.md} for the pinned Python dependencies and commands. The analytic saddle proofs use the certified coverage of \([1/16,32]\); the algorithms deciding signs use Arb enclosures or exact integer/rational arithmetic. Candidate angular positions and root predictors may be floating-point values, while all strict decisions are verified independently of prediction accuracy. The downloadable dyadic intervals and independent reader are in \href{https://github.com/F1Justin/MathLab/tree/v1.0.0/certificates/partitions}{\texttt{certificates/partitions}}. The Airy and phase pilots in the research materials are numerical diagnostics. The analytic arguments and certificates in this manuscript have no Lean formalization.
+
+\paragraph{Authorship and AI disclosure.}
+Chengyi Fang (\href{https://orcid.org/0009-0006-1237-7763}{ORCID 0009-0006-1237-7763}) directed the MathLab project. AI systems performed the primary mathematical research, software development and writing. They also conducted independent model review. Chengyi Fang has not independently verified the proofs. This manuscript is licensed under \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}. Original companion code is licensed under the MIT License.
+
+\clearpage
+\begin{thebibliography}{9}
+\bibitem{zhan}
+J.~Zhan, \emph{Polynomial recursions for counting big blocks in set partitions},
+Stockholm University, 2023--K17, 2023.
+\href{https://kurser.math.su.se/pluginfile.php/16103/mod_folder/content/0/2023/2023_K17_report.pdf?forcedownload=1}{Institutional report}.
+
+\bibitem{mo}
+P.~Alexandersson, \emph{Set partitions with big blocks -- real-rooted polynomials?},
+MathOverflow, 17 January 2024.
+\href{https://mathoverflow.net/questions/462360/set-partitions-with-big-blocks-real-rooted-polynomials}{Question 462360}.
+
+\bibitem{symcat}
+P.~Alexandersson, \emph{Real-rooted polynomials: open problems},
+The Symmetric Functions Catalog, accessed 26 November 2026.
+\href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm}{Problem list}.
+
+\bibitem{symcatsp}
+P.~Alexandersson, \emph{Real-rooted polynomials from set partitions},
+The Symmetric Functions Catalog, accessed 26 November 2026.
+\href{https://www.symmetricfunctions.com/realRootedSetPartitions.htm}{Big blocks example}.
+
+\bibitem{an}
+P.~Alexandersson and O.~Nabawanda, \emph{Peaks are preserved under run-sorting},
+Enumer.\ Combin.\ Appl.\ \textbf{2} (2022), no.~1, S2R2.
+\href{https://doi.org/10.54550/ECA2022V2S2R2}{Article}.
+
+\bibitem{bm}
+M.~B\'ona and I.~Mez\H{o}, \emph{Real zeros and partitions without singleton blocks},
+European J.\ Combin.\ \textbf{51} (2016), 500--510.
+\href{https://arxiv.org/abs/0705.2734}{arXiv:0705.2734}.
+
+\bibitem{dlmf}
+F.~W.~J. Olver et al., eds., \emph{NIST Digital Library of Mathematical Functions},
+Chapter 9, Airy and Related Functions.
+\href{https://dlmf.nist.gov/9.5}{Integral representations} and
+\href{https://dlmf.nist.gov/9.9}{zeros}.
+\end{thebibliography}
+\end{document}

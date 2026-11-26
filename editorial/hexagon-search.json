@@ -1,0 +1,89 @@
+[
+  {
+    "query": "lonely runner",
+    "url": "https://hexagonmath.org/api/v1/works?q=lonely+runner&limit=100",
+    "page": {
+      "limit": 100,
+      "next_cursor": null,
+      "has_more": false,
+      "total": 0
+    },
+    "matches": []
+  },
+  {
+    "query": "set partitions",
+    "url": "https://hexagonmath.org/api/v1/works?q=set+partitions&limit=100",
+    "page": {
+      "limit": 100,
+      "next_cursor": null,
+      "has_more": false,
+      "total": 0
+    },
+    "matches": []
+  },
+  {
+    "query": "big blocks",
+    "url": "https://hexagonmath.org/api/v1/works?q=big+blocks&limit=100",
+    "page": {
+      "limit": 100,
+      "next_cursor": null,
+      "has_more": false,
+      "total": 0
+    },
+    "matches": []
+  },
+  {
+    "query": "threshold four",
+    "url": "https://hexagonmath.org/api/v1/works?q=threshold+four&limit=100",
+    "page": {
+      "limit": 100,
+      "next_cursor": null,
+      "has_more": false,
+      "total": 0
+    },
+    "matches": []
+  },
+  {
+    "query": "shifted runners",
+    "url": "https://hexagonmath.org/api/v1/works?q=shifted+runners&limit=100",
+    "page": {
+      "limit": 100,
+      "next_cursor": null,
+      "has_more": false,
+      "total": 0
+    },
+    "matches": []
+  },
+  {
+    "query": "real-rooted",
+    "url": "https://hexagonmath.org/api/v1/works?q=real-rooted&limit=100",
+    "page": {
+      "limit": 100,
+      "next_cursor": null,
+      "has_more": false,
+      "total": 4
+    },
+    "matches": [
+      {
+        "identifier": "2611.00919",
+        "title": "First differences of real-rooted integer polynomials and simplicial complexes",
+        "abstract": "Let $H(t)=\\sum_{i=0}^d h_it^i$ be a real-rooted polynomial with nonnegative integer coefficients and $h_0=1$. We prove that every strictly increasing initial segment of its coefficients has first differences forming the face-number vector of a simplicial complex. This answers Problem 2.10 in Brenti's list of open problems and Question 4.4 of Kubitzke and Welker, without symmetry, monicity, or degree restrictions. The proof combines a uniform additive estimate for the Kruskal–Katona operator with a continuous inequality for ultra-log-concave sequences. A classical trace bound for totally positive algebraic integers supplies the necessary initial-coefficient condition after the factors $1+t$ are removed. These factors are then restored by a cone construction. In particular, the conclusion holds for products of any number of real-rooted irreducible cubic factors with nonnegative integer coefficients and constant term one."
+      },
+      {
+        "identifier": "2611.00793",
+        "title": "A base-r simplex that is not Ehrhart positive",
+        "abstract": "For integers $r\\ge2$ and $d\\ge1$, Solus's base-$r$ $d$-simplex is the convex hull of the standard basis vectors of $\\mathbb{R}^d$ and the point $-(r-1)(1,r,\\dots,r^{d-1})$. Solus introduced these simplices through numeral systems, proved that their $h^*$-polynomials are real-rooted, and observed that computations suggest they are also Ehrhart positive. Fu Liu recorded this as Solus's conjecture that every base-$r$ $d$-simplex is Ehrhart positive, and Liu and Solus restated it for all $r\\ge2$ and $d\\ge1$. We show that the conjecture fails: the base-$14$ $5$-simplex has Ehrhart polynomial \\[ 1-\\tfrac{268}{15}t+\\tfrac{3955}{12}t^2+\\tfrac{5833}{2}t^3+\\tfrac{10343}{12}t^4+\\tfrac{67228}{15}t^5, \\] whose linear coefficient is negative. The proof is an explicit bijection between the lattice points of each dilate and pairs consisting of a residue modulo $14^5$ and a vector of nonnegative integers, which reduces the count to the distribution of one integer-valued height function over the $537{,}824$ residues. Lean checks the whole statement from the definition of the convex hull, including the finite height distribution, by kernel evaluation. This work has not yet been reviewed by experts. The proofs, the Lean formalization and the text were produced by AI models, working under the author's direction."
+      },
+      {
+        "identifier": "2610.00483",
+        "title": "The Real-Rooting Time Of Heat-Evolved Random Polynomials",
+        "abstract": "Let $G_{n,t}=\\exp(-\\frac{t}{2n}\\partial_z^2)G_n$ be a random Weyl polynomial of degree $n$ under the backward heat flow, with independent coefficients of a law that is not a point mass and has finite variance. Hall, Ho, Jalowy and Kabluchko showed that the empirical zero distribution collapses onto the real line at $t=1$. We show that the first time at which all zeros of $G_{n,t}$ are real, a finite-degree analogue of the de Bruijn--Newman constant, converges in distribution to $T_*=R_*^{-2}$, where $R_*$ is the smallest modulus of a nonreal zero of the random power series $\\sum_j\\eta_jw^j$ with coefficients of the same law; the convergence is almost sure under a coupling of the degrees that shares the top coefficients, whereas under the standard coupling the set of limit points of the real-rooting time is almost surely $[1,\\infty]$. The proof rests on an exact count of the nonreal zeros of analytic combinations $\\sum_{j\\le n}a_jh_{n-j}$ of orthonormal Hermite polynomials: if the real power series $a$ has radius of convergence greater than $1$, no zeros on the unit circle and simple zeros in the unit disk, then for all large $n$ the combination has exactly as many nonreal zeros as $a$ has in the disk. Its method expresses the polynomial and its derivative in the bulk through a $2\\times2$ matrix applied to $(h_n,h_{n-1})$, built from only $O(\\log n)$ steps of the backward three-term recurrence, with the remaining terms controlled by a Christoffel--Darboux bound. For Gaussian coefficients the law of $T_*$ is a Fredholm determinant, $\\mathbb{P}(T_*>t)\\sim\\frac4{3\\pi}t^{-3/2}$ as $t\\to\\infty$, and $(t-1)\\log\\mathbb{P}(T_*\\le t)\\to-\\pi^2/12$ as $t\\downarrow1$, half of the constant for complex coefficients. At the scale $1/n$ the last pair of nonreal zeros collides inside the real bulk, at relative position $\\cos\\theta_*$, where $R_*e^{\\pm i\\theta_*}$ are the nonreal zeros of minimal modulus, and the real-rooting time is within $O(1/n)$ of $T_*$. In a window of size $1/n$ the polynomial is, up to a positive factor and $O(1/n)$, the model $\\zeta\\cos(\\zeta+c)+\\lambda\\sin(\\zeta+c)$, whose threshold for real-rootedness is given by Kepler's equation; the phase $c$ rotates with $n$, so $n(\\Lambda_n-T_*)$ oscillates over an explicit interval and has an explicit limit law jointly with $T_*$."
+      },
+      {
+        "identifier": "2610.00279",
+        "title": "Pattern-avoiding binary arrays and a Stirling-type table: explicit formulas, exact recurrence orders, and non-D-finiteness",
+        "abstract": "Let $a_k(n)$ be the number of $n\\times k$ binary arrays in which no row contains $001$ or $010$ and no column contains $001$ or $011$ as three consecutive entries (OEIS A207123). Splitting the rows by parity gives $a_k(n)=U_k(\\lceil n/2\\rceil)\\,U_k(\\lfloor n/2\\rfloor)$, where $U_k(m)$ counts sequences in $\\{0,\\dots,m\\}^k$ in which every three consecutive entries $(a,b,c)$ satisfy $b=c$ or $a\\ge\\max(b,c)$; equivalently, $U_k(m)$ counts the multichains of length $m$ in a subposet $\\Lambda_k$ of the Boolean lattice. We prove three main results. First, for each $m$ the minimal order of a linear recurrence in $k$ is exactly $3m+1$, and a unique factorization into blocks gives a positive double-sum formula for $U_k(m)$ in terms of Stirling and $r$-Stirling numbers. Second, the bivariate generating function is not D-finite, and every polynomial-coefficient recurrence that holds on a quadrant is a left multiple of the defining four-term recurrence; the same holds for an associated Stirling-type triangle $N(k,q)$, and $U$ is not Stirling-like in the sense of Kauers. Third, the numerators $h_k(t)$ of $\\sum_mU_k(m)t^m=h_k(t)/(1-t)^{k+1}$, analogues of the Eulerian polynomials, have only simple real zeros; equivalently, the chain polynomials of the posets $\\Lambda_k$ are real-rooted, and the rows of $N$ are log-concave. We also determine all binomial shapes with nonnegative parameters in which $U_k(m)$ is a single sum, and show that the near-diagonal entries $N(k,k-d)$ are polynomials in $k$ starting exactly at $k=2d+2$. The reduction, the exact orders, the explicit formula, the non-D-finiteness, the description of the quadrant recurrences and the near-diagonal theorem are formalized in Lean 4 with Mathlib."
+      }
+    ]
+  }
+]

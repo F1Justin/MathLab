@@ -1,0 +1,14 @@
+{
+  "positive_intervals": 121,
+  "total_weight": 303345,
+  "total_weighted_length_units": 153120431,
+  "tested_through_speed": 59940,
+  "maximizer": [
+    160,
+    9192800
+  ],
+  "finite_speed_max": "20159589/153120431",
+  "high_speed_upper_bound": "7735870501306/77359044788527",
+  "global_upper_bound": "20159589/153120431",
+  "minimum_extra_runners": 8
+}

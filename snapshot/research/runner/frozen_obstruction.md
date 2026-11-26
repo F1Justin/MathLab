@@ -1,0 +1,15 @@
+# How many runners must change in the published 57-runner seed?
+
+At radius d=1/59, even keeping all published 57 runners and appending two extra runners, both allowed arbitrary real phases and positive integer speeds with repetitions, cannot cover the whole unit circle. In particular a 58-runner construction derived from this seed must change at least two original runners. This condition refers to the specific rational seed, with the time origin fixed; translating a whole configuration in time is harmless.
+
+For the original runners take the complement of the union of [(k-s-d)/v,(k-s+d)/v] on [0,1]. There are 207 positive-width gaps. Ignoring endpoints is harmless: a closed family covering a gap's interior covers its closure. A single new runner able to cover an interval of length L must have speed <=2d/L because each connected component of its time cover has width 2d/v. The largest gap has width 26269/295000000. This gives v<=380. Intersecting the allowed phase arcs for four gaps eliminates all unused speeds.
+
+For two new runners with speeds v<=w, each covers at most 2dL+2d/v of an interval of length L: separate whole periods and a remainder of length less than a period, whose covered measure cannot exceed 2d/v. Adding the two bounds gives v<=4d/((1-4d)L), hence v<=816 using the largest gap. For each such v split the phase circle into 32 closed intervals with midpoint p and half-width 1/64. On an original gap of midpoint t and width l, the condition
+
+    ||v t+p|| > d+1/64+v l/2
+
+suffices for the slower runner to miss the entire gap throughout that phase interval. Retain only the 20 widest gaps. At least eight remain entirely missed in every box. The faster runner must cover the widest remaining gap, giving an explicit finite upper bound on w. For every pair of missed midpoints t_i,t_j, its necessary phase-independent condition is ||w(t_i-t_j)||<=2d. Exact rational tests discard all remaining w in every one of the 26112 boxes. All inequalities weaken the conditions for success, so an empty candidate set proves impossibility. A modification of one of the original runners followed by adding a runner would still cover after restoring the original runner as an extra, contradicting the two-runner result.
+
+Run python3 research/runner/frozen_extension.py and python3 research/runner/two_runner_obstruction.py at the MathLab root. Both use fractions from the standard library. The input is tomdif's 57-runner certificate distributed in the public solved-conjectures collection, credited in package1/results/known_slr_57.json.
+
+The upstream speed-changing search was separately replayed at version 60e47a0419d97deb104e72eb23692232430ce35f with SO=1007, MULT=0.6, VMX=4, RESET=999999, n=58 and four attempts. Only the path variables HERE and OFF in a3chain3.py were adapted. The best reported post-polish excess was -1.0000. No 58-runner certificate resulted. The independent cyclic-chain heuristic in chain_search.py reached an estimated excess of -0.666671 with 100 tested initial additions, also short of the strict target E>0.

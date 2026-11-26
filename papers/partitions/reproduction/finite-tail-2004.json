@@ -1,0 +1,15 @@
+{
+  "first_polynomial": 1793,
+  "last_polynomial": 2004,
+  "first_new_row": 1797,
+  "strict_pairs_by_lag": {
+    "1": 208,
+    "2": 208,
+    "3": 208,
+    "4": 208
+  },
+  "fallback_rows": 0,
+  "method": "integer recurrence, disjoint certified sign brackets or FLINT root isolation",
+  "python_flint": "0.9.0",
+  "elapsed_seconds": 60.21
+}

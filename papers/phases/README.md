@@ -1,0 +1,5 @@
+# A sharp phase neighbourhood for consecutive lonely runners
+
+Build the manuscript with `latexmk -pdf phases.tex`. Run `python3 check.py` with standard Python 3.9 or newer. It verifies 63 exact examples using the complete event enumeration, including points on each side of the sharp boundary. The first result in the paper is a formula on an explicitly specified neighbourhood; the second is a lower bound on a larger tube under an arithmetic condition on the prime. Both are written proofs.
+
+The project source note is [prime_orbit.md](../../snapshot/research/runner/prime_orbit.md) and the $p=59$ precursor is in [the research exchange](../../snapshot/package1/api_runs/tight_orbit_001/answer.md). Current literature comparisons concern Blanco–Criado–Santos on global phase minima, Poliakova on varying the speeds, and Zhang on the minimum gap and its minimisers. No matching sharp neighbourhood theorem was identified in the referenced sources. These comparisons do not establish exhaustive priority.

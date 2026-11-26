@@ -1,0 +1,44 @@
+{
+  "checked_at_utc": "2026-11-26T08:37:04.617199+00:00",
+  "kind": "Replay of upstream exact mathematical verifier; no API requests",
+  "repository": "1337isnot1337/solved-conjectures",
+  "commit": "75a0b27a1b3e76715a45704865454b14f8f1c63d",
+  "source_directory": "results/shifted-lonely-runner-counterexamples",
+  "inputs": {
+    "verify.py": {
+      "sha256": "11908ba2527c6669264cc81c7514ddf6afeed5ea3d59b895a44c52441629821a",
+      "url": "https://github.com/1337isnot1337/solved-conjectures/blob/75a0b27a1b3e76715a45704865454b14f8f1c63d/results/shifted-lonely-runner-counterexamples/verify.py"
+    },
+    "certificates.json": {
+      "sha256": "bedda0f72d4924d01c5e7c4c02f5c382d296433956e985d7a314ff4ecfa15640",
+      "url": "https://github.com/1337isnot1337/solved-conjectures/blob/75a0b27a1b3e76715a45704865454b14f8f1c63d/results/shifted-lonely-runner-counterexamples/certificates.json"
+    }
+  },
+  "runs": [
+    {
+      "log": "slr_upstream_quick.log",
+      "command": [
+        "python3",
+        "-u",
+        "verify.py",
+        "--quick"
+      ],
+      "scope": "All 40 certificates, n=18..57: exact rational arc cover. Exact maximum additionally recomputed for n=18..24 and n=41.",
+      "exit_code": 0,
+      "elapsed_seconds": 16.652
+    },
+    {
+      "log": "slr_upstream_57_full.log",
+      "command": [
+        "python3",
+        "-u",
+        "-c",
+        "import json,time,verify\nc=next(c for c in json.load(open('certificates.json')) if c['n']==57)\nt=time.perf_counter()\nok,line=verify.check(c,exact=True)\nprint(line)\nprint('elapsed_seconds',round(time.perf_counter()-t,3))\nraise SystemExit(0 if ok else 1)\n"
+      ],
+      "scope": "n=57 only: exact maximum over all pair-event times plus exact rational arc cover.",
+      "exit_code": 0,
+      "elapsed_seconds": 54.382
+    }
+  ],
+  "editorial_note": "The interpreter path is made portable here. See editorial/upstream-seed-check.json for a byte- and field-level comparison with the Git blob."
+}

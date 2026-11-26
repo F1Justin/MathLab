@@ -1,0 +1,4 @@
+{"max_even": 6, "budget": 2, "catalogue_size": 7, "primitive_rows": 8, "nodes": 8, "solution": null}
+{"max_even": 8, "budget": 3, "catalogue_size": 10, "primitive_rows": 12, "nodes": 100, "solution": null}
+{"max_even": 10, "budget": 4, "catalogue_size": 21, "primitive_rows": 20, "nodes": 5954, "solution": null}
+{"max_even": 12, "budget": 5, "catalogue_size": 26, "primitive_rows": 24, "nodes": 245728, "solution": null}

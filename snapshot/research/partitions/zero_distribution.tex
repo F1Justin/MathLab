@@ -1,0 +1,288 @@
+\documentclass[UTF8,fontset=fandol,11pt,a4paper]{ctexart}
+\usepackage[margin=21mm,top=19mm,bottom=20mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=black,pdftitle={四元阈值集合划分多项式的零点分布}}
+\setlength{\parskip}{1pt}
+\linespread{0.97}
+\pagestyle{plain}
+\newcommand{\Rea}{\operatorname{Re}}
+\newcommand{\Ima}{\operatorname{Im}}
+\newcommand{\expo}{\mathrm e}
+\newcommand{\dd}{\mathrm d}
+\newtheorem*{mainthm}{定理}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries 四元阈值集合划分多项式的零点分布}\par
+\vspace{1.6mm}{\small MathLab 研究稿\quad 2026 年 11 月 26 日}
+\end{center}
+
+设 $\Pi_n$ 为 $[n]$ 的普通集合划分，给每个大小至少为四的块权重 $t$，其余块权重为一。记
+\[
+ P_n(t)=\sum_{\pi\in\Pi_n}t^{\#\{B\in\pi:|B|\ge4\}},\qquad d_n=\deg P_n=\lfloor n/4\rfloor .
+\]
+Zhan 研究了这族多项式的递推。SymCat 将“四元阈值下每一行均实根且相邻行交错”列为开放问题。本文证明对充分大的每个 $n$ 成立，给出两端任意固定数目零点的位置，并求得靠近原点一端的相邻行位移。证明的中间半径部分使用可重跑的严格区间计算。
+
+\begin{mainthm}
+存在整数 $N$，对每个 $n\ge N$，$P_n$ 的全部 $\lfloor n/4\rfloor$ 个零点均为简单负实根，且对每个 $1\le j\le4$ 与 $P_{n+j}$ 定向严格交错。进一步，给定 $\eta>0$，存在 $0<a<b$，使充分大的每个 $n$ 都满足下述结论。在 $[-bn,-an]$ 内，$P_n$ 和 $P_{n+1}$ 各有至少 $(1-\eta)d_n$ 个简单负实根。去掉端点处至多常数个零点后，两行的零点严格交错。
+\end{mainthm}
+这里 $a,b$ 只依赖于 $\eta$。整数系数递推、严格根隔离和异号区间已验证 $4\le n\le2004$ 的全部零点均为简单负实根，2000 对相邻非常数行均严格交错。下文的 $N$ 尚无可与 2004 接合的显式上界，故所有行的原猜想仍未解决。
+
+\section{共同的积分与相位}
+写 $A(z)=z+z^2/2+z^3/6$、$B(z)=\expo^z-1-A(z)$。标号组合类的指数公式给出
+\[
+ \sum_{m\ge0}P_m(t)\frac{z^m}{m!}=\exp\{A(z)+tB(z)\}.
+\]
+令 $H=zB'$、$K=zH'$。下节证明：每个半径 $r>0$ 的圆上，$\Rea B$ 的最小值仅在一对共轭点取得。上半平面的点记为 $z_*=r\expo^{i\theta}$，在此点
+\[
+ 0<\theta<\pi,\quad H\in\mathbb R_{<0},\quad \Rea K<0,\quad \Ima B>0.\tag{S}
+\]
+取 $\tau=-1/H(z_*)$，对 $j=0,1$ 在同一半径上提取 $P_{n+j}(-n\tau)$ 的系数。角坐标 $u$ 的指数为 $nf(u)$，其中
+\[
+ f(u)=-\tau B(r\expo^{iu})-iu.
+\]
+相邻两行的振幅分别为 $\exp(A(z))$ 和 $z^{-1}\exp(A(z))$。在 $u=\theta$，有 $f'=0$ 且 $\Rea f''=\tau\Rea K<0$。定义
+\[
+ \psi=-\tau\Ima B(z_*)-\theta,\qquad
+ \phi=\arg\frac{\exp(A(z_*))}{\sqrt{-f''(\theta)}},\qquad
+ L_j=n\psi+\phi-j\theta .
+\]
+取实部为正的平方根，并连续选取辐角。在任一紧半径区间上，存在正数 $D_{n,j}(\tau)$ 使
+\begin{align}
+ P_{n+j}(-n\tau)/D_{n,j}&=\cos L_j+o(1),\label{eq:wave}\\
+ \frac{\dd P_{n+j}(-n\tau)/\dd\tau}{nD_{n,j}}
+ &=-\Rea B(z_*)\cos L_j+\Ima B(z_*)\sin L_j+o(1).\label{eq:slope}
+\end{align}
+误差对此紧区间一致。具体地，$D_{n,j}$ 等于
+\[
+ \frac{2(n+j)!}{\sqrt{2\pi n}}r^{-n-j}\exp(n\Rea f(\theta))
+ \left|\frac{\exp(A(z_*))}{\sqrt{-f''(\theta)}}\right|.
+\]
+两极值点的小邻域以外，积分由于严格的高度差而指数衰减。邻域内作代换 $v=\sqrt n(u-\theta)$，有界三阶余项和高斯控制 $\exp(-c v^2)$ 给出一致的高斯主项，两共轭点相加即得式 \eqref{eq:wave}。先对系数表达式求导，在积分中加入因子 $-nB$，同一估计便给出式 \eqref{eq:slope}。
+
+沿极值分支对 $\Ima H=0$ 求导，得到
+\[
+ r\frac{\dd H}{\dd r}=\frac{|K|^2}{\Rea K}<0,\qquad
+ \frac{\dd\psi}{\dd\tau}=-\Ima B(z_*)<0 .
+\]
+第二式由驻点方程得到。下节的两端估计给出 $r:0\to\infty$ 时 $\tau:\infty\to0$，$\psi:-\pi/4\to0$。
+
+在固定紧区间，$L_j$ 对 $\tau$ 严格递减。式 \eqref{eq:wave} 将全部实零点限制在 $L_j=\pi/2+\ell\pi$ 的小邻域内。取邻域足够窄，因为 $\min\Ima B>0$、$\Rea B$ 有界，式 \eqref{eq:slope} 的导数在每个邻域内同号且非零。两端异号，所以每个完整邻域恰有一个简单根，且相位误差为 $o(1)$。两行相位差为 $\theta$，在紧区间内与 $0,\pi$ 均有正距离，因此严格交错。在对应于 $r_1\le r\le r_2$ 的区间中，每行的零点数为
+\[
+ \frac{n}{\pi}\bigl(\psi(r_2)-\psi(r_1)\bigr)+O(1).
+\]
+此处以 $\psi(r)$ 简记复合函数 $\psi(\tau(r))$。扩大固定区间可使相位增量任意接近 $\pi/4$。由 $d_n\sim n/4$ 即得定理。相应地，零点除以 $n$ 后，以次数归一的极限分布在这段负实轴上的质量为 $4(\psi(r_2)-\psi(r_1))/\pi$。
+
+\section{主鞍点的全半径验证}
+\paragraph{小半径 $0<r\le1/16$。}
+在上半圆写 $z=r\expo^{iu}$。归一化函数 $24B/r^4$ 的前两项为 $\expo^{4iu}+(r/5)\expo^{5iu}$，其余系数 $a_j=24r^j/(4+j)!$，$j\ge2$，分别乘 $\expo^{(4+j)iu}$。用相邻项之比估计尾和可得
+\[
+ \sum a_j\le r^2/29,\quad \sum(4+j)^2a_j\le2r^2,\quad
+ \sum j a_j/4\le r^2/30 .
+\]
+除 $\pi/4,3\pi/4$ 的宽度 $\pm\pi/32$ 的两个邻域以外，$\cos 4u\ge-\cos(\pi/8)$，而 $2(r/5+r^2/29)<1-\cos(\pi/8)$。与 $u=\pi/4$ 比较，最小点只能在这两个邻域内。在 $3\pi/4$ 的邻域，$\cos 5u\ge\cos(13\pi/32)>1/4$，而 $\cos(5\pi/4)=-1/\sqrt2$，故该邻域也被排除。在剩余邻域，归一化的 $\Rea K\le-16\cos(\pi/8)+5r+2r^2<0$。角向二阶导数为 $-\Rea K$，严格凸性给出唯一内点最小值。其 $\Ima H=0$，$\Rea H<0$ 同样由首项控制。在该点 $\Ima B=\Ima(B-H/4)$，其归一化首项 $-(r/20)\sin 5u\ge r/80$，尾部至多 $r^2/30$。这就证明了式 (S)。令 $r\downarrow0$，有 $\theta\to\pi/4$、$H\sim-r^4/6$、$B/H\to1/4$。
+
+\paragraph{中间半径 $1/16\le r\le32$。}
+可复核证书见随附的 \texttt{saddle\_certificate.py}。程序按闭区间覆盖半径轴。在每个半径区间提出一个角区间 $[l,h]$ 和其中一个测试角 $u_0$。它用向外舍入的 Arb 球算术核验四件事：
+\begin{enumerate}
+\item 两端 $\Ima H$ 的符号依次为正、负，且整个角区间内 $\Rea K<0$。
+\item 上半圆其余部分的 $\Rea B$ 严格大于同半径测试角处的 $\Rea B$。
+\item 用经过认证的端点符号收紧临界点的角区间，其上 $\Rea H<0$。
+\item 收紧区间上 $\Ima B>0$，或 $\Ima(B-H/4)>0$；两者在临界点相同。
+\end{enumerate}
+两个单侧二分分别保留可证的正、负端点。计算相位时，还核验根包围区间位于同一个已证唯一性角区间内。浮点近似仅用来提出测试角。$r\le4$ 时对归一化级数保留到 $j=30$，四个被测函数的尾项均由 $\sum_{j\ge31}24(4+j)^2 4^j/(4+j)!<10^{-15}$ 控制。其余半径用 $\expo^{-r}$ 归一后直接作球算术。96 位精度下，验证覆盖了 86 个半径区间。单取 $1\le r\le32$，所占零点的极限比例已经位于 $0.8270862\pm0.000000065$ 内。全半径结论还需要两端的解析估计。
+
+\paragraph{大半径 $r\ge32$。}
+记 $z=x+iy$。多项式 $1+z+z^2/2+z^3/6$ 的模至多 $M=1+r+r^2/2+r^3/6<r^3$。在右半圆上用 $y=\pi$ 作测试，其 $x_\pi=\sqrt{r^2-\pi^2}>r-1/5$。左半圆的 $\Rea B\ge-1-M$，而测试值至多为 $-\expo^{x_\pi}+M$。在右半圆 $y\ge2\pi$ 的部分，因为 $x_\pi-x_{2\pi}\ge3\pi^2/(2r)$，有
+\[
+ \expo^{x_\pi}-\expo^{x_{2\pi}}\ge\expo^{r-1/5}/(2r)>2M .
+\]
+在右半圆 $0\le y\le2\pi$ 且 $y\notin[3\pi/4,5\pi/4]$ 时，用 $\cos y\ge-1/\sqrt2$ 也排除最小点。因此只剩右半圆 $3\pi/4\le y\le5\pi/4$。其中 $0<u<1/8$、$x>r-1$，$\cos(y+u)$ 和 $\cos(y+2u)$ 均至多为 $-1/2$。由
+\[
+ K=(z+z^2)\expo^z-(z+2z^2+3z^3/2)
+\]
+可知 $\Rea K<0$；类似地 $\Rea H\le-r\expo^{r-1}/3$。在唯一最小点 $H$ 为实数，故 $B=H/z-z^3/6$ 给出
+\[
+ \Ima B\ge \expo^{r-1}\sin u/3-r^3/6>0,\qquad
+ \sin u\ge3\pi/(4r).
+\]
+最后 $\theta=O(1/r)$、$|B/H|=O(1/r)$，故 $\psi\to0$。式 (S) 对所有半径得证。
+
+\section{最外侧零点的尺度}
+令 $n=4m+r$，本节 $r\in\{0,1,2,3\}$ 表示余数。固定任意 $k\ge1$，对充分大的 $m$，按模从大到小的第 $k$ 个根为简单负实根，满足
+\[
+ t_{4m+r,k}\sim-\frac{24m^5}{625\cdot4x_{r,k}^4}.
+\]
+其中 $x_{0,k}=(k-\tfrac12)\pi$，$x_{2,k}=k\pi$。$x_{1,k}$ 是 $(x_{0,k},x_{2,k})$ 中 $\tan x=-\tanh x$ 的唯一解，$x_{3,k}$ 是 $(x_{2,k},x_{0,k+1})$ 中 $\tan x=\tanh x$ 的唯一解。
+
+写 $c=24/625$、$h(z)=24B(z)/z^4=1+z/5+O(z^2)$、$a_b=[t^b]P_n$。指数公式给出
+\[
+ \frac{a_{m-\ell}}{a_m}
+ =24^\ell(m)_\ell
+ \frac{[z^{4\ell+r}]\expo^{A(z)}h(z)^{m-\ell}}
+ {[z^r]\expo^{A(z)}h(z)^m}.
+\]
+固定 $s,\ell$ 时，$[z^s]\expo^Ah^{m-\ell}$ 是关于 $m$ 的多项式，首项为 $m^s/(5^s s!)$。因此归一化倒数多项式 $R_m(u)=\sum_{\ell=0}^m(a_{m-\ell}/a_m)(u/(cm^5))^\ell$ 逐系数趋于 $F_r(u)=\sum_{\ell\ge0}r!u^\ell/(4\ell+r)!$。收敛在紧集上一致。事实上 $h$ 的非负系数逐项不超过 $\expo^z$，在半径 $M/m$ 用柯西估计；上式分母对充分大的 $m$ 至少为 $c_r m^r$，其中 $c_r>0$。在 $|u|\le D$ 上，第 $\ell$ 项遂由 $C_{M,r}(625D/M^4)^\ell$ 控制，取 $M^4>625D$ 即可。
+
+函数 $G_r(x)=x^rF_r(-4x^4)/r!$ 从 $G_0=\cos x\cosh x$ 开始逐次积分，得到
+\[
+ G_1=\tfrac12(\sin x\cosh x+\cos x\sinh x),\quad
+ G_2=\tfrac12\sin x\sinh x,\quad
+ G_3=\tfrac14(\sin x\cosh x-\cos x\sinh x).
+\]
+$G_1,G_3$ 的非零根满足上述正切方程。若 $z=x+iy$ 且 $xy\ne0$，分离两式的实虚部并消元将得到 $\sin(2x)\sin(2y)=\sinh(2x)\sinh(2y)$，取绝对值即矛盾。极点代回原式也不是零点。因此 $F_r$ 的全部零点为 $-4x_{r,k}^4$，且均为单根。在包含前 $k$ 个极限零点的圆内以及各个零点的小圆内使用 Rouché 定理，实系数与共轭对称性保证每个小圆内恰有一个实单根。取倒数即得断言。四类 $x_{r,k}$ 的严格次序也给出每个固定窗口的定向交错，包括 $4m+3$ 到 $4m+4$ 的次数跳变。
+
+\section{靠近原点的零点与相邻行间距}
+令 $r>0$ 由 $r+r^2+r^3/2=n$ 确定，$c_0=3/(2\expo)$，$a=(3/4)^{1/3}$，$b=3/(2a)$。记 $0<d_1<d_2<\cdots$ 为 $\operatorname{Ai}(-d)=0$ 的解。固定 $K$。对充分大的 $n$，在复平面按模升序排列的前 $K$ 个零点均为简单负实根。将它们写成 $-x_{n,k}$，则
+\begin{align*}
+x_{n,k}&=c_0r\expo^{-r}\left[1+\frac{d_k}{b}r^{-2/3}+O_k(r^{-1})\right],\\
+x_{n,k}-x_{n+1,k}&\sim \frac{\expo^{-r}}{\expo r}.
+\end{align*}
+同一行相邻根的距离为 $r^{1/3}\expo^{-r}$ 量级，比换一行所引起的位移大。因此这端任意固定数目的根也严格交错。
+
+令 $x=cr\expo^{-r}$，在半径 $R=r+u_0$ 上提取 $P_n(-x)$ 的系数，用 $v/R$ 作幅角，其中 $u_0$ 为有界实数。除去 $\exp(A(r))r^{-n}$ 后，有界 $v,c$ 上指数一致展开为
+\[
+ rS_c(w)+T(v)+O(r^{-1}),\quad w=u_0+iv,\quad
+ S_c(w)=3w^2/4-c\expo^w,\quad T(v)=w^2-\tfrac12v^2S'_c(w).
+\]
+事实上 $h=R\expo^{iv/R}-r=w-v^2/(2r)+O(r^{-2})$。在 $A(r+h)-A(r)-n\log(1+h/r)$ 中，一次项消失，二次项系数是 $3r/4+1+1/(2r)$，三次项系数及有界 $h$ 上的更高项均为 $O(r^{-1})$。另外 $xB(r+h)=cr\expo^h+O(r^4\expo^{-r})$。
+
+积分可截在充分大的固定 $|v|\le M$。整圆上 $|xB|=O(r)$。在小角区，$A(R)-\Rea A(R\expo^{iv/R})\ge C r v^2$ 来自三次项；余弧的二次项和三次项没有共同极大点，故此差至少为 $C' r^2$。和鞍点比较后，截去部分指数小。以上估计对有界复参数 $c$ 一致。
+
+\paragraph{两个鞍点合并。}
+置 $c=c_0(1+\lambda r^{-2/3})$，取 $u_0=1-r^{-1/3}$，$v=sr^{-1/3}$，$q=-1+is$。因 $S'_{c_0}(1)=S''_{c_0}(1)=0$、$S'''_{c_0}(1)=-3/2$，扣除公共指数 $-3r/4-(3/2)\lambda r^{1/3}$ 后，被积函数趋于 $\expo\exp(-q^3/4-3\lambda q/2)$。在复 $\lambda$ 紧集上，归一化被积函数受 $C\exp(-d s^2+C|s|)$ 控制。确实，$c=c_0$ 时主指数相位实部相对 $v=0$ 的差至多为 $-(3r/4)(1-\expo^{-r^{-1/3}})v^2$；参数变化引起的额外差为 $O(r^{1/3}|v|)$。
+
+将系数积分再乘 $Rr^{1/3}$ 以抵消积分元中的因子，记此归一化函数为 $F_n(\lambda)$。代入 $t=-a q$ 后，Airy 积分给出
+\[
+ F_n(\lambda)\ \longrightarrow\ F(\lambda)=\frac{\expo}{a}\operatorname{Ai}(-b\lambda).
+\]
+在 $|v|\le M$ 上，两个归一化指数相差至多 $Cr^{-1/3}(1+|s|^4)$。乘以上述高斯控制再积分，得紧集上的误差为 $O(r^{-1/3})$；柯西公式对导数给出同阶估计。Airy 函数全部零点实负且为单根，故每个极限零点的小圆内恰有一个实单根。
+
+\paragraph{排除模更小的复根。}
+取 $d_K/b<L<d_{K+1}/b$，考虑 $|c|\le c_0(1+Lr^{-2/3})$。紧 Airy 窗口已由上一段处理。若仍有根，沿子列可设 $|\lambda|\to\infty$，且 $c$ 趋于闭临界圆盘内一点。取鞍点 $(3/2)u\expo^{-u}=c$。当 $|c|<c_0$ 时，映射 $u\mapsto(2/3)c\expo^u$ 在半径 $\rho<1$ 的闭圆盘上收缩，其中 $\rho\expo^{-\rho}=2|c|/3$，$c=0$ 时直接取 $u=0$。临界圆上除 $c_0$ 外，沿半径取极限仍有 $|u|<1$，因为 $|u|=1$ 会迫使 $\Rea u=1$。局部逆函数于是给出附近参数的鞍点。
+
+当 $c\to c_0$ 时，设 $\Delta=c/c_0-1$，$h=1-u=\sqrt{-2\Delta}+O(\Delta)$，取实部为正的平方根。这来自 $(1-h)\expo^h=1-h^2/2+O(h^3)$ 的局部求逆。由 $\Rea\Delta\le Lr^{-2/3}$ 及 $|\Delta|r^{2/3}\to\infty$ 知 $\Rea h\ge C|h|$，从而 $1-|u|\ge C'|h|$，$r|h|^3\to\infty$。取 $u_0=\Rea u$，则对实数 $t$，
+\[
+ \Rea\{S_c(u+it)-S_c(u)\}
+ =\Rea\{-3t^2/4-(3/2)u(\expo^{it}-1-it)\}
+ \le-\tfrac34(1-|u|)t^2 .
+\]
+作代换 $t=s/\sqrt{r|h|}$ 后，二次项为 $-(3/4)(h/|h|)s^2$，有界 $s$ 上三次余项为 $O(|s|^3/\sqrt{r|h|^3})$。上式提供高斯控制，沿 $h/|h|$ 收敛的子列所得复高斯积分非零。在远离临界点的情形，$|h|$ 有正下界，同一估计适用。这与假设有根矛盾，得到了整个圆盘内的精确根数。
+
+\paragraph{相邻行的位移。}
+在同一积分中乘 $(r+1)/z$，保持 $r$ 和 $x$ 的标度，所得归一化函数 $F_{n,1}$ 的零点对应第 $n+1$ 行。先作差再取极限，可保留两行极小的位移。对固定 $s$，
+\[
+ r^{4/3}\big((r+1)/z-1\big)\to-q,\qquad
+ r^{4/3}(F_{n,1}-F_n)\to\tfrac23 F'(\lambda).
+\]
+前式的左侧在 $|v|\le M$ 受 $C(1+|s|)$ 控制，故后式在复紧集上一致。记两行对应根的公共参数为 $\lambda_n,\mu_n$；$r(n+1)-r(n)=O(r^{-2})$ 保证这两个根的序号相同。在 $\lambda_n$ 处评价差，再对 $F_{n,1}$ 用实中值定理，得 $\mu_n-\lambda_n\sim-(2/3)r^{-4/3}$。乘回 $x$ 的比例因子即得所述位移。Airy 积分和零点的标准性质见 \href{https://dlmf.nist.gov/9.5}{DLMF §9.5} 与 \href{https://dlmf.nist.gov/9.9}{§9.9}。
+
+\section{从两端的编号数到整个次数}
+本节证明，对充分大的每个 $n$，$P_n$ 的全部 $m=\lfloor n/4\rfloor$ 个零点均为简单负实根，且与 $P_{n+1}$ 严格交错。关键在于把鞍点相位选为连续的实数，并分别在两端确定第几个根。
+
+\paragraph{从最负的根开始编号。}
+写 $n=4m+s$，$0\le s\le3$。外侧用半径 $\rho$，以免与上一节 $r+r^2+r^3/2=n$ 混淆。取
+\[
+ W=m\pi+n\psi+\phi,\qquad
+ \phi=\Ima A(z_*)-\tfrac12\arg(-\tau K(z_*)),
+\]
+其中曲率取实部为正的辐角。在 $\rho\downarrow0$ 时，$\tau=6\rho^{-4}(1+O(\rho))$，$\psi=-\pi/4+\rho/(20\sqrt2)+O(\rho^2)$，$\phi=O(\rho)$。第二式来自 $\dd\psi/\dd\tau=-\Ima B$ 以及 $\Ima(B-H/4)\sim\rho^5/(480\sqrt2)$。固定大整数 $J$，取 $\rho_J=20\sqrt2(J+s/4)\pi/n$，则 $W(\rho_J)=J\pi+o(1)$。该切点在倒数多项式的坐标内趋于 $-4[(J+s/4)\pi]^4$。由第三节的四种根序，切点左侧恰有 $J$ 个简单负根。
+
+外侧双鞍点估计在 $\rho\ge\rho_J$ 上的归一化误差是 $o_n(1)+O(\exp(-cJ))$，直至任意固定半径。确实，$-\tau\Rea B$ 趋于 $-\cos(4u)/4$，四个极大点附近曲率一致非退化。位于 $\pm3\pi/4$ 附近的一对极值在五次项处比主峰低至少 $c\rho$；局部实高斯界留下 $O(\exp(-cn\rho))$ 的相对贡献。其余弧有固定高度差。主峰上的普通高斯近似由一致的导数界给出。为精确排除实轴上的多余根，可在导数积分中用 $B-H/4+zA'/(4n\tau)$ 替换 $B$：系数恒等式表明这相当于从 $\partial_\tau P_n(-n\tau)$ 减去 $nP_n(-n\tau)/(4\tau)$。新权函数除以 $\rho^5$ 后有界，主峰处虚部趋于 $1/(480\sqrt2)$。于是每个完整相位格内恰有一个实单根。按从左算起的名次 $k$，它满足 $W=(k-1/2)\pi+o(1)$，只要 $n\rho\to\infty$ 且 $\rho$ 有界。特别地，
+\[
+ t_{n,k}\sim-\frac{3n^5}{320000\pi^4 k^4},\qquad k\to\infty,\quad k=o(n).
+\]
+
+\paragraph{连接中间尺度的精确鞍点。}
+设 $x=-t>0$，$h(z)=zA'(z)$，
+\[
+ E(z)=A(z)-xB(z)-n\log z,\qquad
+ D(z)=z(h'-xH')(z).
+\]
+取充分大的固定 $P,M$。当 $P\le p\le r-M$ 时，以实部 $p$ 参数化精确鞍点 $z=p+iy$。令 $N=n-h(p)\ge M h'(p)$。在 $|y-\pi|\le1/2$ 中，$h(z)-h(p)=O(p^2)$，$H(z)=z\expo^z(1+O(p^2\expo^{-p}))$。解
+\[
+ y+\arg z+\Ima\log(1-h(z)/(z\expo^z))-\arg(n-h(z))=\pi.
+\]
+左侧等于 $y+O(1/p+p^2\expo^{-p}+p^2/N)$，对 $y$ 的导数为 $1$ 加同阶误差。因此恰有一解，$x=(h(z)-n)/H(z)>0$。记 $\Lambda=x\expo^p\asymp N/p$，$q=1/p+(1+x)p/\Lambda$，则 $|y-\pi|=O(q)$，$q$ 一致小，$\Lambda$ 一致趋向无穷。复解析函数 $x(z)$ 的对数导数为 $-1+O(1/p+p^2\expo^{-p}+p^2/N)$；沿实 $x$ 分支，$\dd\log x/\dd p$ 是该导数的模平方除以其实部，故 $x$ 严格递减。
+
+在半径 $R=|z|$ 上取 $\theta=\arg z$ 和 $G=\Ima E(z)-\arg D(z)/2$。记 $I$ 为系数积分，$I_1$ 为同一积分加权 $R/z'$，其中 $z'$ 沿整圆运动。对某个正数 $C$，有两式
+\[
+ I/C=\cos G+o(1),\qquad
+ (I_1-\cos\theta\,I)/(C\sin\theta)=\sin G+o(1). \tag{B}
+\]
+验证高度差时，写 $v=\Ima z'$。右侧小角弧上实指数的上界除常数外为 $(1+x)\Rea A(z')+x\exp(\Rea z')$；在鞍点此上界只多 $O(\Lambda q^2)$。从 $v=y$ 到 $2\pi$，上界至少降低 $c[(1+x)p+\Lambda/p]$：前项在小角由三个余弦单项式逐项求导可得，后项由横坐标至少减少 $c/p$ 得到。此后直到固定小幅角两项继续递减。更远的弧上指数项上界降至 $\Lambda\exp(-cp)$，而 $A(R)-\Rea A(z)=O(p)$。在 $0\le v\le2\pi$ 但远离 $\pi$ 时，$-\cos v$ 已产生 $c\Lambda$ 的差。于是分离弧上的最小高度差至少为 $c\Lambda q\ge c\sqrt\Lambda$。在主峰附近用角弧长坐标，二阶导数实部至多为 $-c\Lambda$，三阶导数为 $O(\Lambda)$，这是把 $x(z'+z'^2)\expo^{z'}/R^2$ 与大小为 $O((1+x)p)$ 的多项式项比较所得。高斯展开即得第一式。第二式的权函数在上鞍点恰为 $-i$，其弧长导数为 $O(1/y)=O(1)$，于是共轭主项给出正弦。
+
+\paragraph{两个内侧鞍点接近时的一致性。}
+内侧采用 $u=y\cot y$，$c=(3/2)y\expo^{-u}/\sin y$，$R=r+u$，$x=cr\expo^{-r}$。此时 $c$ 随 $0<y<\pi$ 严格增加。取 $w_*=u+iy$，
+\[
+ G=r\Ima S_c(w_*)+2uy-\tfrac12\arg S_c''(w_*),\quad \theta=y/R.
+\]
+在 $(0,\pi)$ 的紧子区间上，式 (B) 由第四节的系数积分直接得到：$\Rea S_c(u+iv)$ 中的余弦是周期的，$-3v^2/4$ 则使 $[-\pi,\pi]$ 外的候选值下降，在 $[0,\pi]$ 上 $\sin v/v$ 严格递减，故只有所需共轭极大点。
+
+当 $y\downarrow0$ 时，所需的条件是 $L=ry^3$ 足够大。把积分中的复幅角参数变形，在正侧 $0\le V\le\epsilon$ 上选 $w=u+\delta(y-V)+iV$，$\delta=1/2$。负侧取共轭，在 $V=\pm\epsilon$ 以水平线段接回原线。被积函数解析，两段在 $V=0$ 处相接。在 $d=V-y$ 处，鞍点展开给出
+\[
+ \frac{\Rea(S_c(w)-S_c(w_*))}{(3/2)d^2}
+ =-\delta y-\frac{3\delta-\delta^3}{6}d+O(y^2+d^2)\le -C(y+V).
+\]
+这里 $\epsilon$ 固定且足够小。在 $V=\epsilon$ 的连接线段上 $\Rea S_c'$ 为正，其极限首项为 $3(\epsilon^2-(\Rea w-1)^2)/4$；原线端点的高度已严格低于极大值，缘自 $1-\cos\epsilon<\epsilon^2/2$。远弧仍用第四节的界。
+
+代入 $s=d\sqrt{ry}$ 后，实指数受 $-C s^2$ 控制，截断端点为 $-\sqrt L$，三次余项为 $O(|s|^3/\sqrt L)$。两种指数之差乘以两种高斯上界的较大者，积分后给出 $O(L^{-1/2})$ 的相对误差。第二个权函数在鞍点等于 $-i$，其变化为 $O(|d|/y)$，同样给出 $O(L^{-1/2})$。变形后的复幅角切向量 $1+i\delta$ 与 $\sqrt{S_c''(w_*)}$ 的乘积实部为正，故仍取上述高斯相位。这样，在 $y$ 趋零且 $L$ 大时，式 (B) 的误差仍可按需缩小。
+
+\paragraph{相位接合与根数。}
+在固定大 $p\approx P$ 的重叠区，沿任一收敛子列将前述高度差除以 $n$。因 $\Lambda/n$ 有正下界、$q\ge1/p$，极限圆上仍只有一个上半平面全局峰。由第二节证书及 $H'\ne0$，精确鞍点与同一 $x/n$ 的主体鞍点相差 $O(1/n)$，由驻点条件，主指数改变 $O(1/n)$。在固定 $p-r\approx-M$ 的重叠区，精确鞍点与同一 $c$ 的 $r+w_*$ 相差 $O(1/r)$：局部指数展开的导数误差有界，而极限鞍点非退化。此处 $rS_c$ 的变化为 $O(1/r)$，$T$ 趋于 $w_*^2$，$D/(R^2r)-S_c''(w_*)\to0$。两处都连续选右半平面内曲率的辐角，$\log z$ 始终取主支。因此相位差作为实数趋于零，两重叠区内可连续插值。
+
+从内侧取固定大整数 $H_0$，令 $y=[2\pi(H_0+1/4)/r]^{1/3}$。因 $\Ima S_c(w_*)=(3/2)y(u-1)$ 及 $u=1-y^2/3+O(y^4)$，切点的相位趋于 $-H_0\pi$。其 Airy 坐标趋于 $[(3\pi/2)(H_0+1/4)]^{2/3}$，由 $d_j=[(3\pi/2)(j-1/4)]^{2/3}(1+O(j^{-2}))$，此值严格介于 $d_{H_0},d_{H_0+1}$。第四节遂给出其右侧恰有 $H_0$ 个根。
+
+从外切点至内切点，相位连续地从 $(-m+J)\pi+o(1)$ 走到 $-H_0\pi+o(1)$。先选 $J,H_0$ 充分大，使两端的误差小于 $1/8$，再取充分大的 $n$。依次选取相位首次达到各中间整数倍 $\pi$ 的点，连同两端切点，系数符号交替，故至少再有 $m-J-H_0$ 个不同负根。加回两端恰达次数 $m$，每根均简单。此计数只要求相位连续。
+
+在中间任一格 $\ell\pi$ 至 $(\ell+1)\pi$ 中，以首次到达 $(\ell+5/6)\pi$ 和在它之前最后一次到达 $(\ell+1/6)\pi$ 将格缩小。端点仍异号，格内的唯一根必在其间，且 $\sin G$ 的符号为 $(-1)^\ell$、绝对值至少为 $1/2$。在根上运用式 (B) 的第二式，得到由左至右第 $k$ 个根 $t_k$ 处，$P_{n+1}(t_k)$ 的符号为 $(-1)^{m-k+1}$。两端固定数目的根由第三、四节的定向交错给出相同符号。于是每个 $(t_k,t_{k+1})$ 和 $(t_m,0)$ 内均有下一行的根；若次数升一，首项在负无穷处的符号还给出 $t_1$ 左侧的一个根。这证明了定理。
+
+\section{五个连续行的严格交错}
+上述方法还给出，对充分大的 $n$ 及 $1\le j\le4$，$P_n$ 与 $P_{n+j}$ 按相同约定严格交错。因此五个连续行中任意两行均严格交错。跨度再大一行，某些余数类的次数便相差二，五行是这种统一表述的最大宽度。
+
+一般的后继行在系数积分中对应乘子 $(R/z')^j$。将式 (B) 的中心和分母改为 $\cos(j\theta)$ 和 $\sin(j\theta)$，上鞍点的权值仍为 $-i$。精确中间鞍点附近的弧长导数和内侧变形线段上的导数均为 $O(1/y)$，与 $j=1$ 的估计相同。在主体区域总有 $0<\theta<\pi/4$。小半径时 $24\Ima H(\rho\expo^{i\pi/4})/\rho^4=-\rho/\sqrt2+O(\rho^2)$，余项绝对值至多 $2\rho^2$；中间半径时程序在每片核对收紧角区间上端小于 $\pi/4$；大半径时 $\theta<1/8$。故对 $j\le4$，主体紧区间上分母有正下界。对 $j\le3$ 此结论持续至 $\rho\downarrow0$。
+
+对 $j=4$，外侧小半径需换一种中心化。写 $I[f]$ 为 $P_n(-x)$ 的系数积分中插入 $f$，$g(z)=H(z)/z^4=1/6+z/24+O(z^2)$。对完整角导数积分得精确等式
+\[
+ (n+4)I[(\rho/z)^4]
+ =I[(\rho/z)^4h(z)-x\rho^4g(z)].
+\]
+右侧权函数除以 $n+4$ 后记作 $V$。在 $P_n$ 的根上，改用 $(V-\Rea V(z_*))/\rho$ 不改符号。此函数及其固定阶角导数一致有界，且上鞍点的值为 $-i(1/(4\sqrt2)+O(\rho+1/n))$，因为 $x\rho^4/(n+4)=6(1+O(\rho+1/n))$。所得正弦符号检验一直适用于第五节的外切点。
+
+近原点固定名次处，将第四节的相邻行位移累加 $j$ 次即可。最外侧固定名次在 $j\le3$ 时由四种极限根的严格次序确定。对于 $j=4$，前后余数类相同，需在第三节再展开一阶。写 $b(z)=24B(z)/z^4$。在 $|z|\le M$、$0\le\ell\le m$ 时，
+\[
+ \exp(A(z/m))b(z/m)^{m-\ell}=\exp(z/5)+O_M((1+\ell)/m),
+ \qquad 0\le1-(m)_\ell/m^\ell\le\ell(\ell-1)/(2m).
+\]
+固定 $\ell$ 时两式的因子都有 $1/m$ 的一阶展开。第三节的柯西估计现在给出：在 $|u|\le D$，归一化倒数多项式第 $\ell$ 项与其极限之差乘以 $m$ 后，绝对值至多为 $C(1+\ell^2)(625D/M^4)^\ell$。分母固定次数的系数有正极限。因此局部一致地有 $R_{m,s}=F_s+G_s/m+o(1/m)$，其中 $G_s$ 为整函数。在简单零点附近求逆即知同一外侧名次的根模为 $C_{s,k}m^5(1+c_{s,k}/m+o(1/m))$。下一同余行的根模与它之比为 $1+5/m+o(1/m)>1$，而下一个名次的首项常数严格不同。这补齐两端次序；对每个 $j$，第五节的符号与次数论证完成证明。
+
+\paragraph{出处与复现。}
+原始递推见 Jack Zhan，\href{https://kurser.math.su.se/pluginfile.php/16103/mod_folder/content/0/2023/2023_K17_report.pdf?forcedownload=1}{\emph{Polynomial recursions for counting big blocks in set partitions}}（2023），定理 3.3。开放命题和已知限制情形见 \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm}{SymCat 开放问题表}。Bóna 与 Mező 的\href{https://people.clas.ufl.edu/bona/files/bigblocknew_asymp.pdf}{无单元素块划分}给出一项相关的最左根研究。区间证书使用 Python、SciPy 与 python-flint 0.9.0；\texttt{edge\_check.py} 独立检查有限行的最外侧根。
+
+\clearpage
+\section{对每一行成立的两个端点结论}
+对每个 $n\ge20$，按模由大到小的前五个零点均为简单负实根。任取两行 $n,n+j$，其中 $1\le j\le4$，两列各五个根严格交替。次数增加时，新行的最左根更负；次数相等时，旧行的最左根更负。
+
+写 $n=4m+s$，$q=1/m$，$v=4X^4$，$t=-(24/625)m^5/v$。对 $m\ge500$，下表给出五根各自的 $X$ 开区间；十进端点均为精确有理数。
+\begin{center}\small
+\begin{tabular}{clllll}\toprule
+$s$&第一根&第二根&第三根&第四根&第五根\\\midrule
+0&1.17--1.73&4.31--4.87&7.45--8.01&10.60--11.16&13.74--14.30\\
+1&1.96--2.52&5.10--5.66&8.24--8.80&11.38--11.94&14.52--15.08\\
+2&2.74--3.30&5.88--6.44&9.02--9.58&12.17--12.73&15.31--15.87\\
+3&3.53--4.09&6.67--7.23&9.81--10.37&12.95--13.51&16.09--16.65\\\bottomrule
+\end{tabular}
+\end{center}
+倒数多项式第 $\ell$ 项是 $(-v)^\ell p_\ell(500q)$。令 $d=4\ell+s$，将 $b^{m-\ell}$ 按 $b-1$ 展开，有
+\[
+p_\ell(500q)=\sum_{i=0}^{d}\left([w^d]\frac{e^{A(5w)}(b(5w)-1)^i}{i!}\right)
+q^{d-i}\prod_{h=0}^{\ell+i-1}(1-hq).
+\]
+取前 41 项；在 $|w|=82$ 上用正系数估计尾项，得到几何级数上界。程序用有向舍入覆盖 $0\le500q\le1$，核对每个区间端点的异号，并在大于第五个区间的圆盘上作两次 Graeffe 变换。变换后五次项的绝对值严格大于其余各项绝对值与尾界之和，由 Rouché 定理圆盘内恰有五根。对跨度四，沿 $(y,v)\mapsto(y/(1+u),v(1+u)^5)$ 比较，$y=500q$。用 Bernstein 系数控制生成元 $(5v\partial_v-y\partial_y)$ 的符号并另估尾项的差，从而确定同一余数类中每一根移动的方向。
+
+在另一端，令 $r+r^2+r^3/2=n$、$\sigma=(15/r)^{1/3}$、$D=1-\sigma/5$。对每个正整数 $n$，
+\[
+ P_n(-x)>0\qquad\left(0\le x\le \tfrac32 D e^{-D}\,r e^{-r}\right).
+\]
+对 $n\ge2000$，在 $[r,r+D]$ 内可取 $F_1(R)=n$ 的实鞍点，其中 $F=A-xB$，$F_j=(R\partial_R)^jF$。令 $y=\sqrt{F_2(R)}\,\theta$，$H=F(R e^{i\theta})-F(R)-in\theta$。标准化积分在 $0\le y\le1$ 上超过 $2/3$，在 $1\le y\le4/3$ 上非负。至 $\theta=\sqrt{\sigma}/5$ 的余弧绝对贡献小于 $0.52$，其后小于 $1/50$。故积分严格为正。小行直接验证 $P_n(t-\tfrac{3}{2e}r e^{-r})$ 的每一个系数严格为正；有限行核验覆盖到 $2004$，也补齐外侧五根跨阈值的比较。详细余项与区间证书见 \texttt{effective\_outer.md} 和 \texttt{effective\_inner.md} 及其同名程序。
+
+\end{document}

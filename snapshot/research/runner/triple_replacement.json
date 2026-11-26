@@ -1,0 +1,302 @@
+[
+  {
+    "target": 58,
+    "radius": "1/59",
+    "cases": [
+      {
+        "removed": [
+          1,
+          2,
+          6
+        ],
+        "components": 8,
+        "longest": "115/10443",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 2
+      },
+      {
+        "removed": [
+          1,
+          2,
+          59
+        ],
+        "components": 58,
+        "longest": "2/177",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 1
+      },
+      {
+        "removed": [
+          1,
+          3,
+          4
+        ],
+        "components": 10,
+        "longest": "57/6962",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 3
+      },
+      {
+        "removed": [
+          1,
+          3,
+          59
+        ],
+        "components": 60,
+        "longest": "1/118",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 1
+      },
+      {
+        "removed": [
+          1,
+          4,
+          6
+        ],
+        "components": 10,
+        "longest": "57/6962",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 2
+      },
+      {
+        "removed": [
+          1,
+          4,
+          59
+        ],
+        "components": 60,
+        "longest": "1/118",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 1
+      },
+      {
+        "removed": [
+          1,
+          6,
+          59
+        ],
+        "components": 60,
+        "longest": "1/118",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 1
+      },
+      {
+        "removed": [
+          2,
+          3,
+          59
+        ],
+        "components": 60,
+        "longest": "1/236",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 1
+      },
+      {
+        "removed": [
+          2,
+          6,
+          59
+        ],
+        "components": 60,
+        "longest": "1/236",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 1
+      },
+      {
+        "removed": [
+          1,
+          2,
+          3
+        ],
+        "components": 8,
+        "longest": "173/13924",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 3
+      },
+      {
+        "removed": [
+          1,
+          2,
+          4
+        ],
+        "components": 8,
+        "longest": "115/10443",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 3
+      },
+      {
+        "removed": [
+          2,
+          3,
+          4
+        ],
+        "components": 10,
+        "longest": "56/10443",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 3
+      }
+    ]
+  },
+  {
+    "target": 94,
+    "radius": "1/95",
+    "cases": [
+      {
+        "removed": [
+          2,
+          3,
+          9
+        ],
+        "components": 12,
+        "longest": "223/88464",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 31
+      },
+      {
+        "removed": [
+          3,
+          4,
+          9
+        ],
+        "components": 12,
+        "longest": "37/18050",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 39
+      },
+      {
+        "removed": [
+          2,
+          4,
+          9
+        ],
+        "components": 10,
+        "longest": "501/147440",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 11
+      },
+      {
+        "removed": [
+          4,
+          6,
+          9
+        ],
+        "components": 14,
+        "longest": "37/18050",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 50
+      },
+      {
+        "removed": [
+          2,
+          3,
+          4
+        ],
+        "components": 12,
+        "longest": "501/147440",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 14
+      },
+      {
+        "removed": [
+          2,
+          3,
+          6
+        ],
+        "components": 16,
+        "longest": "223/88464",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 25
+      },
+      {
+        "removed": [
+          2,
+          6,
+          9
+        ],
+        "components": 16,
+        "longest": "223/88464",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 20
+      },
+      {
+        "removed": [
+          3,
+          4,
+          6
+        ],
+        "components": 16,
+        "longest": "37/18050",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 41
+      },
+      {
+        "removed": [
+          3,
+          6,
+          9
+        ],
+        "components": 16,
+        "longest": "91/80370",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 66
+      },
+      {
+        "removed": [
+          2,
+          3,
+          16
+        ],
+        "components": 20,
+        "longest": "223/88464",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 24
+      },
+      {
+        "removed": [
+          2,
+          9,
+          16
+        ],
+        "components": 20,
+        "longest": "223/88464",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 20
+      },
+      {
+        "removed": [
+          3,
+          9,
+          16
+        ],
+        "components": 20,
+        "longest": "2879/3427980",
+        "status": "IMPOSSIBLE",
+        "max_speed": 2500,
+        "phase_calls": 122
+      }
+    ]
+  }
+]

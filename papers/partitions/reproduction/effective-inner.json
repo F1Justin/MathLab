@@ -1,0 +1,6 @@
+{
+  "finite_shifted_positive_through": 2004,
+  "positive_real_saddle_from": 2000,
+  "airy_series_endpoint_arithmetic": "exact rational",
+  "precision_bits": 192
+}
