@@ -1,0 +1,1 @@
+Rows 4..2004. Dyadic sign intervals: 501501 Directed pairs by lag: [2000, 1999, 1998, 1997]

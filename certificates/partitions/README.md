@@ -1,0 +1,5 @@
+# Dyadic root isolation certificates
+
+For each row from 4 through 2004, in increasing order, the file contains one open interval for each root, listed from most negative to least negative. Each interval is stored as two IEEE binary64 numbers, little endian, with no interleaved metadata. A finite binary64 value is an exact dyadic rational. The complete stream is gzip-compressed. Row n occupies exactly floor(n/4) consecutive pairs.
+
+Install python-flint 0.9.0 and run `python3 verify.py` in this directory. The verifier rebuilds the exact integer polynomials, checks the signs at both endpoints with rigorous interval arithmetic, and verifies the strict orders across one to four rows. It does not use either the predictor or the root solver. Every check is strict; two overlapping enclosures cannot establish a strict sign or a strict order. The intervals account for the entire degree of each row. Run `python3 make.py` to regenerate the data using the project's predictor and certified fallback.
