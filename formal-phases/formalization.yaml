@@ -1,0 +1,139 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: v0.4
+project:
+  name: A sharp phase neighbourhood for consecutive lonely runners
+  description: >-
+    For every prime p at least 7 and the speeds 1 through p−1, the gap near
+    common start equals 1/p plus the maximum of the absolute values of
+    explicit complementary-pair linear forms. This identity holds on the
+    closed cube of radius 1/(2Q(p+1)), where Q is the largest odd integer
+    strictly below (p+1)/2. Every larger centred cube contains a phase vector
+    at which the gap is strictly larger than the formula predicts. If 2 has
+    odd order modulo p up to sign, the gap is at least 1/p everywhere within
+    circle distance 2(p+1)/(p(3p−1)) of the common-start orbit, using the
+    maximum over coordinates and minimizing over common time shifts.
+  authors: [Chengyi Fang]
+  responsible_maintainers: [Chengyi Fang]
+  license: MIT
+classification:
+  arxiv: [math.NT, math.CO]
+  msc2020: [11J71, 11B57]
+sources:
+  - title: A sharp phase neighbourhood for consecutive lonely runners
+    type: paper
+    authors: [Chengyi Fang]
+    id: https://github.com/F1Justin/MathLab/blob/ef98c0707e3a9e1b6b66f905aadd24ea6e38cadc/papers/phases/phases.pdf
+    location: Theorems 1 and 2
+    relationship: formalizes
+    note: The preprint's contributions statement attributes the mathematical work to automated systems and describes Chengyi Fang's project role.
+    license: CC-BY-4.0
+  - title: Farey tight points at zero phases for consecutive speeds
+    type: web discussion
+    authors: [aadrianvv]
+    id: https://github.com/1337isnot1337/solved-conjectures/issues/110#issuecomment-7049825074
+    relationship: background
+    note: Identifies zero-phase Farey tight points and their active speed pairs.
+  - title: Opposite-orientation complementary pairs near common start
+    type: web discussion
+    authors: [aadrianvv]
+    id: https://github.com/1337isnot1337/solved-conjectures/issues/110#issuecomment-7051219544
+    relationship: background
+    note: Gives the qualitative obstruction from exposed complementary pairs. The sharp radius and odd-order tube are the results formalized here.
+  - title: Coloopless zonotopes and counterexamples to the Shifted Lonely Runner Conjecture
+    type: paper
+    authors: [Mónica Blanco, Francisco Criado, Francisco Santos]
+    id: https://arxiv.org/abs/2603.24784v4
+    location: Proposition 5.12 and Theorem 1.8
+    relationship: background
+    note: Computes global minima over all phases for several fixed consecutive speed sets.
+  - title: "Tight instances of the Lonely Runner Conjecture: one-entry modifications and the growth of speeds"
+    type: paper
+    authors: [Yuhan Zhang]
+    id: https://arxiv.org/abs/2608.13599v3
+    location: Appendix A, Question 8.5
+    relationship: background
+    note: Discusses the global problem over both velocities and phases.
+  - title: More (shifted) runners, less loneliness
+    type: paper
+    authors: [Daria Poliakova]
+    id: https://arxiv.org/abs/2609.23952v1
+    relationship: background
+    note: Constructs configurations at large runner counts using changes in velocities and phases.
+  - title: Lonely Runner Relations
+    type: paper
+    authors: [Matthias Beck, Samuel Everett]
+    id: https://arxiv.org/abs/2609.06259v3
+    location: Proposition 4 and Theorem 5
+    relationship: background
+    note: Derives necessary short integer relations among the velocities for small shifted gap.
+status:
+  scope: >-
+    Both general theorems, including strict failure in every enlarged cube,
+    are proved. The orbit distance is the attained infimum over shifts. The
+    tube statement is a sufficient-radius result. The minimum over all
+    phases and the exact boundary of the strict-improvement set are outside
+    this formalization.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Quot.sound, Classical.choice]
+  main_results:
+    - declaration: MathLab.PhaseNeighbourhood.sharp_phase_neighbourhood
+      file: Solution.lean
+      sorry_count: 0
+      axioms: [propext, Quot.sound, Classical.choice]
+      comparator_config: comparator.json
+    - declaration: MathLab.PhaseNeighbourhood.odd_order_phase_neighbourhood
+      file: Solution.lean
+      sorry_count: 0
+      axioms: [propext, Quot.sound, Classical.choice]
+      comparator_config: comparator.json
+automation:
+  methods:
+    - method: agent
+      framework: OpenAI Codex
+      models: [GPT-6]
+      tool_setup: Led proof development, implemented the sharp cube and semantic geometry, integrated the wider tube, and verified the release.
+      cost:
+        spend_usd: Subscription-based usage
+    - method: agent
+      framework: OpenAI Codex
+      models: [gpt-6.2-sol]
+      tool_setup: Assisted with mathematical auditing and publication work in separate subagent contexts.
+    - method: agent
+      framework: OpenAI Responses API
+      models: [gpt-6.2-astra]
+      tool_setup: Supplied the p=59 precursor, reconstructed both paper proofs independently, and drafted the wider-tube Lean development.
+      cost:
+        spend_usd: "0.711504 for the new Lean-specific call"
+  spend_usd: "0.711504 for the new Lean-specific Responses API call, plus prior research and subscription usage"
+  notes: >-
+    Chengyi Fang initiated and funded the project, set the research goals,
+    supervised the work and arranged dissemination. The mathematical proofs,
+    Lean implementation and written exposition were produced with automated
+    systems. No independent human reading of the proofs is claimed.
+fidelity:
+  divergences: >-
+    The Lean statement writes the two time extrema as a real supremum and
+    infimum, the latter with circular coordinate distances. Geometry.lean
+    proves attainment on [0,1] and equality of the half-index and all-index
+    versions of the complementary-pair maximum. The order condition is the
+    least positive exponent for which 2^n is congruent to 1 or −1. It is
+    verified to be odd exactly when an odd positive such exponent exists.
+    The paper's separate observation that p congruent to 3 modulo 4 implies
+    this order condition uses the order of the quotient unit group.
+review:
+  status: agent-reviewed
+  reviewers: ["OpenAI GPT-6.2 Astra (independent manuscript review)", "OpenAI Codex (statement alignment audit)"]
+  human_understanding: none
+  notes: The archived review reconstructs both paper proofs. Lean's kernel and the independent NanoDa kernel replay the formal proof. Human and editorial peer review are pending.
+alignment:
+  namespace: MathLab.PhaseNeighbourhood
+  statements:
+    - source: Theorem 1, closed-cube formula and maximal cube
+      lean: MathLab.PhaseNeighbourhood.sharp_phase_neighbourhood
+      module: Solution
+      status: proved
+    - source: Theorem 2, closed-tube lower bound for odd order modulo sign
+      lean: MathLab.PhaseNeighbourhood.odd_order_phase_neighbourhood
+      module: Solution
+      status: proved
