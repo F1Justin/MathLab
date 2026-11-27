@@ -23,11 +23,11 @@
 \vspace{1ex}
 Chengyi Fang\par
 \vspace{0.3ex}
-26 November 2026
+Revised 27 November 2026
 \end{center}
 
 \begin{abstract}
-Let \(P_n(t)\) count set partitions of \([n]\) by the number of blocks of size at least four. For all sufficiently large \(n\), its \(\lfloor n/4\rfloor\) zeros are simple and negative, and \(P_n\) interlaces \(P_{n+j}\) strictly in the prescribed direction for \(1\le j\le4\). The proof matches absolute zero counts at a reciprocal-polynomial limit and an Airy limit, using uniform saddle estimates between them. The global angular minimum on a bounded range of radii is certified with outward-rounded interval arithmetic. We give the limiting empirical zero distribution, fixed-rank asymptotics and adjacent-row displacement at the Airy edge, and effective bounds at both ends. Integer and interval computations certify every nonconstant row through \(2004\). We also prove a coefficient-order inequality valid for every block-size threshold.
+Let \(P_n(t)\) count set partitions of \([n]\) by the number of blocks of size at least four. For all sufficiently large \(n\), its \(\lfloor n/4\rfloor\) zeros are simple and negative, and \(P_n\) interlaces \(P_{n+j}\) strictly in the prescribed direction for \(1\le j\le4\). The proof matches absolute zero counts at a reciprocal-polynomial limit and an Airy limit, using uniform saddle estimates between them. The global angular minimum on a bounded range of radii is certified with outward-rounded interval arithmetic. We give the limiting empirical zero distribution, fixed-rank asymptotics and adjacent-row displacement at the Airy edge, and effective bounds at both ends. Integer and interval computations certify every nonconstant row through \(2004\) and the four interlacing gaps within that range. We also prove an all-threshold likelihood-ratio comparison between coefficient rows and their derivatives.
 \end{abstract}
 
 \section{The polynomials and the interlacing problem}
@@ -46,13 +46,17 @@ where \(\Pi_n\) consists of all partitions of \([n]\) into unordered nonempty bl
 \]
 Constants are interpreted by their empty root lists.
 
-Zhan studied the polynomials and conjectured consecutive interlacing \cite[Thm.~3.3 and Sec.~3.1.1]{zhan}. Alexandersson posed real-rootedness and the wider window \(P^{(b)}_{n-j}\) through \(P^{(b)}_n\), \(1\le j\le b\), in 2024, using polynomials with an extra common factor \(t\) \cite{mo}. The Symmetric Functions Catalog lists \(b=4\) as the first unresolved threshold for consecutive interlacing in unrestricted partitions \cite{symcat}. It records the \(b=2\) identification with run-sorted permutation descents \cite{an} and the \(b=3\) result. It also records results for partitions restricted to large blocks, or to singletons and large blocks \cite{symcatsp}. Bóna and Mező treated the real-rootedness and extreme roots of the non-singleton restriction \cite{bm}.
+Zhan studied the polynomials and conjectured consecutive interlacing \cite[Thm.~3.3 and Sec.~3.1.1]{zhan}. Alexandersson posed real-rootedness and the wider window \(P^{(b)}_{n-j}\) through \(P^{(b)}_n\), \(1\le j\le b\), in 2024, using polynomials with an extra common factor \(t\) \cite{mo}. The Symmetric Functions Catalog records the \(b=2\) identification with run-sorted permutation descents \cite{an} and the \(b=3\) real-rootedness result, and lists \(b=4\) as the first unresolved threshold for all-row consecutive interlacing in unrestricted partitions \cite{symcat}. It also records results for partitions restricted to large blocks, or to singletons and large blocks \cite{symcatsp}. Bóna and Mező treated the real-rootedness and extreme roots of the non-singleton restriction \cite{bm}.
+
+Alexandersson's differential Beraha--Kahane--Weiss program records a threshold-three candidate argument communicated by Stephan Pfannerer \cite{rrbkw}. It uses different limiting functions at the two ends, estimates of secondary saddle peaks, an unwrapped zero count, and a quantitative rootwise sign condition. A separate Lean proof of threshold-three real-rootedness is reported in the same issue. The program identifies moving-saddle estimates and a reachable-state root-sign problem for general thresholds \cite{rrbkw,rrreachable}.
+
+Exact tests reported by Alexandersson already found the predicted window of five rows at threshold four \cite{rrfinite}. His subsequent research note certifies the angular minimum and obtains the density-one conclusion by the compact two-saddle method \cite{rrdensity}. Section~\ref{sec:bulk} gives our enclosure and phase calculation in the notation used for the uniform estimates. The following result accounts for the full degree and gives the strict order across all four gaps for sufficiently large rows.
 
 \begin{theorem}\label{thm:main}
 There is an integer \(N\) such that, for every \(n\ge N\), the polynomial \(P_n\) has \(\lfloor n/4\rfloor\) simple negative zeros and \(P_n\prec P_{n+j}\) for \(1\le j\le4\). Thus any five consecutive rows starting at \(n\ge N\) strictly interlace pairwise. Five is the largest such window uniform in the starting row.
 \end{theorem}
 
-The maximality follows from the degree jump of two between rows \(4m+3\) and \(4m+8\). The proof gives an existential \(N\). Establishing an explicit \(N\) which meets the finite range, or finding an argument for every row, remains open here. The coefficient result in Section~\ref{sec:coefficients} applies to every \(n\) and \(b\).
+The maximality follows from the degree jump of two between rows \(4m+3\) and \(4m+8\). The proof gives an existential \(N\). Joining the verified finite range to the asymptotic result would establish the all-row conjecture for threshold four. The coefficient result in Section~\ref{sec:coefficients} applies to every \(n\) and \(b\).
 
 \section{The coefficient integral and its angular minima}\label{sec:bulk}
 Let
@@ -146,6 +150,7 @@ The empirical measures of the zeros divided by \(n\), counted with multiplicity 
 Its density at \(t=-\tau(\rho)\) is \(4\Ima B(z_*(\rho))/\pi\). For every \(\eta>0\) there is such a fixed interval whose dilation by \(n\) contains at least \((1-\eta)\lfloor n/4\rfloor\) simple negative zeros of each of \(P_n,P_{n+j}\) for all large \(n\) and \(1\le j\le4\), with strict alternation in the interior.
 \end{corollary}
 The count proves convergence on compact negative intervals. Exhausting the radius axis gives limiting mass one by the two limits of \(\psi\), which proves weak convergence even before Theorem~\ref{thm:main} is used. The density follows from the differentiated phase.
+The density-one zero count also follows from Alexandersson's compact-radius argument \cite{rrdensity}. The reciprocal and Airy counts below fix the absolute ranks at the two ends. Uniform estimates between those cuts then complete the zero count.
 
 \section{The zeros of largest modulus}\label{sec:outer}
 
@@ -354,7 +359,7 @@ Then \(q_0\) is uniformly small, \(|y-\pi|=O(q_0)\), and \(\Lambda\to\infty\) un
 
 On the circle \(R=|z|\), the two saddles dominate uniformly in this range. To see the height gap, parameterize its right small-angle arc by \(v=\Ima z'\), with \(z'=\sqrt{R^2-v^2}+\ii v\). The angle-dependent real exponent is
 \((1+x)\Rea A(z')-x\exp(\Rea z')\cos v\).
-The upper envelope with \(\cos v\) replaced by \(-1\) is above the saddle by \(O(\Lambda q_0^2)\). From \(v=y\) to \(2\pi\) it drops by at least \(c[(1+x)p+\Lambda/p]=c\Lambda q_0\). The decrease of \(\Rea A\) is at least \(c p\) by the cubic cosine term, and the real part of \(z'\) decreases by at least \(c/p\). The envelope keeps decreasing up to any fixed sufficiently small angle. At angles bounded away from zero the exponential envelope is at most \(\Lambda\exp(-cp)\), and the possible polynomial gain is only \((1+x)(A(R)-\Rea A(z))=O((1+x)p)\). On \(0\le v\le2\pi\) away from a fixed small neighborhood of \(\pi\), the loss in \(-\cos v\) gives a gap of order \(\Lambda\). In this comparison the polynomial gain is \(O(\Lambda q_0)\) and \(\exp(R-p)=1+O(1/p)\). Choose \(P,M\) after fixing that neighborhood, so the smaller terms are dominated. The least separated gap is at least \(c\Lambda q_0\ge c\sqrt\Lambda\), since \(\Lambda q_0\ge\max(p,\Lambda/p)\). Reflection treats the lower half-circle.
+At \(v=y\) the upper envelope obtained by replacing \(\cos v\) by \(-1\) is above the saddle by \(O(\Lambda q_0^2)\). From \(v=y\) to \(2\pi\) it drops by at least \(c[(1+x)p+\Lambda/p]=c\Lambda q_0\). The decrease of \(\Rea A\) is at least \(c p\) by the cubic cosine term, and the real part of \(z'\) decreases by at least \(c/p\). The envelope keeps decreasing up to any fixed sufficiently small angle. At angles bounded away from zero the exponential envelope is at most \(\Lambda\exp(-cp)\), and the possible polynomial gain is only \((1+x)(A(R)-\Rea A(z))=O((1+x)p)\). On \(0\le v\le2\pi\) away from a fixed small neighborhood of \(\pi\), the loss in \(-\cos v\) gives a gap of order \(\Lambda\). In this comparison the polynomial gain is \(O(\Lambda q_0)\) and \(\exp(R-p)=1+O(1/p)\). Choose \(P,M\) after fixing that neighborhood, so the smaller terms are dominated. The least separated gap is at least \(c\Lambda q_0\ge c\sqrt\Lambda\), since \(\Lambda q_0\ge\max(p,\Lambda/p)\). Reflection treats the lower half-circle.
 
 Near the upper saddle use arclength \(R(\arg z'-\arg z)\). The second derivative of \(E\) is \(-D(z')/R^2\), with real part in a fixed local neighborhood at most \(-c\Lambda\). This follows from the negative real part of \(x(z'+z'^2)\ee^{z'}/R^2\) for \(v\) near \(\pi\), while the other terms are \(O((1+x)p)=O(\Lambda q_0)\). Third arclength derivatives are \(O(\Lambda)\), and the curvature modulus at the saddle is comparable to \(\Lambda\). Rescaling by \(\sqrt\Lambda\) now gives a uniform Gaussian expansion by the derivative bound and a real Gaussian majorant. Since \(p=O(\Lambda)\), the height gap absorbs polynomial factors in \(p,\Lambda\), making the separated arcs negligible. With
 \[
@@ -388,12 +393,12 @@ Its reflection gives the lower side, and both meet at the same point when \(V=0\
    \ \le\ -c_1(y+V).
  \label{eq:tilt}
 \end{equation}
-The last inequality holds because the coefficients of \(y\) and \(V\) after substituting \(d=V-y\) are both strictly negative, and \(\epsilon\) can be fixed small enough to absorb the remainder. The expression is interpreted by continuity at \(d=0\). On the upper horizontal connector \(\Rea S'_c>0\) for small \(y\), from the double-saddle expansion \((3/4)(\epsilon^2-(\Rea w-1)^2)+O(\epsilon^3)\) and \(|\Rea w-1|\le0.6\epsilon\). Its higher endpoint is on the original line. The inequality \(1-\cos\epsilon<\epsilon^2/2\) at \(y=0\) gives a fixed positive height gap there, which persists for small \(y\). The original line outside the connectors has a fixed gap on bounded sets by the same strict cosine bound, and the remaining tails are exponentially small. The global insertion bound on those arcs is \(O(R/y)\), polynomial when \(r y^3\) is bounded below.
+The last inequality holds because the coefficients of \(y\) and \(V\) after substituting \(d=V-y\) are both strictly negative, and \(\epsilon\) can be fixed small enough to absorb the remainder. The expression is interpreted by continuity at \(d=0\). On the upper horizontal connector \(\Rea S'_c>0\) for small \(y\), from the double-saddle expansion \((3/4)(\epsilon^2-(\Rea w-1)^2)+O(\epsilon^3+y^2)\) and \(|\Rea w-1|\le0.6\epsilon\). First fix \(\epsilon>0\) small and then choose \(y>0\) sufficiently small compared with \(\epsilon\). Its higher endpoint is on the original line. The inequality \(1-\cos\epsilon<\epsilon^2/2\) at \(y=0\) gives a fixed positive height gap there, which persists for small \(y\). The original line outside the connectors has a fixed gap on bounded sets by the same strict cosine bound, and the remaining tails are exponentially small. The global insertion bound on those arcs is \(O(R/y)\), polynomial when \(r y^3\) is bounded below.
 
 On each tilted ray use \(s=d\sqrt{r y}\). Equation \eqref{eq:tilt} gives the majorant \(\exp(-c_2s^2)\). The complex quadratic coefficient \((\ii-\delta)^2 S''_c(w_*)/(2y)\) has bounded modulus and uniformly negative real part. The cubic exponent error is \(O(|s|^3/\sqrt{L_0})\). The \(V=0\) truncation is at \(s=-\sqrt{L_0}\), and the far endpoint is at least a positive multiple of \(\sqrt{L_0}\) once \(y\le\epsilon/2\). Both removed Gaussian tails are negligible. Use the Gaussian bounds for the exact and quadratic phases when integrating their difference, as in the Airy estimate. The amplitude \(\exp(T_c)\) varies by \(O(|d|)\) relative to its nonzero saddle value on the local ray, and \(W_j\) varies by \(O(|d|/y)=O(|s|/\sqrt{L_0})\). The analytic remainder \(O(r^{-1})\) of \eqref{eq:innerexp} remains uniform on the deformed bounded contour. Thus the required normalized errors follow. In the angular variable the upper ray tangent is \(1+\ii\delta\). Its product with the principal \(\sqrt{S''_c(w_*)}\) has positive real part, so the tangent cancels in the complex Gaussian prefactor and no extra argument occurs. This gives the unwrapped phase \eqref{eq:innerphase} and a positive sine coefficient on the whole inner range.
 
 \subsection{Matching the real phases}\label{sec:match}
-Take the fixed-width overlap \(P\le p\le P+1\). There \(x/n\) stays on a compact positive interval. To identify the pure saddle at the same \(x/n\), pass to a convergent subsequence of \(p,x/n,z\). The height comparisons of Section~\ref{sec:middle} divided by \(n\) remain strict on the separated arcs, and the normalized local curvatures stay negative in real part. The term \(A/n\) vanishes, so the limiting point is the upper global minimum of \(\Rea B\) on its circle. Lemma~\ref{lem:angular} identifies that point uniquely. At this point \(H'\ne0\). The pure stationary equation is \(H=-n/x\), whereas the exact equation differs by \(h/x=O(1/n)\). Local inversion and compactness show the two upper saddles at the same \(x/n\) differ by \(O(1/n)\). The function \(-(x/n)B-\log z\) is stationary at the pure saddle. Its change after multiplication by \(n\) is \(O(1/n)\) and the \(A\) term changes by \(O(1/n)\). Also \(D/n=-(x/n)K(z_{\rm pure})+O(1/n)\). Hence the real phases differ by \(o(1)\) uniformly on this overlap.
+Take the fixed-width overlap \(P\le p\le P+1\). There \(x/n\) stays on a compact positive interval. To identify the pure saddle at the same \(x/n\), pass to a convergent subsequence of \(p,x/n,z\). Here \(\Lambda/n\) and \(q_0\) are bounded below by positive constants depending on \(P\); thus the \(c\Lambda q_0\) height comparisons of Section~\ref{sec:middle} divided by \(n\) remain strict on the separated arcs, and the normalized local curvatures stay negative in real part. The term \(A/n\) vanishes, so the limiting point is the upper global minimum of \(\Rea B\) on its circle. Lemma~\ref{lem:angular} identifies that point uniquely. At this point \(H'\ne0\). The pure stationary equation is \(H=-n/x\), whereas the exact equation differs by \(h/x=O(1/n)\). Local inversion and compactness show the two upper saddles at the same \(x/n\) differ by \(O(1/n)\). The function \(-(x/n)B-\log z\) is stationary at the pure saddle. Its change after multiplication by \(n\) is \(O(1/n)\) and the \(A\) term changes by \(O(1/n)\). Also \(D/n=-(x/n)K(z_{\rm pure})+O(1/n)\). Hence the real phases differ by \(o(1)\) uniformly on this overlap.
 
 At the other seam take \(r-M\le p\le r-M+1\), extending the middle estimates to this range using \(M-1\) in place of \(M\). Here \(c=x\ee^r/r\) stays in a positive compact interval by \(\Lambda\asymp N_p/p\). The exact stationary equation from \eqref{eq:directinner} implies that a limiting bounded local saddle solves \(S'_c(w)=0\). Its imaginary part lies near \(\pi\) and is positive. The imaginary equation for \(w=u+\ii y\) forces \(\sin y>0\), so \(y<\pi\) and the real equation gives \(u=y\cot y\). Strict monotonicity of \(c(y)\) identifies this saddle on the reduced branch of Section~\ref{sec:coalescing}. It is uniformly nondegenerate on the overlap. By the differentiated expansion and local inversion, at the same \(c\) the exact \(z-r\) differs from \(w_*\) by \(O(1/r)\). Stationarity changes \(r S_c(w_*)\) by \(O(1/r)\), and the remaining \(w^2\) term by \(O(1/r)\). At the exact saddle, \(D=z^2 E''(z)\), so \(D/(R^2 r)=S''_c(w_*)+O(1/r)\) since \(\arg z=O(1/r)\). This gives real phase agreement with \eqref{eq:innerphase}.
 
@@ -408,7 +413,7 @@ The outer cut \(\rho_J\) from Section~\ref{sec:index} leaves exactly \(J\) roots
 Since \(u=1-y^2/3+O(y^4)\) and
 \(\Ima S_c(w_*)=(3/2)y(u-1)\), its phase tends to \(-H_0\pi\), including the \(+\pi/4\) from the curvature term. As \(c/c_0=1+y^2/2+O(y^4)\), its Airy argument parameter \(b_0\lambda\) tends to \([(3\pi/2)(H_0+1/4)]^{2/3}\). The Airy asymptotic \(d_k=[(3\pi/2)(k-1/4)]^{2/3}(1+O(k^{-2}))\) places that parameter strictly between \(d_{H_0}\) and \(d_{H_0+1}\) for sufficiently large \(H_0\). Theorem~\ref{thm:airy} gives exactly \(H_0\) roots between this inner cut and zero.
 
-Fix the middle range and seams first. Then fix \(J,H_0\) sufficiently large that the separated outer estimates \(O(\exp(-cJ))\) and the inner ones \(O(H_0^{-1/2})\) are small enough for every cosine and sine sign test, including the positive coefficient in \eqref{eq:lagfour}. Finally take \(n\) large enough for the remaining \(o_n(1)\) terms and for the native endpoint phases to be within \(\pi/12\) of their prescribed levels. This yields a continuous real phase \(G\) along the negative axis between the cuts, running from \((-m+J)\pi+o(1)\) to \(-H_0\pi+o(1)\). Use the cuts and the successive first hits of the intermediate integer multiples of \(\pi\), ordered along the real axis. The cosine tests give opposite signs at the ends of each of the \(m-J-H_0\) intervals. Together with the two cut counts this forces \(m\) distinct real zeros. Since \(\deg P_n=m\), they are all simple and negative and exhaust the degree. This argument uses only continuity of the interpolated phase.
+Fix the angular neighborhood about \(\pi\), then \(P,M\) and compact endpoints reaching beyond both fixed overlaps. Fix the phase-bracket widths small enough for the centered sine tests before choosing the cut indices. Then fix \(J,H_0\) sufficiently large that the separated outer estimates \(O(\exp(-cJ))\) and the inner ones \(O(H_0^{-1/2})\) are small enough for every cosine and sine sign test, including the positive coefficient in \eqref{eq:lagfour}. Finally take \(n\) large enough for the remaining \(o_n(1)\) terms and for the native endpoint phases to be within \(\pi/12\) of their prescribed levels. This yields a continuous real phase \(G\) along the negative axis between the cuts, running from \((-m+J)\pi+o(1)\) to \(-H_0\pi+o(1)\). Use the cuts and the successive first hits of the intermediate integer multiples of \(\pi\), ordered along the real axis. The cosine tests give opposite signs at the ends of each of the \(m-J-H_0\) intervals. Together with the two cut counts this forces \(m\) distinct real zeros. Since \(\deg P_n=m\), they are all simple and negative and exhaust the degree. This argument uses only continuity of the interpolated phase.
 
 In each of these intervals with levels \(\ell\pi,(\ell+1)\pi\), take the first hit of \((\ell+5/6)\pi\) and the last hit of \((\ell+1/6)\pi\) before it. The phase stays in the resulting strip between the hits, and the cosine signs force the unique interval root into the strip. There \(|\sin G|\ge1/2\) and its sign is \((-1)^\ell\). The centered insertions \eqref{eq:centerweight} and \eqref{eq:lagfour} apply at the zero itself. For the root of rank \(k\) from the left, the resulting sign in every later row with \(1\le j\le4\) is
 \begin{equation}\label{eq:sign}
@@ -426,7 +431,15 @@ The source of all finite rows is the recurrence
           +\binom n2 P_{n-2}+t\binom n3 P_{n-3},
  \qquad P_0=1,\quad P_i=0\ (i<0).
 \end{equation}
-It follows either by differentiating the exponential formula or from the block containing the new label \cite[Thm.~3.3]{zhan}. The finite checker starts from these integers. It certifies disjoint, ordered negative brackets with opposite polynomial signs, or uses rigorous FLINT root isolation for seed rows and fallbacks. The brackets exhaust the exact degree, so each contains one simple root. Comparing bracket endpoints in the required order proves strict interlacing for every pair of nonconstant rows \(4\le n<n+j\le2004\), \(1\le j\le4\). The numbers of pairs are \(2000,1999,1998,1997\) respectively. An independent reader of all 501,501 archived dyadic intervals verifies these 7,994 pair orders and the endpoint signs without using the root predictor. The next result uses this finite range to cross the threshold of a uniform certificate.
+It follows either by differentiating the exponential formula or from the block containing the new label \cite[Thm.~3.3]{zhan}.
+
+\Needspace{6\baselineskip}
+Write \(G_n\) for the three lag terms in \eqref{eq:rec}. At a zero \(\rho\) of a sufficiently large row, \eqref{eq:sign} with \(j=1\) gives \(P_{n+1}(\rho)P_n'(\rho)<0\). The resulting rootwise bound is the threshold-four instance of the condition in \cite{rrreachable}.
+\[
+ \frac{G_n(\rho)}{-\rho P_n'(\rho)}
+ =1-\frac{P_{n+1}(\rho)}{\rho P_n'(\rho)}<1.
+\]
+The finite checker starts from the integer recurrence. It certifies disjoint, ordered negative brackets with opposite polynomial signs, or uses rigorous FLINT root isolation for seed rows and fallbacks. The brackets exhaust the exact degree, so each contains one simple root. Comparing bracket endpoints in the required order proves strict interlacing for every pair of nonconstant rows \(4\le n<n+j\le2004\), \(1\le j\le4\). The numbers of pairs are \(2000,1999,1998,1997\) respectively. An independent reader of all 501,501 archived dyadic intervals verifies these 7,994 pair orders and the endpoint signs without using the root predictor. The next result uses this finite range to cross the threshold of a uniform certificate.
 
 \Needspace{13\baselineskip}
 \begin{theorem}\label{thm:outereffective}
@@ -534,6 +547,8 @@ For \(1\le n\le2004\), the program \texttt{effective\_inner.py} applies \eqref{e
 \section{A coefficient inequality for every threshold}\label{sec:coefficients}
 For nonnegative coefficient rows \(U,V\) with coefficients padded by zeros, write \(U\preceq V\) if \(u_i v_k\ge u_k v_i\) whenever \(i<k\). This is the likelihood-ratio order on the coefficient index.
 
+The restricted-exponential log-concavity and the comparison of the first normalized coefficients already appear in Alexandersson's support argument \cite{rrsupport}. RealRooted includes a Lean proof of that scalar log-concavity \cite{rrrestricted}. Alexandersson also reports binomially normalized log-concavity for a single row with normalization degree \(\lceil n/b\rceil\) \cite{rrlorentz}. That bound implies log-concavity after weighting by \(k!\). The two coefficient orders below compare different rows and bound the change in their tilted means.
+
 \begin{theorem}\label{thm:coefficients}
 For all \(b\ge2\) and \(n\le m\le n+b\),
 \[
@@ -565,25 +580,105 @@ For \(k\ge1\) and \(m\ge kb\), \(R_k(m)\) is the weighted average of \(R_{k-1}(m
 Taking \(m=n\) gives \(k a_k^2\ge(k+1)a_{k-1}a_{k+1}\), which is the log-concavity of \(k!a_k\). The derivative comparison also implies \(P^{(b)}_m\preceq tP^{(b)}_n\). The adjacent minors after a shift follow by dropping a factor \((k+1)/k\ge1\) from the stronger derivative comparisons, and the first column of \(tP^{(b)}_n\) is zero. Multiplying coefficients of both rows by \(t^k\) preserves the order. For any two nonzero rows in this order, the difference of their normalized means is nonnegative by summing \((k-i)(u_i v_k-u_k v_i)\) over \(i<k\). The row \(tP^{(b)}_n\) has mean exactly one larger than \(P^{(b)}_n\), proving the tilted bound.
 \end{proof}
 
-The factorial-weighted row can have nonreal zeros. The block-containing-label recurrence
+Alexandersson's ordered-marked lift with one lane first fails at \(b=4,n=11\) \cite{rrfinite}. In the present notation this is the factorial-weighted row. The block-containing-label recurrence
 \[
  P^{(b)}_{n+1}(t)=
     \sum_{\ell=1}^{n+1}\binom{n}{\ell-1}
          t^{\mathbf 1_{\{\ell\ge b\}}}P^{(b)}_{n+1-\ell}(t)
 \]
-gives the first threshold-four counterexample at \(n=11\). The factorial-weighted polynomial is
+gives the factorial-weighted polynomial
 \(312676+318671t+94446t^2\), with discriminant \(-16572783743\).
 The rows through \(7\) are linear or constant, and the discriminants for rows \(8,9,10\) are \(977225,20387812,188097001\), all positive. Thus the ordered lift that succeeds for the singleton-and-large-block restriction \cite{symcatsp} needs another idea for unrestricted partitions. The ordered-partition family, in which all blocks are ordered, has a different generating function.
 
 \appendix
+\section{Two positive rootwise margins}\label{sec:hankel}
+
+Alexandersson's algebraic approach asks for a sign at every negative simple
+zero \(u\) of \(P=P_n\): writing \(Q=P_{n+1}\), the desired margin is
+\(w_u=Q(u)/(uP'(u))\) \cite{rrdensity}. One can obtain a weaker conclusion
+uniformly in \(n\) from the leading coefficients, independently of the
+asymptotic root count. Write \(d=\lfloor n/4\rfloor\),
+\(a=[x^{d+1}]Q/[x^d]P\), and define \(M_j\) formally at infinity by
+\[
+ \frac{Q(x)/P(x)-Q(0)/P(0)}{x}-a
+       =\sum_{j\ge0}(-1)^jM_j x^{-j-1}.
+\]
+\begin{theorem}\label{thm:twopoles}
+For \(n\ge8\), \(M_1>0,\ M_2>0\), and \(M_1M_3-M_2^2>0\).
+If \(P_n\) has simple negative roots, at least two distinct roots have
+positive margin. For \(n<8\) the determinant vanishes.
+\end{theorem}
+\begin{proof}
+Write \(n=4d+s\), \(0\le s<4\), and \(C_{n,e}=n!/(24^e e!)\).
+Let \(p_j=[x^{d-j}]P/C_{n,d}\) and
+\(q_j=[x^{d+1-j}]Q/C_{n+1,d+1}\), with missing coefficients zero.
+Set \(E(z)=\exp(z+z^2/2+z^3/6)\) and
+\(U(z)=24(\exp z-1-z-z^2/2-z^3/6)/z^4\). The generating function gives
+\[
+ p_j=24^j d(d-1)\cdots(d-j+1)[z^{s+4j}]E(z)U(z)^{d-j}.
+\]
+As \(U(0)=1\), this is a polynomial in \(d\) of degree at most \(s+5j\),
+also at integers \(0\le d<j\) where the prefactor vanishes. Replacing
+\((d,s)\) by \((d+1,s-3)\) gives degree at most \(s-3+5j\)
+for \(q_j\), with a negative degree bound denoting the zero polynomial.
+Put \(c_i=[t^i](\sum q_jt^j)/(\sum p_jt^j)\) and
+\(N_i=p_0^{i+1}c_i\). Polynomial division yields
+\[
+ N_i=q_i p_0^i-\sum_{j=1}^i p_jp_0^{j-1}N_{i-j},\qquad
+ \deg N_i\le(i+1)s+5i-3 .
+\]
+The signs at issue are those of
+\(f_1=-N_2,\ f_2=N_3,\ f_3=N_2N_4-N_3^2\), since
+\((M_1,M_2,M_3)=(n+1)(-c_2,c_3,-c_4)/(24(d+1))\)
+and \(p_0>0\). All three polynomials have degree at most \(L=8s+24\).
+
+For reproducibility we give the complete finite sign test. For each
+\(s=0,1,2,3\), form each column \(f(2),\ldots,f(2+L)\) using the
+integer recurrence for \(P_n\). Save the first entry and replace the
+column by its successive differences, repeating to exhaustion.
+In all twelve columns the first saved entry is positive and every
+subsequent saved entry is nonnegative. The accompanying rational
+checkers implement this test independently, the second generating
+partitions by the block containing a specified label. Newton's identity
+\(f(d)=\sum_{j=0}^L\binom{d-2}{j}\Delta^j f(2)\)
+now gives strict positivity at every integer \(d\ge2\).
+
+When \(P\) has simple negative roots, partial fractions express the
+quadratic form of the shifted matrix
+\(\left(\begin{smallmatrix}M_1&M_2\\M_2&M_3\end{smallmatrix}\right)\)
+as \(\sum_u(-u)w_u(\alpha-\beta u)^2\).
+At most one positive weight would allow a nonzero linear polynomial
+annihilating all positive summands, contrary to positive definiteness.
+When \(d<2\) there is at most one pole and the matrix has rank at most one.
+\end{proof}
+
+The two-root conclusion leaves the other residues unrestricted. There
+is also a consequence at a fixed rank from the origin. In the notation
+of the Airy analysis, use the same \(r\) and normalization for rows \(n\)
+and \(n+1\). At the \(k\)-th root \(u=t(\lambda_{n,k})\), the change of variable and direct differentiation
+before canceling \(P_n(u)=0\), gives
+\[
+ w_u=\frac{n+1}{r+1}\,
+ \frac{F_{n,1}(\lambda_{n,k})}
+ {(r^{2/3}+\lambda_{n,k})F_n'(\lambda_{n,k})}.
+\]
+The same-contour difference estimate in Section~\ref{sec:airy} gives
+\(r^{4/3}(F_{n,1}-F_n)\to(2/3)F'\) locally uniformly. The limiting
+Airy zero is simple and \((n+1)/(r+1)\sim r^2/2\). Hence
+\(w_u\to1/3\) for each fixed \(k\).
+
 \section{Reproducing the certified computations}\label{app:replay}
-The versioned materials are available with \href{https://github.com/F1Justin/MathLab/tree/v1.0.0}{MathLab v1.0.0}. The companion \texttt{reproduce.py} runs the four certificate scripts from the archived source via temporary copies. It checks each mathematical record against the frozen output, apart from timing fields. See \texttt{reproduction/README.md} for the pinned Python dependencies and commands. The analytic saddle proofs use the certified coverage of \([1/16,32]\). The algorithms deciding signs use Arb enclosures or exact integer/rational arithmetic. Candidate angular positions and root predictors may be floating-point values, while all strict decisions are verified independently of prediction accuracy. The downloadable dyadic intervals and independent reader are in \href{https://github.com/F1Justin/MathLab/tree/v1.0.0/certificates/partitions}{\texttt{certificates/partitions}}. The Airy and phase pilots in the research materials are numerical diagnostics. The analytic arguments and certificates in this manuscript have no Lean formalization.
+The \href{https://github.com/F1Justin/MathLab/tree/v1.0.0}{MathLab v1.0.0 release} supplies \texttt{reproduce.py}, which runs the four archived checkers from temporary copies and compares their output to the frozen records apart from timings. The pinned dependencies and commands are in \href{https://github.com/F1Justin/MathLab/blob/v1.0.0/papers/partitions/reproduction/README.md}{\texttt{reproduction/README.md}}. The saddle proof uses the certified cover of \([1/16,32]\). Arb enclosures or exact arithmetic certify all sign decisions independently of floating-point proposals. The dyadic intervals and their independent reader are in \href{https://github.com/F1Justin/MathLab/tree/v1.0.0/certificates/partitions}{\texttt{certificates/partitions}}. The Airy and phase pilots are numerical diagnostics. The analytic arguments and certificates here have no Lean formalization.
 
 \Needspace{8\baselineskip}
 \paragraph{Authorship and AI disclosure.}
 Chengyi Fang (\href{https://orcid.org/0009-0006-1237-7763}{ORCID 0009-0006-1237-7763}) directed the MathLab project. AI systems performed the primary mathematical research, software development and writing. They also conducted independent model review. Chengyi Fang has not independently verified the proofs. This manuscript is licensed under \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}. Original companion code is licensed under the MIT License.
 
-\begin{thebibliography}{9}
+\begingroup
+\small
+\begin{thebibliography}{99}
+\setlength{\itemsep}{1pt}
+\setlength{\parsep}{0pt}
 \bibitem{zhan}
 J.~Zhan, \emph{Polynomial recursions for counting big blocks in set partitions},
 Stockholm University, 2023--K17, 2023.
@@ -604,6 +699,43 @@ P.~Alexandersson, \emph{Real-rooted polynomials from set partitions},
 The Symmetric Functions Catalog, accessed 26 November 2026.
 \href{https://www.symmetricfunctions.com/realRootedSetPartitions.htm}{Big blocks example}.
 
+\bibitem{rrbkw}
+P.~Alexandersson,
+\href{https://github.com/PerAlexandersson/RealRooted/issues/601}{\emph{Differential BKW theory and Weyl-matrix interlacing dynamics}},
+RealRooted issue 601, opened 11 September 2026.
+\href{https://github.com/PerAlexandersson/RealRooted/issues/601\#issuecomment-6108976046}{11 October update} and
+\href{https://github.com/PerAlexandersson/RealRooted/issues/601\#issuecomment-6249731241}{18 October note}.
+
+\bibitem{rrreachable}
+P.~Alexandersson,
+\href{https://github.com/PerAlexandersson/RealRooted/issues/1773}{\emph{Reachable-state root-sign invariant for all big-block thresholds}},
+RealRooted issue 1773, opened 18 October 2026.
+
+\bibitem{rrfinite}
+P.~Alexandersson,
+\href{https://github.com/PerAlexandersson/RealRooted/issues/2590\#issuecomment-7059635458}{\emph{Big blocks \(j\ge4\): research pass}},
+RealRooted issue 2590, 21 November 2026.
+
+\bibitem{rrdensity}
+P.~Alexandersson,
+\href{https://github.com/PerAlexandersson/RealRooted/issues/1773\#issuecomment-7139029318}{\emph{Research checkpoint for big-block polynomials}},
+RealRooted issue 1773, 24 November 2026.
+
+\bibitem{rrsupport}
+P.~Alexandersson,
+\href{https://github.com/PerAlexandersson/RealRooted/issues/1982}{\emph{Prove threshold-Bell atom activation and support}},
+RealRooted issue 1982, accessed 26 November 2026.
+
+\bibitem{rrrestricted}
+P.~Alexandersson,
+\href{https://github.com/PerAlexandersson/RealRooted/blob/d34c13585e69912d443ecb973d9b78733dd9a052/RealRooted/CombinatorialExamples/RestrictedExponential.lean}{\emph{Restricted-exponential recurrence}},
+RealRooted, merged in pull request 2074, 27 October 2026.
+
+\bibitem{rrlorentz}
+P.~Alexandersson,
+\href{https://github.com/PerAlexandersson/RealRooted/issues/1773\#issuecomment-7141592644}{\emph{Operators and multivariate lifts for big-block polynomials}},
+RealRooted issue 1773, 24 November 2026.
+
 \bibitem{an}
 P.~Alexandersson and O.~Nabawanda, \emph{Peaks are preserved under run-sorting},
 Enumer.\ Combin.\ Appl.\ \textbf{2} (2022), no.~1, S2R2.
@@ -620,4 +752,5 @@ Chapter 9, Airy and Related Functions.
 \href{https://dlmf.nist.gov/9.5}{Integral representations} and
 \href{https://dlmf.nist.gov/9.9}{zeros}.
 \end{thebibliography}
+\endgroup
 \end{document}

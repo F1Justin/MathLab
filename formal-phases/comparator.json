@@ -1,0 +1,15 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "MathLab.PhaseNeighbourhood.sharp_phase_neighbourhood",
+    "MathLab.PhaseNeighbourhood.odd_order_phase_neighbourhood"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

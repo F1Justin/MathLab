@@ -1,0 +1,10 @@
+{
+  "intervals": 121,
+  "weighted_length": 153120431,
+  "finite_speeds_checked": 59940,
+  "maximizing_speed": 160,
+  "maximizing_window_start": 9192800,
+  "global_capacity": "20159589/153120431",
+  "high_speed_upper_bound": "7735870501306/77359044788527",
+  "seven_runner_upper_bound": "141117123/153120431"
+}

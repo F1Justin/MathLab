@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
+\usepackage{needspace}
 \usepackage{lmodern,microtype,amsmath,amssymb,amsthm,booktabs}
 \usepackage[margin=1in]{geometry}
 \usepackage[hidelinks]{hyperref}
@@ -20,22 +21,25 @@
 \title{Compatible local replacements for shifted lonely runners}
 \author{Chengyi Fang\\[-2pt]\small
 \href{https://orcid.org/0009-0006-1237-7763}{ORCID 0009-0006-1237-7763}}
-\date{26 November 2026}
+\date{27 November 2026}
 
 \begin{document}
 \maketitle
 \begin{abstract}
 Write \(1/(n+1+E_n)\) for the infimal covering radius of \(n\) shifted
-runners with distinct positive integer speeds. Combining three published
-local rules, with shared runners where the prescribed phases agree, gives
+runners with distinct positive integer speeds. Combining three rules of
+Daria Poliakova and selecting compatible phases at shared speeds gives
 \[
- E_n\ge \max\left\{\fl{n/150},
-          \fl{\frac{8011n-3241770}{1085489}}\right\}\qquad(n\ge1).
+ E_n\ge\max\left\{\fl{n/125},\
+          \fl{\frac{36071n-11671970}{4337929}}\right\}
+ \quad(n\ge1),\qquad
+ \liminf_{n\to\infty} E_n/n\ge\frac{577511}{69406489}.
 \]
-An additional family of disjoint replacements yields
-\(\liminf_{n\to\infty}E_n/n\ge 513079/69470921\).
-We also give a finite decision procedure for affine local rules with
-unrestricted odd added speeds and real phase parameters.
+Sixteen exact recipes yield a recursive schedule.
+One gives 476 distinct speeds at radius at most \(1/481\).
+Lean verifies that configuration and the integer counting step for the
+first bound. We also give a finite decision procedure for the local
+affine class with arbitrary positive odd added speeds and real phase parameters.
 \end{abstract}
 
 \section{Covering radius and local replacements}
@@ -127,7 +131,7 @@ It preserves locality for the translated rule, since responsibility for
 the seed is unchanged. This translation acts in the same way after
 multiplication by any odd scale.
 
-\section{Three rules and their combinations}
+\section{Recipes with competing phase prescriptions}\label{sec:recipes}
 
 Use rule \(A\) from Poliakova's Theorem 7 and rules \(B,C\) from the
 \(19\to17\) and \(24\to21\) rows of her Table 1 \cite{Poliakova}.
@@ -151,201 +155,201 @@ For the exact data below, \([X]_{a,h}\) prescribes phase
         \cup[\{5,9\}]_{1/4,\,1/4}
         \cup[\{15,27\}]_{1/4,\,0}.
 \end{align*}
-For example the shared prescriptions of \(B_1\) and \(B_5\) are at
-\(15,45,60,80,120,135\). Time-translating the second copy by \(1/2\)
-makes all six agree, and speed \(240\) is retained with its prescribed
-phase. This merged rule deletes thirteen even speeds and adds nine
-odd speeds. The merge \(A_1,C_5,C_9\) has shared prescriptions at
-\(45,135,405,540,720,1080\), all with the same phase in their respective
-copies. It deletes twenty even speeds and adds thirteen odd speeds.
 
-A subscript denotes the odd scale and \(B_5'\) denotes the
-time-translated copy. The following counts come from applying (1) to
-the combined tables. The threshold is half the largest affected even
-speed. The final column counts the pairs \((q,k)\) checked before
-any further scaling.
-\begin{center}
-\begin{tabular}{@{}rlrr@{}}
-\toprule
-Threshold & Rule combination & Gain & Residues \\
-\midrule
-96 & \(A_1\) & 1 & 184 \\
-120 & \(B_1\) & 2 & 536 \\
-216 & \(C_1\) & 3 & 882 \\
-600 & \(B_1,B_5'\) & 4 & 2\,680 \\
-1080 & \(A_1,A_9,C_5\) & 5 & 5\,356 \\
-1944 & \(A_1,C_5,C_9\) & 7 & 9\,928 \\
-5832 & \(A_1,A_5,C_{25},C_{27}\) & 8 & 41\,576 \\
-9720 & \(C_1,C_{25},A_{45},B_{81}\) & 9 & 65\,766 \\
-\bottomrule
-\end{tabular}
-\end{center}
-To reproduce a check, merge the prescriptions and remove the
-prescribed speeds from the deletion set. For each \(q\) and \(k\)
-from Lemma~\ref{lem:primitive}, form the eligible intervals and sort by
-left endpoint. Start at \(-1\), and advance the rightmost covered point
-to the greater of its present value and the next right endpoint if the
-next interval starts at or below it. The check succeeds when the
-rightmost point reaches \(1\). This uses rational endpoints and accepts
-coincidences. The full standard-library check is
-\texttt{overlap\_packing.py}.
+A recipe starts with several odd dilations of these tables. Reflection
+\(t\mapsto-t\) negates both phase coefficients. A translation by half a
+turn changes the constant phase of an odd speed by \(1/2\) and leaves
+the even seed in place. These operations specify the candidate
+prescriptions at each speed. The recipe chooses at most one
+prescription at any speed. It removes a specified subset of the
+proposed deletions and installs a prescription at every proposed
+deletion it keeps. A speed can thus be deleted even if a different
+table proposed a phase for it. At a shared odd speed it installs only
+one runner.
 
-All entries of these supports are \(2,3,5\)-smooth. If \(c\) is coprime
-to \(30\), scaling a combination by \(c\) gives a rule whose speeds have
-prime-to-\(30\) part \(c\). Here this part is the integer left after
-dividing away every factor \(2,3,5\). Thus supports at different cores
-cannot meet. Within one core we choose a single combined rule and count
-each prescribed speed once. Every remaining even seed speed then occurs
-once and every added speed is odd. These facts ensure positivity and
-distinctness throughout the construction.
+After these choices we verify the combined recipe directly by the
+local condition in Lemma~\ref{lem:primitive}. The verification is
+necessary because choosing one of two competing prescriptions may
+remove a witness used by a constituent rule. The affected even set is
+the union of the actual deletions and all installed even
+prescriptions. Every other even speed remains at phase zero.
+The gain is the number of actual deletions minus the number of
+installed odd speeds.
+
+All affected \(q\) for the recipes below are divisible by four.
+If \(\gcd(k,q/2)=1\), then \(k\) is odd and coprime to \(q\).
+Every constant phase has denominator dividing four. An aligned
+track must therefore satisfy \(q\mid 4v\). With this divisibility,
+alignment depends only on \(k\bmod 4\), and the alignment condition is
+\[
+   (4vk+(4a_v)q)\equiv0\pmod{4q}.
+\]
+One can test \(k=1,3\) for each affected \(q\). The accompanying
+independent replay enumerates all primitive numerators by this congruence,
+forms the rational intervals in \eqref{eq:test}, and verifies that their
+closed union covers \([-1,1]\). In both checks the witnesses are drawn
+from the installed prescriptions. The affected sizes and their
+certified gains are
+\[
+\begin{array}{c|rrrrrrrr}
+ \text{Gain} &1&2&3&4&5&6&7&8\\ \hline
+ \text{Seed size} &96&120&216&480&600&864&1080&2400\\[2pt]
+ \text{Gain} &9&10&11&12&13&14&15&16\\ \hline
+ \text{Seed size} &3000&4320&5400&5832&7776&12000&15000&21600 .
+\end{array}
+\]
+The indicated sizes suffice for the specific recipes, and each recipe
+also works for larger seed sizes. Appendix~\ref{app:recipes} gives
+the choices of copies, deletions and phases.
+
+At seed size \(480\), the recipe removes 11 even speeds, rephases
+17 others and adds 7 odd speeds. For example, it keeps speed 240
+at a nonzero constant phase. Speed 120 with label \((1/2,-1/2)\)
+meets its old zero-phase obligation. For odd \(k\), \(k/2+1/2\)
+is integral and \(\lvert z/2-1/2\rvert\le1\) on \([-1,1]\).
+The recipe gives 476 distinct positive integer speeds at radius at
+most \(1/481\). A direct rational sweep
+over the time circle checks that same configuration independently of
+the local residue calculation. The Lean theorem
+\texttt{MathLab.ScaleRule.certificate476} checks the literal
+configuration and proves the cover for every real time.
 
 \section{Counting the savings}\label{sec:count}
 
-For \(x\ge0\), let \(g(x)\) count reached thresholds in the multiset
-\[
-  (96,120,216,600,1080,1944)
-     \ \sqcup\ \bigsqcup_{j\ge0}5^j(1944,5832,9720).
- \tag{2}\label{eq:thresholds}
-\]
-At a core \(c\) use \(x=N/c\). For \(x<9720\) the table realizes
-\(g(x)\), including the jump of two at \(1944\).
-The supports of \(A_{9^i}\) are pairwise disjoint for all \(i\ge0\).
-Indeed, in the support of \(A\), the only multiple of \(9\) is \(9\)
-and \(1\) is absent. These supports are also prime to \(5\).
-For \(x\ge9720\) all six head thresholds and all three first-cycle
-thresholds have been reached. All six head thresholds have been reached
-at \(x/5\). Consequently \(g(x)=3+g(x/5)\).
-Use the recipe at \(x/5\) scaled by \(5\) together with the three disjoint
-rules \(A_1,A_9,A_{81}\), which fit at \(x\ge9720\) because their highest
-threshold is \(96\cdot81=7776\). This realizes \(g(x)\) by induction.
-At \(x=9720\) the recursion attains gain ten, accounting for two reached
-thresholds with this same value.
+A dilation of any recipe by \(c\ge1\) coprime to 30 preserves the
+ratio in \eqref{eq:test}. At an affected scaled speed \(qc\), the
+primitive numerator is still odd because \(q\) is divisible by four.
+The two checked residues therefore give exactly the witnesses needed
+under dilation. All unscaled affected speeds and odd additions are
+supported on the primes \(2,3,5\). Removing these prime factors from
+a scaled speed recovers \(c\). Thus recipes assigned to distinct
+cores \(c\) have disjoint supports and compose simultaneously.
 
-Write \(C_m(x)=\#\{c\in\mathbb Z_{>0}:c\le x,\gcd(c,m)=1\}\).
-The construction saves \(G_0(N)=\sum_{\gcd(c,30)=1}g(N/c)\) runners.
-Each integer coprime to \(6\) equals \(5^j c\) uniquely with
-\(\gcd(c,30)=1\). Thus
-\[
- G_0(N)=\sum_{t\in (96,120,216,600,1080,1944)}C_{30}(N/t)
-        +\sum_{t\in (1944,5832,9720)}C_6(N/t).
- \tag{3}\label{eq:period}
-\]
-The two appearances of \(1944\) contribute separately.
+Let \(H\) be the first thirteen seed sizes in the displayed table and
+let \(B=(12000,15000,21600)\) be the last three, counted with their
+positions in the gain sequence. Multiplying any recipe by five frees
+the speeds in \(A_1,A_9,A_{81}\), where \(A_s\) denotes rule \(A\)
+at dilation \(s\). Those three copies are pairwise disjoint and prime
+to five, have total gain three and fit by size 7776. In fact all
+\(A_{9^i}\) have mutually disjoint supports. The only speed of \(A\)
+divisible by nine is 9, and speed 1 is absent. Hence no speed in the
+support of \(A\) is nine times another speed in that support, nor
+can a larger power of nine give a collision.
 
-For the larger family let \(g_1(x)=g(x)\) if \(x<9720\), and
-otherwise use the improved recipe from \(x/5\) scaled by five with
-every \(A_{9^i}\) satisfying \(96\cdot9^i\le x\).
-The support argument above still applies. Subtracting the recursion
-for \(g\) from that for \(g_1\) shows
+Starting with each recipe in \(B\), repeated multiplication by five
+and addition of the three copies gives three more units at each
+successive row of thresholds \(5^j B\), \(j\ge0\).
+Indeed the three copies fit by \(5t\) for \(t\in B\), and the last
+threshold in \(B\) comes before the first one in \(5B\). Thus a
+single core with relative seed size \(x\) can attain the count
 \[
- g_1(x)-g(x)=\sum_{i\ge3,\ j\ge0}
-   \mathbf{1}_{96\cdot9^i5^j\le x}.
+    g(x)=\#\{t\in H:t\le x\}
+       +\sum_{j\ge0}\#\{t\in B:5^j t\le x\}.
 \]
-Each added threshold is above \(9720\) and only finitely many are reached
-at a fixed \(x\). Therefore this construction saves
+The recipes attaining different counts can be different. A core uses
+one recipe for its current count.
+
+Write \(C_m(y)=\#\{1\le c\le y:\gcd(c,m)=1\}\).
+The resulting saving at global seed size \(N\) is at least
 \[
- G_1(N)=G_0(N)+\sum_{i\ge3} C_6\bigl(N/(96\cdot9^i)\bigr).
- \tag{4}\label{eq:extended}
+ G(N)=\sum_{t\in H}C_{30}(N/t)+\sum_{t\in B}C_6(N/t).
+ \tag{2}\label{eq:count}
 \]
-In particular \(G_1(N)\ge G_0(N)\). Equations
-\eqref{eq:period}--\eqref{eq:extended} give an exact count of the
-savings of the specified constructions. They suffice to certify
-larger excess for any particular \(n\) if the number saved at
-\(N=n+h\) is at least \(h\). In that event the constructed cover has
-at most \(n\) runners, and adding unused positive integer speeds at
-phase zero if necessary gives \(\Gamma(n)\le1/(n+h+1)\).
+The second term absorbs the powers of five, since each integer
+coprime to six is uniquely \(5^j c\) with \(c\) coprime to 30.
+If \(G(n+h)\ge h\), the construction with \(N=n+h\) leaves
+at most \(n\) runners. Padding by unused positive integer speeds
+preserves the cover at radius \(1/(n+h+1)\). Therefore \(E_n\ge h\).
 
 \begin{theorem}\label{thm:main}
 For every \(n\ge1\),
 \[
- E_n\ \ge\ \max\!\left\{
-        \fl{\frac n{150}},
-        \fl{\frac{8011n-3241770}{1085489}}\right\}.
- \tag{5}\label{eq:main}
+ E_n\ge
+ \max\left\{\fl{n/125},\
+           \fl{\frac{36071n-11671970}{4337929}}\right\}.
+ \tag{3}\label{eq:finite}
 \]
-Moreover
+Moreover,
 \[
-  \liminf_{n\to\infty}\frac{E_n}{n}\ \ge\
-       \frac{513079}{69470921}.
- \tag{6}\label{eq:liminf}
+       \liminf_{n\to\infty}\frac{E_n}{n}
+       \ \ge\ \frac{577511}{69406489}.
+ \tag{4}\label{eq:liminf}
 \]
 \end{theorem}
+
 \begin{proof}
-For the first floor use \(h=\fl{n/150}\) and \(N=n+h\ge151h\).
-If \(h=0\) use the even seed. Otherwise it suffices to show
-\(G_0(151h)\ge h\). The residues of positive integers coprime to
-\(30\) are \(1,7,11,13,17,19,23,29\) modulo \(30\). Counting
-complete periods and checking the \(30\) remainders gives
-\(C_{30}(x)\ge4x/15-14/15\) for \(x\ge0\).
-Using the first seven thresholds in \eqref{eq:thresholds} gives
+For \(1\le r<m\) coprime to \(m\), the progression \(t(r+jm)\),
+\(j\ge0\), contributes
+\(\lfloor(N+t(m-r))/(mt)\rfloor\) to \(C_m(N/t)\). The
+first 1029 integers \(h\), starting at zero, satisfy
+\(G(126h)\ge h\) by direct integer evaluation. Advancing \(h\)
+by 1029 shifts the argument by \(126\cdot1029\). For each progression,
+floor superadditivity gives an increment of at least
+\(\lfloor126\cdot1029/(mt)\rfloor\). The sum is 1038, so
+\(G(126h)\ge h\) for every \(h\). With \(h=\fl{n/125}\),
+\(n+h\ge126h\). This proves the first finite bound.
+The Lean theorem \texttt{MathLab.ScaleCounting.all\_sizes}
+verifies this integer induction.
+
+For the second finite bound, the periods \(mt\) of the progression
+indicators divide their least common multiple \(P=87480000\).
+Each period has gain 721420, hence slope \(p/q=36071/4374000\).
+The maximal discrepancy
 \[
-  G_0(151h)\ \ge\ \frac{792599}{729000}h-\frac{98}{15}>h
-  \qquad (h\ge75).
+      K=\max_{N\ge0}\{pN-qG(N)\}=16045969
 \]
-For \(1\le h\le74\), the sum over the first nine thresholds minus \(h\)
-has minimum zero. This finite check uses
-\(C_{30}(x)=8\fl{x/30}+\#\{r\in\{1,7,11,13,17,19,23,29\}:
-r\le\fl{x}\bmod30\}\).
-
-For the second floor set \(p=8011,\ q=1093500\).
-The function \(H(N)=pN-qG_0(N)\) on nonnegative integers has period
-\(P=17496000\). Indeed \(P\) is the least common multiple of \(mt\) for
-the nine terms \(C_m(N/t)\) in \eqref{eq:period}. Over a full period
-the sum increases by \(128176=pP/q\). The largest value of \(H\) is
-\(K=4335269\), attained at \(N=8139479\) where \(G_0(N)=59626\).
-For this finite calculation initialize \(G_0(0)=0\) and enumerate
-the progressions of jumps \(t(r+jm)\) with \(1\le r<m\), \(\gcd(r,m)=1\)
-and \(j\ge0\), stopping at \(P\). Add the multiplicities of equal jumps.
-Between jumps \(H\) is increasing, so check the integer immediately
-before each of the \(125176\) distinct jump positions and both
-period endpoints. This yields \(K\) by exact integer comparisons.
-The accompanying verifier \texttt{periodic\_packing.py} also
-evaluates the maximizing case directly by quotient and remainder.
-
-Set \(h=\fl{(pn+q-1-K)/(q-p)}\). When \(h>0\),
-\(p(n+h)-K\ge q(h-1)+1\), so \(G_0(n+h)>h-1\). Integrality yields
-\(G_0(n+h)\ge h\), as required. The case \(h\le0\) follows from the
-even seed.
-
-Finally \(G_0(N)/N\to p/q\) by \eqref{eq:period}. For the additional
-terms of \(G_1(N)/N\), the bound \(C_6(N/t)\le N/t\) gives a
-summable majorant, and \(C_6(N/t)/N\to1/(3t)\) termwise.
-Hence
+occurs at \(N=4239239\) where \(G(N)=34956\). It is enough
+to check the integers immediately before the hits in the progressions
+in one period, and both period endpoints. On each intervening interval
+the discrepancy increases, and the discrepancy is periodic since
+\(pP=q\cdot721420\). The exact replay merges the sorted
+progressions and obtains the displayed maximum. For
+\(h=\fl{(pn+q-1-K)/(q-p)}>0\), one has
 \[
- \lim_{N\to\infty}\frac{G_1(N)}N
-   =\frac{8011}{1093500}
-       +\sum_{i\ge3}\frac1{3\cdot96\cdot9^i}
-   =\frac{8011}{1093500}+\frac1{186624}
-   =\frac{513079}{69984000}=\alpha_1.
+   qG(n+h)\ge p(n+h)-K\ge q(h-1)+1 .
 \]
-Given \(0<a<\alpha_1\), for all large \(n\) take
-\(h=\fl{an/(1-a)}\) and \(N=n+h\). Then \(G_1(N)\ge aN\ge h\).
-Letting \(a\) increase to \(\alpha_1\) proves
-\eqref{eq:liminf}.
+Integrality gives \(G(n+h)\ge h\). The zero-phase seed proves the
+bound when \(h\le0\).
+
+To obtain \eqref{eq:liminf}, improve the per-core construction.
+For \(x<38880\) use the recipe giving \(g(x)\). For
+\(x\ge38880\), use the improved construction at \(x/5\),
+dilate it by five, and add every \(A_{9^i}\) that fits at \(x\).
+The supports are disjoint by the preceding argument. For
+\(x\ge38880=5\cdot7776\) the head \(H\) fits at both \(x\)
+and \(x/5\), and all of the first triple \(B\) fits at \(x\).
+Thus \(g(x)=3+g(x/5)\) in this range. The first three
+\(A_{9^i}\) always fit there, and the next first fits at
+\(96\cdot9^3=69984>38880\). It follows by induction along the
+recursion that the improvement is one additional unit at each
+threshold \(96\cdot9^i5^j\), \(i\ge3\), \(j\ge0\).
+For every fixed finite subset of these thresholds the density of counted
+cores at each one is \(4/15\). Taking increasingly many of them gives
+a lower limit of at least
+\[
+ \alpha=\frac{36071}{4374000}
+    +\frac4{15}\sum_{i\ge3,\ j\ge0}
+       \frac{1}{96\cdot9^i5^j}
+    =\frac{577511}{69984000}
+\]
+for the saving divided by \(N\).
+For \(0<a<\alpha\), all sufficiently large seed sizes save at least
+\(aN\). Taking \(h=\fl{an/(1-a)}\) and \(N=n+h\)
+then gives \(h\le aN\). Letting \(a\) increase to \(\alpha\)
+proves \eqref{eq:liminf}.
 \end{proof}
 
-\paragraph{Disjoint compositions.}
-The first six disjoint-support thresholds are
-\(96\), \(120\), \(216\), \(864\), \(1080\), and \(3000\).
-They are followed by \(5^j(5400,5832,9720)\)
-for \(j\ge0\). For the distinct intermediate gains \(4,5,6,7\)
-one can use respectively
-\[
- \begin{gathered}
- (A_1,B_5,A_9),\qquad (A_1,A_9,C_5),\\
- (A_1,A_5,B_9,B_{25}),\qquad (A_1,A_5,B_9,C_{25}).
- \end{gathered}
-\]
-The other gains through nine use the same disjoint rows as above.
-The same three-rule extension gives the repeated tail.
-The saved fraction is \(76897/10935000\), yielding
-\(\liminf E_n/n\ge76897/10858103\). The disjoint-only bound is
-\(E_n\ge\fl{n/167}\). Indeed use \(N=168h\) with \(h=\fl{n/167}\);
-the first three contributions sum to at least
-\((707/675)h-14/5>h-3\). When \(h\ge7\) the fourth and fifth each
-contribute at least one. For \(h=1,\ldots,6\), the first nine
-contributions sum to \(2,3,3,4,5,6\), respectively.
-The disjoint and overlap savings are independent constructive bounds.
+For example, at \(n=100000\) the two terms of \eqref{eq:finite} give
+\(800\) and \(828\), respectively. The second yields a covering radius
+at most \(1/100829\). The comparison is with earlier constructive
+bounds for the same quantity. Poliakova's Theorem 1 gives
+\(E_n\ge\fl{n/287}\), the largest coefficient for a single rule in
+her Table 1 is \(1/224\), and the first MathLab release obtained
+\(\fl{n/150}\) and the coefficient \(513079/69470921\)
+\cite{Poliakova,MathLabVOne}. Poliakova's separate construction already
+gives \(E_n\ge1\) for \(n\ge95\). The new bounds concern the same
+all-size extremal quantity, with no new size in the open interval
+\(58\le n\le94\).
 
 \section{A finite decision problem for affine local rules}\label{sec:finite}
 
@@ -354,6 +358,9 @@ exactly the class of Lemma~\ref{lem:primitive}, in which the affected
 even speeds do not exceed \(L\), the added speeds are positive odd
 integers, and each phase is affine in \(\delta\) with coefficients
 independent of \(N\).
+\texttt{aadrianvv} used SAT to test finite speed and phase menus
+for this kind of local condition, and carried out fixed-size patch
+searches on the even seed \cite{UpstreamSearch}.
 
 \begin{proposition}\label{prop:np}
 The existence of such a rule of gain at least \(r\) is decidable.
@@ -462,33 +469,51 @@ This excludes positive gain through \(L=12\) in the stated class.
 The cutoff is a limit on local even speeds, independent of the
 global number of runners.
 
-\section*{Code and attribution}
+\section*{Verification and attribution}
 
-The accompanying replay script verifies the two constructions and
-the small affine rule exclusions. It checks local coverage and the
-discrepancy in exact rational or integer arithmetic.
-The source, checks and data are in the
-\href{https://github.com/F1Justin/MathLab/tree/v1.0.0}{versioned MathLab repository}.
-In the companion Lean project,
-\texttt{MathLab.PeriodicPacking} verifies the counting period, sharp
-discrepancy and the resulting integer implication. The geometric
-construction uses the proofs and finite checker in this article.
-Daria Poliakova devised the underlying three rules and the initial
-framework \cite{Poliakova}. The paper's contributions are the specific
-compatible compositions, the counting profiles and bounds, and the
-finite reduction for the affine rule search. The minimum-frontier
-search argument was developed with Astra.
+The recipe choices are finite certificates, not claims of optimality
+over every possible mixture. The intervals in this proof are checked
+by rational arithmetic. The discrepancy and the low-cutoff
+exclusions use exact finite enumeration.
+The Lean development verifies a generic local transfer result,
+the 476-runner example and the integer all-size counting inequality
+under the displayed progression data. The identification of
+those progressions with a physically realizable schedule, the larger
+discrepancy bound and the limiting-layer argument use the written proof
+and exact arithmetic checkers.
 
-Chengyi Fang initiated and funded the project, set its objectives,
-supervised its execution and directed dissemination. Codex and
-Astra performed the principal mathematical development, computation
-and writing. The contributor understands aspects of the research
-but has not independently checked any part of the proofs.
+Poliakova devised the three rules and their original application at
+disjoint odd dilations. The first MathLab release combined copies
+whose shared phases were already compatible \cite{MathLabVOne}. This
+revision checks recipes that choose from competing phases, and uses
+the resulting sixteen recipes to improve the finite and asymptotic
+bounds. The finite decision theorem is retained from the first release.
+The prior SAT experiments on bounded phase menus are credited to
+\texttt{aadrianvv} \cite{UpstreamSearch}.
 
-\medskip\noindent
-This work is licensed under
+Chengyi Fang initiated the work, directed the research and prepared
+it for dissemination. AI systems performed the principal mathematical
+development, implementation and writing. The author understands
+aspects of the research but has not independently checked the proofs.
+
+The article is licensed under
 \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
-The original accompanying code is released under the MIT License.
+The original accompanying software uses the MIT License.
+
+\appendix
+\section{Recipe certificates}\label{app:recipes}
+
+Each copy is specified by its rule letter, odd dilation, reflection bit
+and half-turn bit. The deletion list gives the speeds actually removed.
+At a surviving speed with multiple distinct labels, the list records
+the selected \((4a,4h)\). Otherwise the unique surviving label is
+used. All other evens in the seed retain phase zero. These data suffice
+to reconstruct every interval union in Section~\ref{sec:recipes}.
+The primitive-center check is to require \(4v\) divisible by \(q\),
+retain arcs satisfying \(4vk+(4a)q\equiv0\bmod 4q\), and sweep the
+resulting closed intervals in increasing order of left endpoint.
+
+\input{recipes.tex}
 
 \begin{thebibliography}{9}
 \bibitem{BCS}
@@ -508,5 +533,13 @@ one-entry modifications and the growth of speeds},
 \emph{Shifted Lonely Runner counterexamples for \(18\le n\le57\)},
 \href{https://github.com/1337isnot1337/solved-conjectures/issues/110}
 {solved-conjectures, issue 110}, 2026.
+\bibitem{UpstreamSearch}
+\texttt{aadrianvv},
+\href{https://github.com/1337isnot1337/solved-conjectures/issues/110\#issuecomment-7055867934}{Finite-menu uniform rule search} and
+\href{https://github.com/1337isnot1337/solved-conjectures/issues/110\#issuecomment-7060116112}{fixed-size structured patch search},
+\emph{solved-conjectures}, issue 110, 21 November 2026.
+\bibitem{MathLabVOne}
+C.~Fang, \emph{Compatible local replacements for shifted lonely runners},
+\href{https://github.com/F1Justin/MathLab/blob/ef98c0707e3a9e1b6b66f905aadd24ea6e38cadc/papers/runners/compatible-replacements.pdf}{MathLab v1.0.0}, 26 November 2026.
 \end{thebibliography}
 \end{document}

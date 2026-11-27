@@ -1,0 +1,234 @@
+{
+  "settled_micro_usd": 24627104,
+  "stage_settled_micro_usd": 3367928,
+  "unsettled_reserved_micro_usd": 0,
+  "budget_micro_usd": 70000000,
+  "remaining_micro_usd": 45372896,
+  "basis": "Project pricing applied to returned API usage; excludes Codex subscriptions, hardware, and third-party platform costs.",
+  "runs": [
+    {
+      "task": "edge_review_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1290912,
+      "actual_micro": 1096592
+    },
+    {
+      "task": "runner_construct_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1300512,
+      "actual_micro": 822952
+    },
+    {
+      "task": "density_review_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1318760,
+      "actual_micro": 679480
+    },
+    {
+      "task": "packing_review_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1304640,
+      "actual_micro": 814880
+    },
+    {
+      "task": "near_zero_review_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1290816,
+      "actual_micro": 437736
+    },
+    {
+      "task": "inner_bridge_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1284864,
+      "actual_micro": 489544
+    },
+    {
+      "task": "eventual_review_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1327704,
+      "actual_micro": 756024
+    },
+    {
+      "task": "effective_inner_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1284128,
+      "actual_micro": 920448
+    },
+    {
+      "task": "algebraic_induction_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1282144,
+      "actual_micro": 933384
+    },
+    {
+      "task": "public_rule_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1282048,
+      "actual_micro": 1076288
+    },
+    {
+      "task": "tight_orbit_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1281496,
+      "actual_micro": 526216
+    },
+    {
+      "task": "two_free_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1281416,
+      "actual_micro": 535496
+    },
+    {
+      "task": "lean_phase_windows_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1282368,
+      "actual_micro": 878608
+    },
+    {
+      "task": "lean_witness_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1286224,
+      "actual_micro": 828984
+    },
+    {
+      "task": "two_free_solver_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1281496,
+      "actual_micro": 545936
+    },
+    {
+      "task": "lean_stability_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1282272,
+      "actual_micro": 285072
+    },
+    {
+      "task": "lean_local_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1282944,
+      "actual_micro": 877624
+    },
+    {
+      "task": "scale_search_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1284368,
+      "actual_micro": 880248
+    },
+    {
+      "task": "uniform_sat_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1283192,
+      "actual_micro": 735752
+    },
+    {
+      "task": "lean_rule_a_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1283232,
+      "actual_micro": 600632
+    },
+    {
+      "task": "publication_runner_referee_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1438344,
+      "actual_micro": 939344
+    },
+    {
+      "task": "publication_partitions_referee_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1476184,
+      "actual_micro": 985664
+    },
+    {
+      "task": "publication_phase_referee_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1303184,
+      "actual_micro": 505104
+    },
+    {
+      "task": "mass_obstruction_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1282128,
+      "actual_micro": 1142408
+    },
+    {
+      "task": "farey_trade_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1281608,
+      "actual_micro": 821568
+    },
+    {
+      "task": "lean_weighted_cover_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1281864,
+      "actual_micro": 841224
+    },
+    {
+      "task": "prime_repair_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1281976,
+      "actual_micro": 744376
+    },
+    {
+      "task": "community_root_margins_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1282752,
+      "actual_micro": 557592
+    },
+    {
+      "task": "harvest_packing_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1431568,
+      "actual_micro": 892768
+    },
+    {
+      "task": "harvest_weighted_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1285440,
+      "actual_micro": 865480
+    },
+    {
+      "task": "harvest_phase_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1312864,
+      "actual_micro": 711504
+    },
+    {
+      "task": "harvest_partition_001",
+      "model": "gpt-6.2-astra",
+      "status": "completed",
+      "reserved_micro": 1472616,
+      "actual_micro": 898176
+    }
+  ]
+}

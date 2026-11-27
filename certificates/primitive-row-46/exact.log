@@ -1,0 +1,3 @@
+'MathLab.Mass46.sharp_minimum' depends on axioms: [propext, Classical.choice, Quot.sound]
+replaying MathLab.ExactMinimum
+exit=0

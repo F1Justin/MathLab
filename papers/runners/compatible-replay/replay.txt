@@ -1,0 +1,19 @@
+seed size    96  gain  1  primitive centers     184
+seed size   120  gain  2  primitive centers     536
+seed size   216  gain  3  primitive centers     882
+seed size   480  gain  4  primitive centers    1458
+seed size   600  gain  5  primitive centers    3074
+seed size   864  gain  6  primitive centers    4226
+seed size  1080  gain  7  primitive centers    7530
+seed size  2400  gain  8  primitive centers   17850
+seed size  3000  gain  9  primitive centers   21514
+seed size  4320  gain 10  primitive centers   26122
+seed size  5400  gain 11  primitive centers   36874
+seed size  5832  gain 12  primitive centers   54342
+seed size  7776  gain 13  primitive centers   48978
+seed size 12000  gain 14  primitive centers   76434
+seed size 15000  gain 15  primitive centers  115634
+seed size 21600  gain 16  primitive centers  138674
+476 distinct positive speeds cover the circle at radius 1/481 (229334 exact arcs).
+Finite guarantees floor(n/125) and floor((36071n-11671970)/4337929).
+Asymptotic lower bound liminf E_n/n ≥ 577511/69406489.

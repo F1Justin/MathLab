@@ -1,0 +1,14 @@
+{
+  "L": 46,
+  "probes": 578,
+  "weight": "45/2",
+  "tail_from": 2689,
+  "tail_capacity": "1",
+  "penalties": {
+    "6": "1/4",
+    "18": "3/16",
+    "315": "5/96"
+  },
+  "lower_bound": "2113/96",
+  "minimum_tracks": 23
+}

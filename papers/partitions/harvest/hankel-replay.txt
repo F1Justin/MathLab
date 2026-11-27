@@ -1,0 +1,12 @@
+n mod 4 = 0, sign 1: positive Newton expansion at d = 2
+n mod 4 = 0, sign 2: positive Newton expansion at d = 2
+n mod 4 = 0, sign 3: positive Newton expansion at d = 2
+n mod 4 = 1, sign 1: positive Newton expansion at d = 2
+n mod 4 = 1, sign 2: positive Newton expansion at d = 2
+n mod 4 = 1, sign 3: positive Newton expansion at d = 2
+n mod 4 = 2, sign 1: positive Newton expansion at d = 2
+n mod 4 = 2, sign 2: positive Newton expansion at d = 2
+n mod 4 = 2, sign 3: positive Newton expansion at d = 2
+n mod 4 = 3, sign 1: positive Newton expansion at d = 2
+n mod 4 = 3, sign 2: positive Newton expansion at d = 2
+n mod 4 = 3, sign 3: positive Newton expansion at d = 2

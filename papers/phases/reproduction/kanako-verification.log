@@ -1,0 +1,45 @@
+Host kanako
+Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)
+Mathlib 56a005855ea17e0b0958f73ec801ae140b0a1679
+Build completed successfully (1621 jobs).
+Checked 233 declarations, including 153 private declarations.
+Used axioms: [propext, Quot.sound, Classical.choice]
+replaying Solution
+replaying MathLab
+replaying MathLab.PhaseNeighbourhood.Geometry
+replaying MathLab.PhaseNeighbourhood.Sharpness
+replaying MathLab.PhaseNeighbourhood.Tube
+replaying MathLab.PhaseNeighbourhood.Cube
+replaying MathLab.PhaseNeighbourhood.Farey
+replaying MathLab.PhaseNeighbourhood.Core
+replaying MathLab.PhaseNeighbourhood.Definitions
+Resolving dependencies
+Building Challenge
+⚠ [1047/1048] Replayed Challenge
+warning: Challenge.lean:85:8: declaration uses `sorry`
+warning: Challenge.lean:94:8: declaration uses `sorry`
+Build completed successfully (1048 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, MathLab.PhaseNeighbourhood.sharp_phase_neighbourhood, MathLab.PhaseNeighbourhood.odd_order_phase_neighbourhood, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenge
+Building Solution
+Build completed successfully (1620 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, MathLab.PhaseNeighbourhood.sharp_phase_neighbourhood, MathLab.PhaseNeighbourhood.odd_order_phase_neighbourhood, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!
+9f473b9723e2e2852886c208b5690d5aede906756fd0972233e8be1d33ab0504  MathLab/PhaseNeighbourhood/Core.lean
+44a7f3a944b3c67092dff2d3106cfd15990362a35d9eefe01de56c02c8f6f3b4  MathLab/PhaseNeighbourhood/Cube.lean
+c85a408f1484c1b94e8befbc9f853fa54b78487141521cd825b242282acd546a  MathLab/PhaseNeighbourhood/Definitions.lean
+a3fa890f00fd1ceb5a40b6d63ee6cd5218ef87616043918654f261970180ff1b  MathLab/PhaseNeighbourhood/Farey.lean
+7dff66c2a69bc6dd9e4012874be76f528750a3f18b5eb28025eee47045d00b5e  MathLab/PhaseNeighbourhood/Geometry.lean
+2636ee98b585998c56792133fc061db3f6e20cae1d5e613938542c7dc8c77087  MathLab/PhaseNeighbourhood/Sharpness.lean
+379496c51ac5407325dc939f44fc0c6a1958e624c28c3aa168bc07425ee2fa63  MathLab/PhaseNeighbourhood/Tube.lean
+3d0363fd3edbe70607706bf0ff94856145ce7b9cfcddc32cd4bbeee31d0ab9fe  scripts/AuditAxioms.lean
+aa603b6835dee10567dbfbce351677887195026cc55b2e14573a49b1b79f2115  MathLab.lean
+8a169d94b598c8b33ec90c89065ed18be5eb63c46c0ba9ca39038d2d63446179  Challenge.lean
+1ff9916b5415205e46af9faaa0b36bcb85ad4f80f00d3724c36952fe982e827f  Solution.lean
+69669adccafd1058337435dd1e991c1e0ec38b208db236bdd85091c639ccad1a  comparator.json
+73509832aeb70dfb846b3f897870af34e09645106279e55e1a825aba0d5b85dd  lakefile.toml
+600b777e298d47dc3f163f2bb2c50323f80935ba6b1309c7572c4fe3ac8decb6  lake-manifest.json
+ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c  lean-toolchain
