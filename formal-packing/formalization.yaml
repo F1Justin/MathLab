@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: v0.4
+project:
+  name: A 476-runner shifted cover at radius 1/481
+  description: >-
+    On a circle of circumference one, there are 476 runners with distinct positive
+    integer speeds and rational initial phases whose distances to a stationary observer
+    have pointwise minimum at most 1/481 for every real time. The construction begins
+    with 480 phase-zero even tracks and uses compatible local replacements to remove
+    eleven tracks, rephase seventeen others, and add seven odd tracks. The phase
+    values have common denominator 1924.
+  authors: [Chengyi Fang]
+  responsible_maintainers: [Chengyi Fang]
+  license: MIT
+classification:
+  arxiv: [math.CO, math.NT]
+  msc2020: [11J71, 05B40]
+sources:
+  - title: More (shifted) runners, less loneliness
+    type: paper
+    authors: [Daria Poliakova]
+    id: https://arxiv.org/abs/2609.23952v1
+    relationship: adapts
+    note: >-
+      Definition 5 and Theorems 6–7 supply the local uniform-rule framework.
+      The 476-runner instance combines the rule from Theorem 7, a reflected
+      fivefold dilation of that rule, and the rule from the 24-to-21 row
+      of Table 1 with a half-turn time translation.
+  - title: Compatible local replacements for shifted lonely runners
+    type: paper
+    authors: [Chengyi Fang]
+    relationship: formalizes
+    note: >-
+      The 27 November 2026 MathLab manuscript specifies this instance in
+      “Recipes with competing phase prescriptions” and gives the recipe in
+      “Recipe certificates”. Lean verifies the witnesses on the installed phases
+      and their assembly into a single cover.
+  - title: Coloopless zonotopes and counterexamples to the Shifted Lonely Runner Conjecture
+    type: paper
+    authors: [Mónica Blanco, Francisco Criado, Francisco Santos]
+    id: https://arxiv.org/abs/2603.24784v4
+    relationship: background
+status:
+  scope: >-
+    Covers every real time with closed bands at the specified radius, with exactly
+    476 distinct speeds and a stationary observer external to that count.
+    The compared declaration is the concrete cover. Optimality and the companion
+    paper's all-size estimates and liminf remain outside its scope.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Quot.sound, Classical.choice]
+automation:
+  methods:
+    - method: agent
+      models: [GPT-6, GPT-6.2 Sol]
+      framework: OpenAI Codex
+      tool_setup: >-
+        Coordinated proof integration, audited the statement, and built and replayed
+        the formalization. GPT-6.2 Sol subagents used maximum reasoning.
+    - method: agent
+      models: [gpt-6.2-astra]
+      framework: OpenAI Responses API
+      tool_setup: Independently audited the companion packing proof and the original Lean endpoint.
+  notes: >-
+    Chengyi Fang initiated, directed, and maintains the work. AI systems performed
+    the principal mathematical development, implementation, and writing. The
+    contributor has not independently checked the complete proof.
+review:
+  status: agent-reviewed
+  reviewers: [OpenAI Codex, GPT-6.2 Astra]
+  human_understanding: none
+  notes: >-
+    The companion packing audit checked source attribution, residue tables, and
+    the distinction between the formal endpoint and the larger manuscript proof.
+    The Challenge and Solution are subject to mechanical comparison.
+alignment:
+  namespace: MathLab.Packing476
+  statements:
+    - source: The 476-runner configuration in the companion packing manuscript
+      lean: MathLab.Packing476.exists_cover
+      module: Solution
+      status: proved
