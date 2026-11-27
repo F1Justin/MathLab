@@ -1,0 +1,17 @@
+name: Palomar mechanical preflight for the 476-runner shifted cover
+on:
+  push:
+    branches: [review/palomar-packing-preflight]
+permissions:
+  contents: read
+jobs:
+  check:
+    uses: PalomarRegistry/PalomarSubmission/.github/workflows/submission.yml@046554302064b2c83c2b924bea6db87fc5900c68
+    with:
+      repository: F1Justin/MathLab
+      commit: 19ae072a1a85e62f315053cbf212b3237467d1f6
+      pipeline_commit: 046554302064b2c83c2b924bea6db87fc5900c68
+      request_id: packing47601
+      mode: full
+      execution_profile: palomar-standard-v1
+      options: '{"project_path":"formal-packing","comparator_config_path":"formal-packing/comparator.json","formalization_metadata_path":"formal-packing/formalization.yaml","authorization_relationship":"I am a responsible author or maintainer"}'
