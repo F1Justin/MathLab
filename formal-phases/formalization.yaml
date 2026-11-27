@@ -91,6 +91,7 @@ automation:
   methods:
     - method: agent
       framework: OpenAI Codex
+      models: [GPT-6]
       tool_setup: Led proof development, implemented the sharp cube and semantic geometry, integrated the wider tube, and verified the release.
       cost:
         spend_usd: Subscription-based usage

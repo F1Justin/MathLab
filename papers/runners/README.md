@@ -2,7 +2,7 @@
 
 | Manuscript | Results |
 | --- | --- |
-| [Compatible local replacements](compatible-replacements.pdf) · [LaTeX](compatible-replacements.tex) | For every $n$, $E_n\ge\max\{\lfloor n/150\rfloor,\lfloor(8011n-3241770)/1085489\rfloor\}$. The expanded construction gives $\liminf E_n/n\ge513079/69470921$. A finite decision procedure covers affine local rules with real phase parameters and all odd added speeds. |
+| [Compatible local replacements](compatible-replacements.pdf) · [LaTeX](compatible-replacements.tex) | For every $n$, $E_n\ge\max\{\lfloor n/125\rfloor,\lfloor(36071n-11671970)/4337929\rfloor\}$. The expanded construction gives $\liminf E_n/n\ge577511/69406489$. A finite decision procedure covers affine local rules with real phase parameters and all odd added speeds. |
 | [One-runner extension and phase stability](frozen-extension.pdf) · [LaTeX](frozen-extension.tex) | With the public 57-runner seed fixed, the exact extension optimum is $1359451/79000000$ at the unique new speed $528344$. The paper gives all optimal phases, a stability radius and a weighted obstruction to seven additions. |
 
 The first paper builds configurations for the infimum over distinct positive integer speeds and arbitrary phases. The second optimizes and modifies specified seeds, and covers several stated phase boxes and finite menus. The prime-orbit phase result has a separate manuscript in this release. The 58-runner target concerns the unrestricted global inequality $\Gamma(58)<1/59$, which remains open in the cited sources.
@@ -12,6 +12,7 @@ The first paper builds configurations for the infimum over distinct positive int
 Run from the publication package root. The launcher verifies outputs against the frozen certificates and uses a temporary copy for scripts that write JSON.
 
 ~~~sh
+python3 papers/runners/compatible-replay/verify.py
 python3 papers/runners/replay.py packing
 python3 papers/runners/replay.py frozen
 python3 papers/runners/replay.py boxes

@@ -1,1 +1,1 @@
-The [pinned Lean sources and compilation instructions](sources.zip) verify the 476-runner cover, the rule-A and transfer lemmas, and integer counting endpoints. See the included toolchain, manifest and Kanako receipts. The asymptotic estimate uses the written composition proof.
+The [pinned Lean sources and compilation instructions](sources.zip) verify the 476-runner cover, the rule-A and transfer lemmas, and integer counting endpoints. See the included toolchain, manifest and verification receipts. The asymptotic estimate uses the written composition proof.

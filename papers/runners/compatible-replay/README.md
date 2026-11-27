@@ -4,4 +4,4 @@ Run `python3 verify.py` from this directory. Python 3.9 or later and its standar
 
 The integer part merges the events in one full counting period, checks the largest discrepancy and its witness, and evaluates the 1029 starting values and step increment for the all-size bound. Exact arithmetic gives the two finite guarantees and the limiting coefficient. The proof that these computations apply to every real time and to arbitrarily large seed sizes is in the [manuscript](../compatible-replacements.tex).
 
-[Independent replay output](replay.txt) · [Lean scope and Kanako receipt](lean/README.md)
+[Independent replay output](replay.txt) · [Lean scope and kernel receipt](lean/README.md)
