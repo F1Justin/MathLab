@@ -1,0 +1,104 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amsthm,amssymb,microtype}
+\usepackage[a4paper,hmargin=23mm,vmargin=23mm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{corollary}{Corollary}
+\setlength{\parindent}{1.25em}
+\raggedbottom
+\title{A sharp real-rootedness threshold for products of weighted Delannoy triangles}
+\author{MathLab research note}
+\date{28 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $D_c(n,k)$ count paths to $(n-k,k)$ with unit horizontal and vertical steps and diagonal steps of weight $c$. For a fixed $d>0$, every positive-degree row of the ordinary matrix product $D_cD_d$ has simple negative zeros for every $c>0$ exactly when $d\ge 1/3$. Below the threshold, sufficiently large odd degrees already have nonreal zeros at $c=0$, which persist for small positive $c$. For the ordinary square $D_1^2$ all zeros lie strictly between $-4-3\sqrt2$ and $-3+2\sqrt2$. The extreme roots tend to these endpoints.
+\end{abstract}
+
+\section{The product and its divided difference}
+Denote the row polynomial $\sum_k D_c(n,k)x^k$ by $T_n^{(c)}(x)$. Deleting the last step gives $T_0=1$, $T_1=1+x$ and
+\[
+ T_n^{(c)}=(1+x)T_{n-1}^{(c)}+cxT_{n-2}^{(c)}.
+\]
+Write $G_n(x)=\sum_{j=0}^nD_c(n,j)T_j^{(d)}(x)$. It is monic of degree $n$ and has positive coefficients even at $c=0$. Row zero is constant.
+\begin{theorem}\label{main}
+For $d\ge 1/3$ and $c>0$, each $G_n$ has $n$ distinct negative zeros. For every fixed $0<d<1/3$ and all sufficiently large odd $n$, there is an $\varepsilon(d,n)>0$ such that $G_n$ has a nonreal conjugate pair for $0\le c<\varepsilon(d,n)$.
+\end{theorem}
+\begin{corollary}
+The rows of $D_1^2$ in the Delannoy clause of Mao and Wang's Conjecture 4.1 \cite{mw} have simple roots in $(-4-3\sqrt2,-3+2\sqrt2)$. Their least and greatest roots converge to the respective endpoints as $n\to\infty$.
+\end{corollary}
+In the unweighted case, the Omega Institute explicitly registered a complete ordinary proof candidate using a divided difference, circle crossings and complementary real samples. Its released Lean result covers the source identity and central count \cite{omega,omegaPR}. We use that construction in direct characteristic coordinates. The comparison below gives $n+1$ alternating samples, handles both weights and identifies the sharp uniform threshold.
+
+For $y>0$, let $s,t$ solve $z^2-(y-1)z+dy=0$. Their sum and product give $(s-d)(t-d)=d(d+1)$. The characteristic roots of the inner row recurrence at $x=-y$ are $-s,-t$. Thus with $h(z)=(-1)^nzT_n^{(c)}(-z)$,
+\begin{equation}\label{dd}
+ P_n(y):=(-1)^nG_n(-y)=\frac{h(s)-h(t)}{s-t}.
+\end{equation}
+Indeed $T_j^{(d)}(-y)=((-s)^{j+1}-(-t)^{j+1})/(t-s)$, and summing with weights $D_c(n,j)$ gives \eqref{dd}. At $s=t$ its value is $h'(s)$ by continuity.
+
+\section{Alternating samples for \texorpdfstring{$d\ge 1/3$}{d at least 1/3}}
+Put $R=\sqrt{d(d+1)}$, $p=d+R$, and $y_\pm=1+2d\pm2R$. Observe $y_->0$ and $p\ge1$ precisely when $d\ge1/3$. The recurrence for $T_n^{(c)}$ and that for the Chebyshev polynomial $U_n$ give, for $z>0$,
+\begin{equation}\label{cheb}
+ h(z)= z(cz)^{n/2}U_n(X(z)),\qquad X(z)=\frac{z-1}{2\sqrt{cz}}.
+\end{equation}
+The map $X$ increases from $-\infty$ to $+\infty$. Since $U_n(\cos\theta)=\sin((n+1)\theta)/\sin\theta$, $h$ is monic with simple roots $0,r_1,\ldots,r_n$, where $X(r_i)=\cos(i\pi/(n+1))$. Let $k$ count the $r_i$ strictly greater than $p$.
+
+\paragraph{The circle.} For $0<\phi<\pi$ take $s=d+Re^{i\phi}$, $t=\overline{s}$. Then $y=1+2d+2R\cos\phi$ decreases from $y_+$ to $y_-$. Since $s$ is in the upper half-plane, the sum $\Psi(\phi)=\sum_{h(r)=0}\arg(s-r)$ of arguments in $(0,\pi)$ is continuous, and \eqref{dd} has sign $\operatorname{sgn}\sin\Psi(\phi)$. The initial phase is $k\pi$, or $(k+1/2)\pi$ if $p$ is a root. The final phase is $(n+1)\pi$ since $d-R<0$. We can select successive interior points where the phase equals
+\[
+ (k+j+3/4)\pi,\qquad 0\le j\le n-k.
+\]
+Continuity gives each next crossing after the preceding one. In order of decreasing $y$, these signs are $(-1)^{k+j}$. In particular the largest of the sampled $y$ has sign $(-1)^k$.
+
+\paragraph{The positive real branch.} If $k>0$, take $s>p$ and $t=d+d(d+1)/(s-d)$. Then $0<t<s$, $y=1+s+t$ increases strictly with $s$, and $st=dy>dy_+=p^2\ge1$. Write $s_j$ for the points with
+\[
+ X(s_j)=\cos\!\left(\frac{(j+1/2)\pi}{n+1}\right),\qquad 0\le j<k.
+\]
+All are strictly above $p$ because $s_j>r_{j+1}>p$. At these points $X(s_j)>0$. Monotonicity gives $X(t)<X(s)$, and
+\[
+ X(s)+X(t)=\frac{\sqrt{s}+\sqrt{t}}{2\sqrt c}\left(1-\frac1{\sqrt{st}}\right)>0.
+\]
+Consequently $|X(t)|<X(s)<1$. In \eqref{cheb} the sine in the numerator is $(-1)^j$ at $s_j$; at $t$ its absolute value is at most one. Also $\sqrt{1-X(t)^2}>\sqrt{1-X(s_j)^2}$ and $t^{1+n/2}<s_j^{1+n/2}$. Hence $|h(t)|<|h(s_j)|$ and $P_n(y)$ has sign $(-1)^j$. As $y$ decreases, the real-branch samples appear in order $j=0,\ldots,k-1$. Their last sign is opposite to the first circle sign. Together there are $n+1$ alternating signs at positive, distinct arguments, giving $n$ distinct roots of $P_n$. For $k=0$ the circle samples alone give this count. This proves the first assertion.
+
+In the ordinary square $p=1+\sqrt2$. The largest possible real-branch sample has $s<X^{-1}(1)=3+2\sqrt2$. Since $y=s(s+1)/(s-1)$ increases for $s>p$, its value is below $4+3\sqrt2$. Circle samples satisfy $3-2\sqrt2<y<3+2\sqrt2$. The strict enclosures of the roots between the samples give the asserted enclosure.
+
+The first two real samples exist for all sufficiently large $n$ and both approach $s=3+2\sqrt2$, since their angles tend to zero. They trap a root with $y\to4+3\sqrt2$. For the opposite end fix $\phi_0<\pi$ close enough to $\pi$ that $\Re s(\phi_0)<0$. Each root $r$ of $h$ lies in $[0,3+2\sqrt2]$. At $s=s(\phi_0)$ each phase deficit $\pi-\arg(s-r)$ is at least $\arctan(\Im s/(3+2\sqrt2-\Re s))>0$. The difference $(n+1)\pi-\Psi(\phi_0)$ therefore tends to infinity. Two opposite-sign crossings occur in $(\phi_0,\pi)$ for all large $n$. Letting $\phi_0\uparrow\pi$ traps the least positive $y$ at its limiting value $3-2\sqrt2$.
+
+\section{Why the threshold is sharp}
+Fix $0<d<1/3$. Then $d<p<1$, $R<1-d$ and
+\[
+ \alpha=\arcsin\!\left(\frac{R}{1-d}\right)<\frac\pi2.
+\]
+At $c=0$ the first row polynomial is $(1+x)^n$. For the purpose of counting zeros we can drop the factor $(-1)^n$ in \eqref{dd} and take $h(z)=z(1-z)^n$. Choose any odd $n$ satisfying
+\begin{equation}\label{nbound}
+ (n+1)d>1,\qquad 2(n\alpha/\pi+1)<n.
+\end{equation}
+Both conditions hold for all sufficiently large odd $n$.
+
+\paragraph{Outside the circle interval.} For $0<y<y_-$ both $s,t$ are negative. There $h'(z)=(1-z)^{n-1}(1-(n+1)z)>0$. For $y>y_+$ choose $s>p$ and $d<t<p<1$. On $[d,1)$, $h$ is strictly decreasing by \eqref{nbound}. Thus $h(s)<h(t)$ if $s<1$. If $s\ge1$, then $h(s)\le0<h(t)$ by oddness of $n$. At either endpoint $y_\pm$, the repeated root $d\pm R$ is a point with $h'\ne0$. Finally $G_n(x)>0$ for $x\ge0$. Hence every real zero has $y\in(y_-,y_+)$.
+
+\paragraph{Counting with multiplicity.} Again set $s=d+Re^{i\phi}$. Use the continuous phase
+\[
+ \Phi(\phi)=\arg s+n\arg(1-s),\qquad 0<\phi<\pi,
+\]
+where $\arg s\in(0,\pi)$ and $-\alpha\le\arg(1-s)<0$. The latter bound follows from the tangent to the circle of radius $R$ centered at $1-d>R$. Thus $-n\alpha<\Phi<\pi$. Zeros correspond to integer multiples of $\pi$. To bound how often a level can occur, differentiate to obtain
+\begin{equation}\label{derivative}
+ \Phi'=\frac12+\frac{d}{2|s|^2}
+       +n\left(\frac12+\frac{3d-1}{2|s-1|^2}\right).
+\end{equation}
+For example the angular derivative of $\arg(s-b)$ is $1/2+(R^2-(d-b)^2)/(2|s-b|^2)$; a constant change of phase gives the same derivative for $1-s$. Here $|s|^2$ strictly decreases with negative derivative, whereas $|s-1|^2$ increases with positive derivative in the open arc. Since $3d-1<0$, \eqref{derivative} gives $\Phi''>0$ throughout. Each integer level occurs at most twice counted with multiplicity. A tangency has order exactly two. In transferring multiplicities to $G_n$, both $dy/d\phi$ and the factor $|h(s)|/\operatorname{Im}s$ in the divided difference are nonzero in the open arc.
+
+There are at most $\lfloor n\alpha/\pi\rfloor+1$ such levels. By \eqref{nbound}, the total number of real zeros, with multiplicity, is strictly smaller than $n$. A nonreal zero at $c=0$ has a closed disk about it disjoint from the real axis and with no zero on its boundary. Continuity of coefficients and Rouch\'e's theorem preserve the number of zeros in that disk for all sufficiently small $c>0$. This proves the converse in Theorem~\ref{main}. At $d=0$ the product gives $G_n(x)=T_n^{(c)}(1+x)$ directly, explaining the restriction $d>0$ in the threshold statement.
+
+\paragraph{A cubic witness.} With $c=d=1/10$ ordinary matrix multiplication gives
+\[
+ 25G_3(x)=25x^3+160x^2+328x+210.
+\]
+Its discriminant is $-72300$, so even a weighted square can have a nonreal pair. The universal converse above applies arbitrarily close to $d=1/3$ from below.
+
+\begin{thebibliography}{9}\small
+\bibitem{mw} J. Mao and L. Wang, \emph{The Narayana transformation}, Conjecture 4.1, \href{https://arxiv.org/abs/2607.01572}{arXiv:2607.01572v1}, 2026.
+\bibitem{omega} The Omega Institute, \emph{Mao--Wang Delannoy matrix-square rows}, \href{https://github.com/the-omega-institute/trureturing/issues/15051}{trureturing issue 15051}, October 2026.
+\bibitem{omegaPR} The Omega Institute, \emph{Freeze the Delannoy upper-circle actual-root partial}, \href{https://github.com/the-omega-institute/trureturing/pull/15117}{trureturing pull request 15117}, October 2026.
+\end{thebibliography}
+\noindent\small This local research draft was developed with AI assistance. External review and a priority determination for the weighted theorem are pending.
+\end{document}
