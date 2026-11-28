@@ -7,7 +7,9 @@ of ordinary classical mathematics in Lean's standard environment. -/
 open Lean Elab Command
 run_cmd do
   let allowed := #[``propext, ``Classical.choice, ``Quot.sound]
-  for theoremName in #[``MathLab.WT.Witness.smooth_profile_approximation,
+  for theoremName in #[``MathLab.WT.Witness.matched_profile_approximation,
+      ``MathLab.WT.Witness.matched_profile_sequence, ``MathLab.WT.actual_cost_closures_equal,
+      ``MathLab.WT.Witness.smooth_profile_approximation,
       ``MathLab.WT.Witness.smooth_profile_sequence, ``MathLab.WT.smooth_simultaneous_approximation,
       ``MathLab.WT.L2Input.cost_derandomization, ``MathLab.WT.cost_derandomization,
       ``MathLab.WT.all_infima_equal, ``MathLab.WT.smooth_infimum_eq,

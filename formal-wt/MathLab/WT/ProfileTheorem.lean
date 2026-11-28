@@ -21,6 +21,7 @@ and table are in the original coordinates of the WT definition. -/
 structure SmoothProfileWitness (W : Witness v α β) (ε P : ℝ) where
   width : ℝ
   D : ℝ
+  width_lt : width < D
   length_gt : P < D
   expands : W.σ/2 ≤ D
   witness : Witness width (W.tableExcess+ε) (W.windowEnergy+ε)
@@ -49,18 +50,22 @@ theorem Witness.smoothProfile_of_realization (W : Witness v α β) (hreal : Cent
   obtain ⟨ρ,hρ,hs⟩ := W.tight.smooth_profile_pair he C.width_pos C.width_lt C.expands ha hb
     C.window_regular C.table_regular C.window_support C.table_support C.plateau C.mass C.window_cost
     C.table_cost C.even_window C.even_table C.autocorrelation C.cover C.auto_sup C.auto_l1 C.cover_sup
-  let r := min ρ (min e 1)/4
-  have hr : 0 < r := div_pos (lt_min hρ (lt_min he zero_lt_one)) (by norm_num)
+  let m := min ρ (min e 1)
+  let r := min m ((C.D-C.u)/4)/4
+  have hm : 0 < m := lt_min hρ (lt_min he zero_lt_one)
+  have hgap : 0 < (C.D-C.u)/4 := by linarith [C.width_lt]
+  have hr : 0 < r := div_pos (lt_min hm hgap) (by norm_num)
+  have h4m : 4*r ≤ m := by dsimp [r]; linarith [min_le_left m ((C.D-C.u)/4)]
+  have h4gap : 4*r ≤ (C.D-C.u)/4 := by dsimp [r]; linarith [min_le_right m ((C.D-C.u)/4)]
   have hsmall : r < min ρ (min e 1) := by
-    change min ρ (min e 1)/4 < min ρ (min e 1)
-    linarith [lt_min hρ (lt_min he zero_lt_one)]
-  have hre : 4*r ≤ e := by
-    dsimp [r]; linarith [min_le_right ρ (min e 1),min_le_left e (1:ℝ)]
-  have hr₁ : 4*r ≤ 1 := by
-    dsimp [r]; linarith [min_le_right ρ (min e 1),min_le_right e (1:ℝ)]
+    change r < m
+    linarith
+  have hre : 4*r ≤ e := h4m.trans ((min_le_right _ _).trans (min_le_left _ _))
+  have hr₁ : 4*r ≤ 1 := h4m.trans ((min_le_right _ _).trans (min_le_right _ _))
   obtain ⟨M⟩ := mollifier_exists hr
   obtain ⟨hd,S,errors⟩ := hs hr (lt_min_iff.mp hsmall).1 M
   let D := C.D-2*r
+  have width_lt : C.u+6*r < D := by dsimp [D]; linarith
   have dgt : P < D := by dsimp [D]; linarith [C.length_gt]
   have htab : S.witness.tableExcess ≤ W.tableExcess+ε := by
     have h := S.witness.tableExcess_le
@@ -78,7 +83,7 @@ theorem Witness.smoothProfile_of_realization (W : Witness v α β) (hreal : Cent
   let i : Fin S.witness.n := ⟨0,index⟩
   obtain ⟨supA,l1A,supC⟩ := errors i
   have two : 2*e ≤ ε := by dsimp [e]; linarith
-  refine ⟨⟨C.u+6*r,D,dgt,hd,O,S.deterministic,S.symmetric,S.length,i,S.smooth_window i,S.smooth_table i,
+  refine ⟨⟨C.u+6*r,D,width_lt,dgt,hd,O,S.deterministic,S.symmetric,S.length,i,S.smooth_window i,S.smooth_table i,
     fun x => (supA x).trans two,l1A.trans two,fun x => (supC x).trans two,?_,?_⟩⟩
   · have h := (supA 0).trans two
     change |conv (S.witness.w i) (rev (S.witness.w i)) 0 - W.meanAutocorr 0| ≤ ε at h
@@ -129,15 +134,14 @@ structure SmoothProfileSequence (W : Witness v α β) where
 
 /-- All three modes of convergence and both energy conclusions use one
 sequence. The covering target changes with the actual half-length. -/
-theorem Witness.profileSequence_of_realization (W : Witness v α β) (hreal : CenteredProfileRealization) :
-    Nonempty (SmoothProfileSequence W) := by
-  let Q (n : ℕ) := (W.smoothProfile_of_realization hreal (profileTolerance_pos n) n).some
+def SmoothProfileSequence.ofPairs (W : Witness v α β)
+    (Q : ∀ n : ℕ, SmoothProfileWitness W (profileTolerance n) n) : SmoothProfileSequence W := by
   have ha (n : ℕ) (x : ℝ) : |(Q n).autocorr x-W.meanAutocorr x| ≤ profileTolerance n :=
     (Q n).auto_sup x
   have hc (n : ℕ) (x : ℝ) : |(Q n).coverError x| ≤ profileTolerance n := (Q n).cover_sup x
   have hn (n : ℕ) : |(Q n).windowNormSq-W.windowEnergy| ≤ profileTolerance n := (Q n).energy_error
   have htop := tendsto_atTop_mono (fun n => (Q n).length_gt.le) tendsto_natCast_atTop_atTop
-  refine ⟨⟨Q,htop,?_,?_,?_,?_,?_⟩⟩
+  refine ⟨Q,htop,?_,?_,?_,?_,?_⟩
   · rw [Metric.tendstoUniformly_iff]
     intro e he
     filter_upwards [profileTolerance_zero.eventually_lt_const he] with n h
@@ -156,6 +160,11 @@ theorem Witness.profileSequence_of_realization (W : Witness v α β) (hreal : Ce
     have hh := limsup_le_limsup (Eventually.of_forall (fun n => (Q n).table_error))
       (isCoboundedUnder_le_of_le atTop (fun n => (Q n).tableSurplus_pos.le)) ht.isBoundedUnder_le
     exact hh.trans_eq ht.limsup_eq
+
+theorem Witness.profileSequence_of_realization (W : Witness v α β) (hreal : CenteredProfileRealization) :
+    Nonempty (SmoothProfileSequence W) :=
+  ⟨SmoothProfileSequence.ofPairs W (fun n =>
+    (W.smoothProfile_of_realization hreal (profileTolerance_pos n) n).some)⟩
 
 end
 end MathLab.WT

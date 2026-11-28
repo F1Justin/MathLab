@@ -5,6 +5,9 @@ import MathLab.WT.Certificate
 import MathLab.WT.SmoothCorollary
 import MathLab.WT.ProfileTheorem
 import MathLab.WT.L2Input
+import MathLab.WT.TableEnergyFill
+import MathLab.WT.MatchedProfiles
+import MathLab.WT.CostPairs
 
 /-! Unconditional theorems for Carter, O'Bryant and Tao, Conjecture 7.1.
 The finite example is linked to its exact rational arrays in WT.Certificate. -/
@@ -14,11 +17,25 @@ theorem Witness.smooth_profile_approximation {v α β : ℝ} (W : Witness v α �
     {ε : ℝ} (hε : 0 < ε) (P : ℝ) : Nonempty (SmoothProfileWitness W ε P) :=
   W.smoothProfile_of_realization centered_profile_realization hε P
 
-/-- Theorem 1 of the manuscript, with both profiles and both energy limits
-on one sequence of smooth, compactly supported, single-atom WT witnesses. -/
 theorem Witness.smooth_profile_sequence {v α β : ℝ} (W : Witness v α β) :
     Nonempty (SmoothProfileSequence W) :=
   W.profileSequence_of_realization centered_profile_realization
+
+theorem Witness.matched_profile_approximation {v α β : ℝ} (W : Witness v α β)
+    {ε : ℝ} (hε : 0 < ε) (P : ℝ) :
+    ∃ Q : SmoothProfileWitness W ε P, W.tableExcess ≤ Q.tableSurplus :=
+  W.matchedProfile_of_realization centered_profile_realization fill_profile_energy hε P
+
+/-- Theorem 1. One sequence of genuine smooth, deterministic, symmetric pairs
+converges to both correlation profiles and to both actual input costs. -/
+theorem Witness.matched_profile_sequence {v α β : ℝ} (W : Witness v α β) :
+    Nonempty (MatchedProfileSequence W) :=
+  W.matchedProfileSequence_of_realization centered_profile_realization fill_profile_energy
+
+/-- Actual costs are the table excess and window energy of the same witness. -/
+theorem actual_cost_closures_equal :
+    closure actualCostPairs = closure smoothSymmetricCostPairs :=
+  cost_pair_closures_of_matched (fun W => W.matched_profile_sequence)
 
 theorem cost_derandomization {v α β : ℝ} (W : Witness v α β) {ε : ℝ} (hε : 0 < ε) :
     ∃ v' : ℝ, ∃ V : Witness v' (α+ε) (β+ε), V.Deterministic ∧ V.Symmetric :=

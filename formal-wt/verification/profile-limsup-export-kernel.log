@@ -1,0 +1,6 @@
+Lean default kernel accepts the solution
+leanexport 0, leanchecker 0, seconds 62.66
+MathLab.WT.Witness.smooth_profile_approximation
+MathLab.WT.Witness.smooth_profile_sequence
+MathLab.WT.smooth_infimum_eq
+MathLab.WT.Witness.universal_product_lower

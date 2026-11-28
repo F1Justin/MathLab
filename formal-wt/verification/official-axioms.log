@@ -1,3 +1,6 @@
+MathLab.WT.Witness.matched_profile_approximation depends on [propext, Classical.choice, Quot.sound]
+MathLab.WT.Witness.matched_profile_sequence depends on [propext, Classical.choice, Quot.sound]
+MathLab.WT.actual_cost_closures_equal depends on [propext, Classical.choice, Quot.sound]
 MathLab.WT.Witness.smooth_profile_approximation depends on [propext, Classical.choice, Quot.sound]
 MathLab.WT.Witness.smooth_profile_sequence depends on [propext, Classical.choice, Quot.sound]
 MathLab.WT.smooth_simultaneous_approximation depends on [propext, Classical.choice, Quot.sound]

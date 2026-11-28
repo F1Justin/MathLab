@@ -1,17 +1,21 @@
-@MathLab.WT.Witness.smooth_profile_approximation : ∀ {v α β : ℝ} (W : MathLab.WT.Witness v α β) {ε : ℝ},
-  0 < ε → ∀ (P : ℝ), Nonempty (MathLab.WT.SmoothProfileWitness W ε P)
-@MathLab.WT.Witness.smooth_profile_sequence : ∀ {v α β : ℝ} (W : MathLab.WT.Witness v α β),
-  Nonempty (MathLab.WT.SmoothProfileSequence W)
-MathLab.WT.smooth_infimum_eq : sInf MathLab.WT.smoothValues = MathLab.WT.infimum MathLab.WT.Kind.unrestricted
-@MathLab.WT.Witness.universal_product_lower : ∀ {v α β : ℝ} (W : MathLab.WT.Witness v α β), 495709 / 562500 ≤ α * β
-MathLab.WT.Certificate.certified_witness : ∃ W,
-  W.Deterministic ∧
-    W.Symmetric ∧
-      W.σ = 1056 ∧
-        MathLab.WT.objective (MathLab.WT.Certificate.alphaGrid / 20) (20 * MathLab.WT.Certificate.betaGrid) <
-          188606746 / 100000000
-'MathLab.WT.Witness.smooth_profile_approximation' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MathLab.WT.Witness.smooth_profile_sequence' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MathLab.WT.smooth_infimum_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MathLab.WT.Witness.universal_product_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MathLab.WT.Certificate.certified_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+@MathLab.WT.Witness.matched_profile_approximation : ∀ {v α β : ℝ} (W : MathLab.WT.Witness v α β) {ε : ℝ},
+  0 < ε → ∀ (P : ℝ), ∃ Q, W.tableExcess ≤ Q.tableSurplus
+@MathLab.WT.Witness.matched_profile_sequence : ∀ {v α β : ℝ} (W : MathLab.WT.Witness v α β),
+  Nonempty (MathLab.WT.MatchedProfileSequence W)
+MathLab.WT.actual_cost_closures_equal : closure MathLab.WT.actualCostPairs = closure MathLab.WT.smoothSymmetricCostPairs
+structure MathLab.WT.MatchedProfileSequence {v α β : ℝ} (W : MathLab.WT.Witness v α β) : Type
+number of parameters: 4
+fields:
+  MathLab.WT.MatchedProfileSequence.sequence : MathLab.WT.SmoothProfileSequence W
+  MathLab.WT.MatchedProfileSequence.table_energy_tendsto : Filter.Tendsto (fun n => (self.sequence.pair n).tableSurplus)
+      Filter.atTop (nhds W.tableExcess)
+constructor:
+  MathLab.WT.MatchedProfileSequence.mk {v α β : ℝ} {W : MathLab.WT.Witness v α β}
+    (sequence : MathLab.WT.SmoothProfileSequence W)
+    (table_energy_tendsto :
+      Filter.Tendsto (fun n => (sequence.pair n).tableSurplus) Filter.atTop (nhds W.tableExcess)) :
+    MathLab.WT.MatchedProfileSequence W
+def MathLab.WT.actualCostPairs : Set (ℝ × ℝ) :=
+{z | ∃ v α β W, z = (W.tableExcess, W.windowEnergy)}
+def MathLab.WT.smoothSymmetricCostPairs : Set (ℝ × ℝ) :=
+{z | ∃ v α β W, W.Deterministic ∧ W.Symmetric ∧ W.SmoothCompact ∧ z = (W.tableExcess, W.windowEnergy)}

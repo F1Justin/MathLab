@@ -4,10 +4,11 @@
 \usepackage[margin=1.02in]{geometry}
 \usepackage{xcolor}
 \usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue!55!black]{hyperref}
-\hypersetup{pdftitle={A single even signed window for WT witnesses},pdfauthor={MathLab}}
+\hypersetup{pdftitle={A single even signed window for WT witnesses},pdfauthor={MathLab working manuscript}}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
 \newcommand{\R}{\mathbb R}
 \newcommand{\E}{\mathbb E}
 \newcommand{\ind}{\mathbf1}
@@ -20,7 +21,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-For every finite window--table witness of Carter, O'Bryant and Tao we construct one smooth compactly supported pair, each function even about its prescribed centre. The window autocorrelation approximates the input mean autocorrelation in both \(L^1\) and the uniform norm. The covering convolution approximates the reflected mean covering uniformly after the table has been extended to the output length. The covering and autocorrelation inequalities hold pointwise, and both energy budgets are respected up to an arbitrarily small additive error. Combined with the sharp WT bound of Akwei and Williams, this gives \(4\sqrt2/3\) for the infimum over the intersection of the deterministic and symmetric classes. Their positive gap for a single symmetric nonnegative window makes the use of signed windows essential.
+For every finite window--table witness of Carter, O'Bryant and Tao we construct one smooth compactly supported pair, each function even about its prescribed centre. The window autocorrelation approximates the input mean autocorrelation in both \(L^1\) and the uniform norm. After the tables have been extended to the output length, the covering convolution uniformly approximates the average of the input mean covering and its reflection. The covering and autocorrelation inequalities hold pointwise, and both actual costs converge to those of the input law. Combined with the sharp WT bound of Akwei and Williams, this gives \(4\sqrt2/3\) for the infimum over the intersection of the deterministic and symmetric classes. For two-cell inputs with common WT parameters, a uniform support-radius guarantee at autocorrelation error \(\epsilon\) must grow at least as \(c\epsilon^{-1/2}\).
 \end{abstract}
 
 \section{The question}
@@ -43,34 +44,17 @@ For every input law there exist \(D_j\to\infty\), declared widths \(v_j\le D_j\)
  &\norm{V_j*V_j-A}_1+\norm{V_j*V_j-A}_\infty\longrightarrow0,\\
  &\norm{V_j*T_j-C_{D_j}^+}_\infty\longrightarrow0,\\
  &\norm{V_j}_2^2\longrightarrow B,\qquad
- \limsup_j\bigl(\norm{T_j}_2^2-2D_j\bigr)\le H .
+ \norm{T_j}_2^2-2D_j\longrightarrow H .
 \end{align*}
 \end{theorem}
 In particular, for each \(\epsilon>0\) the \emph{same} pair meets the budgets \(\beta+\epsilon,\alpha+\epsilon\). Width does not occur in the objective of Conjecture~7.1. It does occur in the threshold \(4(1+v\sqrt{\beta/\alpha})^2\) in \cite[Theorem 2.3]{cot}.
 
 \begin{corollary}\label{cor:intersection}
-The infimum over pairs which are both deterministic and symmetric equals the unrestricted infimum. It remains the same with both functions smooth. Its value is \(4\sqrt2/3\).
+The attainable cost pairs \((H,B)\) have the same closure for unrestricted WT witnesses and for smooth deterministic symmetric pairs. The infimum of \(2\sqrt{\alpha\beta}\) in either class is \(4\sqrt2/3\).
 \end{corollary}
 \begin{proof}
-Apply the two budget bounds to each unrestricted input and then let \(\epsilon\downarrow0\). Inclusion gives the reverse inequality. The numerical value follows from \cite{aw}.
+Theorem~\ref{th:main} puts each unrestricted cost pair in the closure of the smooth pairs. Inclusion gives the reverse containment. Each unrestricted input is approximated with both declared budgets increased by at most \(\epsilon\). Continuity of the objective gives equality of the infima, whose numerical value follows from \cite{aw}.
 \end{proof}
-
-An exact compact even square root need not exist. For example, take
-\(w=(2\ind_{[0,1)}+\ind_{[1,2)})/3\) with \(v=2,\ \sigma=4\) and \(t=\ind_{[-2,4]}\). The entire extension of its autocorrelation transform is
-\[
- \left(\frac{\sin(z/2)}{z/2}\right)^2\frac{5+4\cos z}{9}.
-\]
-Its zero at \(\pi+i\log2\) is simple. The transform of the autocorrelation of any compactly supported real even window is an entire square, so it cannot have this zero. This is the one-dimensional obstruction in the convolution-root criterion of Ehm, Gneiting and Richards \cite[Theorem 2.1(d) and Example 2.3]{egr}. Phillips and Schmidt give an \(L^1\) approximation theorem using convolution squares of \(L^2\) factors \cite[Corollary 5]{ps}.
-
-The obstruction also quantifies the width cost for this fixed input. Write \(z_0=\pi+i\log2\). For \(0<r<1/2\) the disk about \(z_0\) of radius \(r\) contains exactly that simple zero; put \(m_r=\min_{|z-z_0|=r}|\widehat A(z)|>0\). For any real even window \(V\) supported in \([-R,R]\), let \(L=\max(2,2R)\) and \(\eta=\norm{V*V-A}_\infty\). The difference of the autocorrelations is supported in \([-L,L]\). On the circle its Fourier transform has modulus at most \(2L\eta\exp((\log2+r)L)\). If this were smaller than \(m_r\), Rouch\'e's theorem would give exactly one zero, counted with multiplicity, for the entire square \(\widehat V^2\) inside the disk. Hence
-\[
- \eta\ge \frac{m_r}{2L}\exp\bigl(-(\log2+r)L\bigr).
-\]
-For any sequence with \(\eta_j\to0\), this forces \(R_j\to\infty\). Taking logarithms and then letting \(r\downarrow0\) gives
-\[
- \liminf_{j\to\infty}\frac{R_j}{\log(1/\eta_j)}\ge\frac1{2\log2}.
-\]
-Akwei and Williams measure the declared, normalized width as the WT \emph{objective} approaches its optimum \cite{aw}.
 
 \section{Spectral compression}
 Pair each centred input atom with its joint reflection at half its probability. This gives \(C_L^+\) and preserves \(A,B,H\). For a fixed \(0<\theta<1\), give total probability \(\theta\) to the window
@@ -167,18 +151,61 @@ For the unperturbed reflected law its left-end covering profile \(F\), with the 
 \]
 Consequently smoothing by \(\phi*\phi\) and changing \(L\) to \(D\) together cost at most \(4\omega_F(2\delta)\) in the uniform norm, where \(\omega_F\) denotes the modulus of continuity. The additional perturbation from the reference law costs \(O(\theta)\). The compactly supported continuous \(A\) is approached by \((\phi*\phi)*A\) in both \(L^1\) and the uniform norm. Also \(B=A(0)\) and \(\norm V_2^2=(V*V)(0)\).
 
-Choose \(\theta,\delta\downarrow0\), and for each choice take \(M\) sufficiently large that all its error terms tend to zero along the resulting sequence, with \(M\to\infty\). Equations \eqref{eq:point}--\eqref{eq:finalbudget} give every assertion. Translating the two functions to centres \(v'/2\) and \((2D-v')/2\) recovers the original coordinates.
+To match the table excess in both directions, write \(h=\norm T_2^2-2D\). Choose an even \(\psi\in\cc\) supported on \([-1,1]\) with \(\norm\psi_2=1\), and put \(x_0=L+11M/2\). For large \(M\), the points \(\pm x_0\) lie outside \(\supp T\), inside the allowed table support, and more than \(M\) from \([-D,D]\). At each point add a translate of
+\[
+ \sqrt{(H-h)_+/2}\,\lambda^{-1/2}\psi(x/\lambda).
+\]
+For sufficiently small \(\lambda>0\) the two bumps have disjoint supports, avoid \(T\), and leave the covering on \([-D,D]\) unchanged. The new table excess is exactly \(\max(H,h)\). Their combined \(L^1\) norm is \(O_{M,\theta,\delta}(\sqrt\lambda)\), so convolution with the bounded window changes the cover uniformly by at most \(M^{-1}\) after reducing \(\lambda\). Each new table is smooth and compactly supported.
+
+Choose \(\theta,\delta\downarrow0\), and for each choice take \(M\) sufficiently large that all its error terms tend to zero along the resulting sequence, with \(M\to\infty\). Equation \eqref{eq:finalbudget} and \(H_\theta\to H\) give \(\max(H,h)\to H\). Together with the preceding profile estimates this proves the theorem. Translating the two functions to centres \(v'/2\) and \((2D-v')/2\) recovers the original coordinates.
 \end{proof}
+
+\section{How wide must an approximating window be?}
+Write \(B_V=V*V\) for a real even window supported in \([-R,R]\). Call \(V\) admissible here if \(V\in L^2\), \(\int V=1\), and \(B_V\ge0\). Every centred deterministic symmetric WT window meets these conditions.
+
+\begin{proposition}\label{prop:width}
+There is a constant \(c>0\) such that, for every \(R\ge1\), some nonnegative two-cell WT input with the same parameters \((v,\sigma,\alpha,\beta)=(2,4,2,1)\) satisfies
+\(\norm{B_V-A}_\infty\ge cR^{-2}\) for every admissible \(V\) of radius at most \(R\).
+Moreover, for each \(0<q<1/2\) there is a single fixed nonnegative WT input for which uniform error at most \(\epsilon\) requires radius at least \(c_q\epsilon^{-q}\) for sufficiently small \(\epsilon\).
+\end{proposition}
+
+\begin{proof}
+Let the input autocorrelation \(A\) be supported in \([-v,v]\), set \(L=\max(v,2R)\), and write \(\eta=\norm{B_V-A}_\infty\). On a circle \(\Gamma\) enclosing one simple zero of \(\widehat A\) and no other zeros, put \(m=\min_\Gamma|\widehat A|>0\) and \(b=\max_\Gamma|\operatorname{Im}z|\). Since \(\widehat B_V=\widehat V^2\) is an entire square, Rouch\'e's theorem and the support estimate give
+\[
+ m\le\max_\Gamma|\widehat B_V-\widehat A|\le e^{Lb}\norm{B_V-A}_1 .
+\]
+Two nonnegative autocorrelations of mass one satisfy
+\(\norm{B_V-A}_1=2\int_{-v}^{v}(A-B_V)_+\le4v\eta\).
+
+For \(a>0\), take \(w=(e^a\ind_{[0,1)}+\ind_{[1,2)})/(1+e^a)\) and \(t=\ind_{[-2,4]}\). They cover \([0,4]\) with value one and satisfy the stated budgets. In the convention \(\operatorname{sinc}z=\sin(z)/z\),
+\[
+ \widehat A(z)=\operatorname{sinc}^2(z/2)\,\frac{\cosh a+\cos z}{\cosh a+1}.
+\]
+Set \(a=1/(2R)\). The circle \(|z-\pi-ia|=a/2\) encloses just the zero \(\pi+ia\). There \(m\ge c_0a^2\) with an absolute \(c_0>0\). Indeed, for \(u=z-\pi\) the numerator factors as \(2\sin((u-ia)/2)\sin((u+ia)/2)\). The distances \(|u-ia|,|u+ia|\) are at least \(a/2,3a/2\), and both sine arguments stay in a fixed disk about zero of radius less than one, where \(|\sin z|\ge c_1|z|\). The sinc factor is uniformly bounded away from zero. Now \(Lb\le3/2\), proving the first assertion.
+
+For the fixed-input assertion choose an even integer \(k\ge2\) and let
+\[
+ f(x)=(1+x^k(1-x)^{k+1})\ind_{[0,1]}(x),\qquad w=f/\!\int f .
+\]
+With \(t=\ind_{[-1,2]}\) this is a strong WT input, for instance with \((v,\sigma,\alpha,\beta)=(1,2,1,2)\). Write \(N=2\pi n,\ z=N+h/N^k\) and \(d=k!\,i^{-k}\in\R\setminus\{0\}\). Integrating the polynomial on \([0,1]\) by parts \(k+2\) times gives, uniformly for bounded complex \(h\) as \(n\to\infty\),
+\[
+ N^k(iz)\widehat f(z)=ih+d+O_k(N^{-1}),\qquad
+ N^k(-iz)\widehat f(-z)=-ih+d+O_k(N^{-1}).
+\]
+The endpoint values are one, the derivatives of orders \(1,\ldots,k-1\) vanish at both ends, and the \(k\)-th derivatives at zero and one are \(k!\) and zero. In the disk bounded by \(|h-id|=|d|/2\), the first limiting affine function has one zero and the second has none. Rouch\'e's theorem gives those counts for the two factors for all large \(n\). Their product, divided by \((\int f)^2\), is \(\widehat A(z)\). On the corresponding circle in \(z\) it has modulus at least \(c_k N^{-2k-2}\). Take \(n=\lceil R^{1/k}/(2\pi)\rceil\). Then \(Lb=O_k(1)\) and \(N\asymp R^{1/k}\), so the initial estimate yields \(\eta\ge c'_k R^{-2-2/k}\) for all sufficiently large \(R\). By inclusion of support classes, sufficiently small error forces \(R\) past this threshold. Choose \(k\) with \(k/(2k+2)>q\).
+\end{proof}
+
+Already the fixed choice \(a=\log2\) gives a two-cell window with masses \(2/3,1/3\) and a simple zero at \(\pi+i\log2\). A circle of any fixed radius \(0<r<1/2\) about that zero gives \(\liminf_{\eta\to0}R/\log(1/\eta)\ge1/(2\log2)\) by the same estimate, first with fixed \(r\) and then with \(r\downarrow0\). The criterion for exact compact even roots, with examples including the normalized limiting ramp autocorrelation of \cite{aw}, is due to Ehm, Gneiting and Richards \cite[Theorem 2.1(d), Examples 2.3--2.4 and \S3.5]{egr}. Phillips and Schmidt obtain \(L^1\) approximation by convolution squares of general \(L^2\) factors \cite[Corollary 5]{ps}. Akwei and Williams' logarithmic width theorem measures normalized declared width against error in the WT objective \cite{aw}.
 
 \section{A finite example}
 The accompanying integer data specify one signed, even pair of step functions on cells of length \(1/20\). It has \(v=6269/20\) and \(\sigma=1056\). The following decimals are rounded for display.
 \begin{center}
-\begin{tabular}{lrrr}
+\small\begin{tabular}{lrrr}
 \toprule
 Witness & \(\alpha\) & \(\beta\) & \(2\sqrt{\alpha\beta}\)\\
 \midrule
-Six atoms of \cite[Appendix A.3]{cot} & 0.944813044 & 0.941258026 & 1.886067720\\
-One even signed pair & 0.944812777 & 0.941258026 & 1.886067454\\
+Six atoms of \cite[Appendix A.3]{cot} & 0.944813043789 & 0.941258026242 & 1.886067719637\\
+One even signed pair & 0.944812777399 & 0.941258026228 & 1.886067453735\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -189,7 +216,7 @@ For verification let \(W_j\) denote the mass of window cell \(j\), \(T_j\) the t
  \min_{|hk|\le\sigma/2}(w*t)(hk)=1,\qquad
  4\alpha\beta<(188606746/10^8)^2 .
 \]
-The accompanying independent construction starts from the authors' six rational atoms \cite{data}. It uses a fixed-point Fourier transform for discovery, then checks the resulting distinct pair by exact integer arithmetic. The proof of Theorem~\ref{th:main} does not use either finite example.
+The accompanying independent construction starts from the authors' six rational atoms \cite{data}. A fixed-point Fourier transform supplies a candidate. Exact integer arithmetic certifies a distinct pair of the same width at \(\sigma=680\), with objective \(1.8860674537416310\ldots\) and minimum covering one. The proof of Theorem~\ref{th:main} does not use either finite example.
 
 \section*{An elementary dual certificate}
 For completeness we give a shorter certificate for a weaker universal lower bound. It uses only autocorrelation positivity and a compact test measure. The sharper floor \(8/9\) for the product is due to Akwei and Williams \cite{aw}.
@@ -207,7 +234,7 @@ Pairing the cover with \(\mu\) gives
 Fubini gives
 \(\E\norm{\mu*\widetilde w}_2^2=\iint A(x-y)\,d\mu(x)d\mu(y)\).
 For \(|s|\le v\), the length of overlap of the two interval terms, shifted by \(s\), is
-\(\sigma-l(X+X')-\max(|s|,l|X-X'|)\), where \(X'\) is an independent copy. Each interval--endpoint interaction contributes \(b\,\E\int_{lX}^\infty A(s)\,ds\), in four orders and positions combined. The two unequal endpoints have zero interaction. Expanding \(\E\norm{t-\mu*\widetilde w}_2^2\ge0\) and using \(A(0)\le1\) therefore gives
+\(\sigma-l(X+X')-\max(|s|,l|X-X'|)\), where \(X'\) is an independent copy. There are four equal interval--endpoint terms, each contributing \(b\,\E\int_{lX}^\infty A(s)\,ds\). The two unequal endpoints have zero interaction. Expanding \(\E\norm{t-\mu*\widetilde w}_2^2\ge0\) and using \(A(0)\le1\) therefore gives
 \[
  a\ge\int A(s)P(|s|/l)\,ds,\quad
  P(r)=l\bigl(\E\max(r,|X-X'|)-2\E X\bigr)
@@ -225,15 +252,13 @@ Since \(\E\max(r,|X-X'|)=1-\int_r^1F(y)\,dy\), one obtains
 \[
  P(r)=\frac{991418+r(4032r^4+1365r^2-5940r+2625)}{1125000}.
 \]
-The tangent to \(r^4\) at \(5/8\) bounds the quartic in parentheses below by \(15(5824r^2-8544r+3325)/64>0\). For \(r\ge1\), \(P\) continues affinely with positive slope \(l\). Thus \(P\ge P(0)=495709/562500\). Integrating against \(A\ge0\) of mass one proves the claim.
+Using the tangent line to \(r^4\) at \(5/8\), the quartic in parentheses is at least \(15(5824r^2-8544r+3325)/64>0\). For \(r\ge1\), \(P\) continues affinely with positive slope \(l\). Thus \(P\ge P(0)=495709/562500\). Integrating against \(A\ge0\) of mass one proves the claim.
 \end{proof}
 
 \paragraph{Provenance.}
 This research manuscript was developed with AI systems that constructed the proofs, wrote the formalization and performed the computations under human research direction. An independent Lean~4 proof establishes Theorem~\ref{th:main}, the equality of infima, the elementary lower bound and the original integer witness. The identification of the sharp value uses the analytic theorem of Akwei and Williams \cite{aw}.
 
-\small
 \begin{thebibliography}{9}
-\setlength{\itemsep}{2pt}
 \bibitem{aw} J. Akwei and A. Williams, \emph{The sharp WT-triple bound: stability and witness width}, v05, 17 November 2026, with verification supplement. \href{https://doi.org/10.5281/zenodo.24326518}{Zenodo, 10.5281/zenodo.24326518}.
 \bibitem{cot} D. Carter, K. O'Bryant and T. Tao, \emph{On the diameter and distribution of Sidon sets}, 26 October 2026. \href{https://arxiv.org/abs/2610.36207v1}{arXiv:2610.36207v1}.
 \bibitem{data} D. Carter, K. O'Bryant and T. Tao, \emph{Sidon-error}, rational input, directory \texttt{asymptotic/}, revision \texttt{ff5b032}. \href{https://github.com/dcartermath/sidon-error/tree/ff5b032fc3745140549777a96a9ec3ba7f8dd954/asymptotic}{Authors' repository}.

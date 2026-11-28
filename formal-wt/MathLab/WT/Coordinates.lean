@@ -113,7 +113,7 @@ theorem Witness.center_plateau {v α β} (W : Witness v α β) (i : Fin W.n) {x 
 
 /-- Assemble a single pair from centred data. Evenness, exact cover and sign
 of the autocorrelation are assumptions on pointwise representatives. -/
-theorem ofCentered {v D α β : ℝ} {w t : ℝ → ℝ}
+theorem ofCenteredPair {v D α β : ℝ} {w t : ℝ → ℝ}
     (hv : 0 < v) (hD : v ≤ D) (ha : 0 < α) (hb : 0 < β)
     (hw : Regular w) (ht : Regular t)
     (ws : Function.support w ⊆ Icc (-v/2) (v/2))
@@ -122,7 +122,8 @@ theorem ofCentered {v D α β : ℝ} {w t : ℝ → ℝ}
     (wm : ∫ x, w x = 1) (wc : energy w ≤ β) (tc : energy t ≤ 2*D+α)
     (we : ∀ x, w (-x) = w x) (te : ∀ x, t (-x) = t x)
     (ac : ∀ x, 0 ≤ conv w w x) (cov : ∀ x, |x| < D → 1 ≤ conv w t x) :
-    ∃ W : Witness v α β, W.Deterministic ∧ W.Symmetric := by
+    ∃ W : Witness v α β, W.Deterministic ∧ W.Symmetric ∧ W.σ=2*D ∧
+      (∀ i, W.w i=shift (v/2) w) ∧ (∀ i, W.t i=shift (D-v/2) t) := by
   let W : Witness v α β := {
     n := 1, σ := 2*D, p := fun _ => 1,
     w := fun _ => shift (v/2) w, t := fun _ => shift (D-v/2) t
@@ -141,12 +142,25 @@ theorem ofCentered {v D α β : ℝ} {w t : ℝ → ℝ}
       simp only [expectation, Fin.sum_univ_one, one_mul, conv_shift]
       apply cov
       exact abs_lt.mpr ⟨by linarith [h.1], by linarith [h.2]⟩ }
-  refine ⟨W, rfl, ?_⟩
+  refine ⟨W,rfl,?_,rfl,fun _ => rfl,fun _ => rfl⟩
   intro i x
   change w (v-x-v/2) = w (x-v/2) ∧ t (2*D-v-x-(D-v/2)) = t (x-(D-v/2))
   rw [show v-x-v/2= -(x-v/2) by ring, show 2*D-v-x-(D-v/2)= -(x-(D-v/2)) by ring,
     we, te]
   trivial
+
+theorem ofCentered {v D α β : ℝ} {w t : ℝ → ℝ}
+    (hv : 0 < v) (hD : v ≤ D) (ha : 0 < α) (hb : 0 < β)
+    (hw : Regular w) (ht : Regular t)
+    (ws : Function.support w ⊆ Icc (-v/2) (v/2))
+    (ts : Function.support t ⊆ Icc (-D-v/2) (D+v/2))
+    (tp : ∀ x, |x| < D-v/2 → t x = 1)
+    (wm : ∫ x, w x = 1) (wc : energy w ≤ β) (tc : energy t ≤ 2*D+α)
+    (we : ∀ x, w (-x) = w x) (te : ∀ x, t (-x) = t x)
+    (ac : ∀ x, 0 ≤ conv w w x) (cov : ∀ x, |x| < D → 1 ≤ conv w t x) :
+    ∃ W : Witness v α β, W.Deterministic ∧ W.Symmetric := by
+  obtain ⟨W,hd,hs,_,_,_⟩ := ofCenteredPair hv hD ha hb hw ht ws ts tp wm wc tc we te ac cov
+  exact ⟨W,hd,hs⟩
 
 end
 end MathLab.WT
