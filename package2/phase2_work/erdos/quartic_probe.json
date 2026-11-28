@@ -1,0 +1,62 @@
+{
+  "method": "GGK section 8 exact divisor sieve",
+  "a_max": 32,
+  "k_range": "floor(25a^2/9)+1 .. 4a^2",
+  "complete": true,
+  "last_a": 32,
+  "last_k": 4096,
+  "parameter_pairs": 13992,
+  "divisors_tested": 3094880,
+  "preparity_squares": 3,
+  "cpu_seconds": 1.320302424,
+  "witnesses": [
+    {
+      "a": 14,
+      "k": 560,
+      "u": 485,
+      "q": 1,
+      "v": 99,
+      "x": 257,
+      "y": 256,
+      "z": 292,
+      "t": 193,
+      "N": 193,
+      "H": 99,
+      "gcd": 1,
+      "H5_over_N3_num": 9509900499,
+      "H5_over_N3_den": 7189057
+    },
+    {
+      "a": 25,
+      "k": 1925,
+      "u": 217,
+      "q": 1,
+      "v": 99,
+      "x": 134,
+      "y": 133,
+      "z": 158,
+      "t": 59,
+      "N": 59,
+      "H": 99,
+      "gcd": 1,
+      "H5_over_N3_num": 9509900499,
+      "H5_over_N3_den": 205379
+    },
+    {
+      "a": 28,
+      "k": 2240,
+      "u": 970,
+      "q": 2,
+      "v": 198,
+      "x": 514,
+      "y": 512,
+      "z": 584,
+      "t": 386,
+      "N": 386,
+      "H": 198,
+      "gcd": 2,
+      "H5_over_N3_num": 304316815968,
+      "H5_over_N3_den": 57512456
+    }
+  ]
+}

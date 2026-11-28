@@ -1,0 +1,127 @@
+[
+  {
+    "modulus": 3,
+    "solution_residue_quadruples": 33,
+    "J_residues": [
+      0
+    ]
+  },
+  {
+    "modulus": 5,
+    "solution_residue_quadruples": 321,
+    "J_residues": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "modulus": 7,
+    "solution_residue_quadruples": 385,
+    "J_residues": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "modulus": 8,
+    "solution_residue_quadruples": 1536,
+    "J_residues": [
+      0,
+      4
+    ]
+  },
+  {
+    "modulus": 9,
+    "solution_residue_quadruples": 945,
+    "J_residues": [
+      0,
+      3,
+      6
+    ]
+  },
+  {
+    "modulus": 11,
+    "solution_residue_quadruples": 1441,
+    "J_residues": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  {
+    "modulus": 13,
+    "solution_residue_quadruples": 4033,
+    "J_residues": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  {
+    "modulus": 16,
+    "solution_residue_quadruples": 24576,
+    "J_residues": [
+      0,
+      12
+    ]
+  },
+  {
+    "modulus": 17,
+    "solution_residue_quadruples": 9601,
+    "J_residues": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ]
+  },
+  {
+    "modulus": 32,
+    "solution_residue_quadruples": 196608,
+    "J_residues": [
+      0,
+      12,
+      16,
+      28
+    ]
+  }
+]

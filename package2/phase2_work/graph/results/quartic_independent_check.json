@@ -1,0 +1,18 @@
+{
+  "reviewed_draft_sha256": "c53fa4dce98b9205e47ea1be4df5b2f469191f85186f27f3c3950d732e368d7c",
+  "independent_original_polynomial_check": true,
+  "positive_at_k_equals_a_squared": "64*a*(a + u)*(2*a**2 + 2*a*u + 3*q**2)/9",
+  "derived_J": "63*a**4 + 200*a**3*u + 74*a**2*k + 192*a**2*q**2 - 72*a*k*u - 9*k**2",
+  "polynomial_and_congruence_checks": true,
+  "positive_quotients_through_24_allowed_by_mod_3_8": [
+    12,
+    15,
+    24
+  ],
+  "cubic_endpoint": "122368/81",
+  "A5_at_relaxed_minimum": "243/2720",
+  "V5_minimum": "32/85",
+  "H10_over_N6_lower_limit": "2048/85",
+  "constant_decimal": "1.37464672793152634504052173902",
+  "limits_checked_in": "quartic_independent_review.md"
+}
