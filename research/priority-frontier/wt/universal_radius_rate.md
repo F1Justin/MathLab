@@ -6,7 +6,7 @@ Let \(v>0\) and let \(\beta\ge1/v\). Consider finite laws of real windows \(w_i\
 
 **Positive definite densities on the line.** The same statements apply to all continuous nonnegative positive definite densities \(A\) of integral one, supported in \([-v,v]\), with \(A(0)\le\beta\). By the one-dimensional Boas–Kac–Krein factorization, such an \(A\) is the autocorrelation of an \(L^2\) factor supported in an interval of length \(v\). Translate the factor into \([0,v]\) and multiply it by a unit scalar to normalize its integral; \(|\int w|^2=\int A=1\) and \(\|w\|_2^2=A(0)\). The proof below applies also to complex factors with \(\widehat A=|\widehat w|^2\). The same two-cell lower bounds belong to this class. [Ehm–Gneiting–Richards, Theorem 2.1(a)](https://doi.org/10.1090/S0002-9947-04-03502-0)
 
-The estimates concern the support of a symmetric factor of the given autocorrelation. The [simultaneous WT theorem](../../../papers/wt-derandomization/single-even-window.pdf) also matches a covering profile and two actual cost coordinates, with its own choice of radius.
+The estimates concern the support of a symmetric factor of the given autocorrelation. The [simultaneous WT theorem](https://github.com/F1Justin/MathLab/blob/ae92acdcae0f6bd718a9cdfb3e537606f86f0336/papers/wt-derandomization/single-even-window.pdf) also matches a covering profile and two actual cost coordinates, with its own choice of radius.
 
 ## A cubic Fourier estimate
 

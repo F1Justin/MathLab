@@ -7,7 +7,7 @@ Let \(w_p=p\mathbf1_{[0,1)}+(1-p)\mathbf1_{[1,2)}\), \(0\le p\le1\), and \(A_p=w
 \]
 The same bounds hold in \(L^1(\mathbb R)\), with different constants. These estimates concern approximation of the autocorrelation with the indicated actual support radius. Rates for simultaneous approximation of the table profile or its surplus require a separate argument.
 
-The lower bounds follow from the simple nonreal zero for \(p=e^{1/(2R)}/(1+e^{1/(2R)})\) in the [WT manuscript, support-radius proposition](../../../papers/wt-derandomization/single-even-window.pdf). Its Rouché argument directly gives \(\|V*V-A_p\|_1\ge cR^{-2}\); nonnegativity and the support of \(A_p\) also give \(\|V*V-A_p\|_1\le8\|V*V-A_p\|_\infty\). We prove the upper bound and enforce exact nonnegativity, including away from the input support.
+The lower bounds follow from the simple nonreal zero for \(p=e^{1/(2R)}/(1+e^{1/(2R)})\) in the [WT manuscript, support-radius proposition](https://github.com/F1Justin/MathLab/blob/ae92acdcae0f6bd718a9cdfb3e537606f86f0336/papers/wt-derandomization/single-even-window.pdf). Its Rouché argument directly gives \(\|V*V-A_p\|_1\ge cR^{-2}\); nonnegativity and the support of \(A_p\) also give \(\|V*V-A_p\|_1\le8\|V*V-A_p\|_\infty\). We prove the upper bound and enforce exact nonnegativity, including away from the input support.
 
 ## A finite trigonometric square
 
