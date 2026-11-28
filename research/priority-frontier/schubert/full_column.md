@@ -172,7 +172,7 @@ because \(|\theta|\le1\). Hence \(A_{j-\ell}=A_j+O_B(j u^2)\); the signed coeffi
 
 Combining the uniform extension theorem with the [boundary stability theorem for adjoining a tall column](tall_column.md) also permits iteration. Starting with a fixed boundary polynomial zero-free on the closed unit disk, one may append any finite number of successively sufficiently tall leftmost columns. At each stage the threshold may depend on the entire previously fixed board and its weights. Once the final height exceeds its threshold, every admissible finite rank has simple negative zeros.
 
-For actual boards consisting of one column, at most finitely many pairs \((b,n)\), \(1\le b<n\), can fail real-rootedness. The uniform extension theorem with empty \(B\) covers all sufficiently large \(b\) at once. Each of the finitely many smaller \(b\) gives a fixed \(b\times1\) rectangle, whose boundary polynomial has positive real part on the closed disk, so only finitely many ranks remain for that height. The argument is qualitative and gives no numerical bound on this joint exceptional set.
+For actual boards consisting of one column, the [finite-rank Jacobi product inequality](single_cut.md) covers every pair \((b,n)\), \(1\le b<n\), with arbitrary nonnegative weights on the permitted single cuts.
 
 ### Arbitrary first four widths and unit widths below them at every rank
 
