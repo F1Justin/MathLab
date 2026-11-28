@@ -1,6 +1,6 @@
 # A two-thirds real-root bound in every threshold-four row
 
-Let \(P_n(t)=n![z^n]\exp(A(z)+tB(z))\), with \(A(z)=z+z^2/2+z^3/6\), \(B=e^z-1-A\), and \(m=\lfloor n/4\rfloor\). For **every \(n\)** at least \(\lceil 2m/3\rceil\) zeros of \(P_n\) are distinct, simple and negative. For \(n\ge2000\) these roots are certified on a single explicit middle interval. Every complete phase cell there contains exactly one simple root. The roots of consecutive rows strictly alternate in the intersection of their middle intervals, apart from the freedom about which row supplies the first and last root. For \(n\le2004\) the [existing finite certificates](../../../snapshot/research/partitions/four_row_window.md) give the full row.
+Let \(P_n(t)=n![z^n]\exp(A(z)+tB(z))\), with \(A(z)=z+z^2/2+z^3/6\), \(B=e^z-1-A\), and \(m=\lfloor n/4\rfloor\). For **every \(n\)** at least \(\lceil 2m/3\rceil\) zeros of \(P_n\) are distinct, simple and negative. For \(n\ge2000\) these roots are certified on a single explicit middle interval. Every complete phase cell there contains exactly one simple root. The roots of consecutive rows strictly alternate in the intersection of their middle intervals, apart from the freedom about which row supplies the first and last root. For \(n\le2004\) the [existing finite certificates](https://github.com/F1Justin/MathLab/tree/04e5e9ec4469c236e13615fba3d17ee20c2d6bf8/certificates/partitions) give the full row.
 
 Here are the saddle and the interval. Write \(u=1/n,\ D=z\,d/dz,\ h=DA,\ H=DB\). For \(1/4\le R\le13\), put \(z=Re^{iq}\) and choose the continuous upper solution of
 \[
@@ -55,7 +55,7 @@ At \(\Psi=a\pi\), the main cosine has sign \((-1)^a\) and magnitude greater than
 
 In a fixed row every pair of consecutive roots in the middle interval has opposite signs of \(\sin G\), since it meets the ordered phase cells with exactly one root in each complete cell. The forward and backward shift tests force an intervening root of each neighboring row. Applied in both directions to neighboring rows in the intersection of their certified intervals, this gives strict alternation there. Endpoint cells cannot insert an extra root because all cells strictly between them are complete.
 
-At \(R=1/4\) the certificate proves \(1+4\Psi/(n\pi)<0.013\); at \(R=13\) it proves \(1+4\Psi/(n\pi)>0.685\). Thus the number of complete cells exceeds \(0.672\,n/4-2\). For \(n\ge2000\), this is at least \(2\lfloor n/4\rfloor/3\). The rank ordering here concerns the negative real axis in the stated middle interval. The effective full-row bridge also requires treating the roots between this interval and each extreme.
+At \(R=1/4\) the certificate proves \(1+4\Psi/(n\pi)<0.013\); at \(R=13\) it proves \(1+4\Psi/(n\pi)>0.685\). Thus the number of complete cells exceeds \(0.672\,n/4-2\). For \(n\ge2000\), this is at least \(2\lfloor n/4\rfloor/3\). The rank ordering here concerns the negative real axis in the stated middle interval. The following section joins the interval to the outermost roots.
 
 ## Joining the middle interval to minus infinity
 
@@ -63,7 +63,7 @@ For every \(n\ge2000\), the same sign and simplicity tests hold from \(R=250/n\)
 \[
        (k-1)\pi < \Psi+m\pi < k\pi
 \]
-whenever \(k\ge5\) and \(k\le\lfloor0.685m-0.315s/4\rfloor\). Consecutive rows strictly alternate on their common half-line ending at the earlier of their two \(t(13)\) values. This removes the gap between the effective outer and middle arguments. The unresolved part of the real-root count is on the side towards zero.
+whenever \(k\ge5\) and \(k\le\lfloor0.685m-0.315s/4\rfloor\). Consecutive rows strictly alternate on their common half-line ending at the earlier of their two \(t(13)\) values. This removes the gap between the effective outer and middle arguments. The [fold integral](all_rows_four.md) completes the remaining count on the side towards zero.
 
 For \(0\le R\le1/4\) set \(B_0(v)=24B(Re^{iv})/R^4\), \(H_0(v)=24H(Re^{iv})/R^4\), and \(t_0=\tau R^4/24\); the normalized functions at zero are defined by continuation. Here \(nR\ge250\) is required when applying the inequalities to a row. The same predictor tube and core estimates work on the closed auxiliary parameter rectangle including \(R=0\). For the derivative insertion use \(J/R\) in place of \(J\); its normalized value is unchanged. The factors \((B_0-H_0/4)/R,\ (D B_0-D H_0/4)/R\), written with \(D\) acting on the original angular functions before division by radius powers, have convergent series at zero because the degree-four term cancels. The same holds for \(A/R\) and \(h/R\).
 

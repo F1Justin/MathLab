@@ -174,7 +174,20 @@ def outside_boxes(left, right, predicate):
     return True
 
 
-def certify(a, b, rlo, rhi, tlo, thi, outer_join=False):
+# Angular derivative orders of (6H/z^4-1)/R, including its outer e^{iv}.
+FOURTH_COEFF = [[6*ONE*k**o/math.factorial(k+3) for k in range(1,33)] for o in (0,1)]
+assert 2*6*33*4**32*10**13 < math.factorial(36)
+
+
+def fourth_weight(radius, angle, u, tau, order):
+    a=unit(angle); z=radius*a
+    A=scaled_polynomial(radius,angle,1)
+    if order:
+        A=scaled_polynomial(radius,angle,2)-4*A
+    return u*unit(-4*angle)*A-4*tau*(a*series(FOURTH_COEFF[order],z)+TAIL)
+
+
+def certify(a, b, rlo, rhi, tlo, thi, outer_join=False, higher_shifts=False):
     r = interval(rlo,rhi)
     u = interval(tlo,thi)/2000
     n = 2000/arb(thi)
@@ -246,7 +259,7 @@ def certify(a, b, rlo, rhi, tlo, thi, outer_join=False):
         return "outer numbering"
     if not outer_join and rlo == 0.25 and not standard_phase < ONE*13/1000:
         return "lower count"
-    if rhi == 13 and not (standard_phase > ONE*685/1000 and q < ONE*24/100):
+    if rhi == 13 and not (ONE*685/1000 < standard_phase < ONE*99/100 and q < ONE*24/100):
         return "upper count"
 
     eta = min(0.116, 0.54/rhi)
@@ -254,6 +267,22 @@ def certify(a, b, rlo, rhi, tlo, thi, outer_join=False):
     if not (q > eta_arb and q < PI/2):
         return "positive arc"
     curvatures, third_derivatives, insertions = [], [], []
+    shift_slopes,shift_bounds=[],[]
+    if higher_shifts:
+        for lag in ((2,3) if small else (2,3,4)):
+            sine=(lag*q).sin().lower()
+            if not sine>0:
+                return "lag sine"
+            shift_slopes.append((lag/sine).upper())
+            shift_bounds.append((2/sine).upper())
+        if small:
+            V4=fourth_weight(r,q,u,tau,0)
+            denom=(-V4.imag).lower()
+            if not denom>0:
+                return "fourth direction"
+            max_v=(u*scaled_polynomial(r,arb(0),1).real+
+                   4*tau*(series(FOURTH_COEFF[0],r)+ERR)+abs(V4.real))
+            shift_bounds.append((max_v/denom).upper())
     for i in range(8):
         ds = eta_arb*interval(ONE*(i-4)/4,ONE*(i-3)/4)
         zz,(Hz,Kz,Tz,HL) = vals(q+ds,[1,2,3,5])
@@ -263,13 +292,15 @@ def certify(a, b, rlo, rhi, tlo, thi, outer_join=False):
         if outer_join:
             dv = tau*scaled_remainder(r,q+ds,1)+lam*u*scaled_polynomial(r,q+ds,2)
         insertions.append(abs(dv).upper())
+        if higher_shifts and small:
+            shift_slopes.append((abs(fourth_weight(r,q+ds,u,tau,1))/denom).upper())
     curvature = min(curvatures)
     if not curvature > 0:
         return "local concavity"
     normalization = (n*abs(C)/(2*PI)).sqrt()
     local_error = normalization * max(third_derivatives)*4/(6*n*curvature**2)
     # Both signed one-row shifts have the same first-derivative and global bounds.
-    slope = max((max(insertions)/T.imag.lower()).upper(), (1/q.sin().lower()).upper())
+    slope = max((max(insertions)/T.imag.lower()).upper(), (1/q.sin().lower()).upper(), *shift_slopes)
     insertion_error = normalization * 2*slope/(n*curvature)
 
     h0 = (u*polynomial(z,0)-tau*B).real
@@ -283,7 +314,7 @@ def certify(a, b, rlo, rhi, tlo, thi, outer_join=False):
     else:
         absolute_v += lam*u*polynomial(r,1)
     whole_weight = max(((absolute_v+abs(T.real))/T.imag.lower()).upper(),
-                       (2/q.sin().lower()).upper(), ONE)
+                       (2/q.sin().lower()).upper(), ONE, *shift_bounds)
     core_loss = curvature*eta_arb**2/2
     loss = min(core_loss.lower(),gamma.lower())
     if not n*loss>1:
@@ -339,13 +370,13 @@ def certify(a, b, rlo, rhi, tlo, thi, outer_join=False):
     return None
 
 
-def main():
+def main(higher_shifts=False):
     totals = Counter()
     for a,b in zip([0]+RADII,RADII):
         stack = [(a,b,0.,1.)]
         while stack:
             r1,r2,t1,t2 = stack.pop()
-            failure = certify(a,b,r1,r2,t1,t2,outer_join=(a==0))
+            failure = certify(a,b,r1,r2,t1,t2,outer_join=(a==0),higher_shifts=higher_shifts)
             if failure is None:
                 totals["accepted"] += 1
                 continue
