@@ -1,0 +1,243 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,amsthm,mathtools,booktabs}
+\usepackage[margin=1.02in]{geometry}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={A single even signed window for WT witnesses},pdfauthor={MathLab}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\R}{\mathbb R}
+\newcommand{\E}{\mathbb E}
+\newcommand{\ind}{\mathbf1}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\cc}{C_c^\infty(\R)}
+\DeclareMathOperator{\supp}{supp}
+\title{A single even signed window for WT witnesses}
+\author{MathLab working manuscript}
+\date{28 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every finite window--table witness of Carter, O'Bryant and Tao we construct one smooth compactly supported pair, each function even about its prescribed centre. The window autocorrelation approximates the input mean autocorrelation in both \(L^1\) and the uniform norm. The covering convolution approximates the reflected mean covering uniformly after the table has been extended to the output length. The covering and autocorrelation inequalities hold pointwise, and both energy budgets are respected up to an arbitrarily small additive error. Combined with the sharp WT bound of Akwei and Williams, this gives \(4\sqrt2/3\) for the infimum over the intersection of the deterministic and symmetric classes. Their positive gap for a single symmetric nonnegative window makes the use of signed windows essential.
+\end{abstract}
+
+\section{The question}
+Carter, O'Bryant and Tao use a finite joint law of real functions \(w_i,t_i\) to bound the diameter of a Sidon set. In their Definition~2.1 the parameters \(v,\alpha,\beta\) are positive and \(\sigma\ge2v\). The functions are bounded and integrable. Each \(w_i\) has integral one and support in \([0,v]\). Each \(t_i\) is supported in \([-v,\sigma]\) and equals one on \((0,\sigma-v)\). With \(\widetilde f(x)=f(-x)\), the remaining conditions are
+\begin{align}
+ B:=\E\norm{w_i}_2^2\le\beta,\qquad
+ H:=\E\norm{t_i}_2^2-\sigma\le\alpha, \label{eq:budget}\\
+ A:=\E(w_i*\widetilde w_i)\ge0 \ \text{on }\R,\qquad
+ C:=\E(w_i*t_i)\ge1 \ \text{on }(0,\sigma). \label{eq:point}
+\end{align}
+The same index is used in both factors. All convolutions in \eqref{eq:point} are continuous by translation continuity in \(L^2\), so the cover includes both endpoints. Nonnegativity of the two functions themselves defines the smaller strong class \cite{cot}.
+
+Akwei and Williams \cite{aw} have already settled both strict inequalities in Conjecture~7.1 of \cite{cot}. The unrestricted, deterministic and atomwise symmetric infima of \(2\sqrt{\alpha\beta}\) equal \(4\sqrt2/3\). Their deterministic sequence uses a one-sided ramp. Their symmetric sequence uses mixtures of centred boxes. They also show that a single symmetric nonnegative window, even with a signed random table, satisfies \(\alpha\beta>8/9+10^{-13}\). Here we ask whether a \emph{single} signed symmetric pair can reproduce the two correlation profiles of an arbitrary input law. This retains information about each input that is lost upon taking an infimum.
+
+Centre the window at zero and the table at zero by separate translations of \(v/2\) and \((\sigma-v)/2\). The covering interval becomes \([-L,L]\), \(L=\sigma/2\). The table is supported in \([-L-v/2,L+v/2]\) and is one on \((-L+v/2,L-v/2)\). For any larger \(L\), translate each table shoulder with its endpoint and fill the middle with ones. Write \(C_L\) for the mean covering in these coordinates and \(C_L^+(x)=(C_L(x)+C_L(-x))/2\). The two shoulders see the old convolution in translated coordinates and the intervening region has cover one. Extension adds the same amount to the squared table norm and the covering length. In particular \(H\) in \eqref{eq:budget} is independent of \(L\) \cite[Lemma 2.7]{cot}.
+
+\begin{theorem}\label{th:main}
+For every input law there exist \(D_j\to\infty\), declared widths \(v_j\le D_j\), and real even \(V_j,T_j\in\cc\) which, in centred coordinates, are deterministic WT witnesses of covering length \(2D_j\). They satisfy
+\begin{align*}
+ &\norm{V_j*V_j-A}_1+\norm{V_j*V_j-A}_\infty\longrightarrow0,\\
+ &\norm{V_j*T_j-C_{D_j}^+}_\infty\longrightarrow0,\\
+ &\norm{V_j}_2^2\longrightarrow B,\qquad
+ \limsup_j\bigl(\norm{T_j}_2^2-2D_j\bigr)\le H .
+\end{align*}
+\end{theorem}
+In particular, for each \(\epsilon>0\) the \emph{same} pair meets the budgets \(\beta+\epsilon,\alpha+\epsilon\). Width does not occur in the objective of Conjecture~7.1. It does occur in the threshold \(4(1+v\sqrt{\beta/\alpha})^2\) in \cite[Theorem 2.3]{cot}.
+
+\begin{corollary}\label{cor:intersection}
+The infimum over pairs which are both deterministic and symmetric equals the unrestricted infimum. It remains the same with both functions smooth. Its value is \(4\sqrt2/3\).
+\end{corollary}
+\begin{proof}
+Apply the two budget bounds to each unrestricted input and then let \(\epsilon\downarrow0\). Inclusion gives the reverse inequality. The numerical value follows from \cite{aw}.
+\end{proof}
+
+An exact compact even square root need not exist. For example, take
+\(w=(2\ind_{[0,1)}+\ind_{[1,2)})/3\) with \(v=2,\ \sigma=4\) and \(t=\ind_{[-2,4]}\). The entire extension of its autocorrelation transform is
+\[
+ \left(\frac{\sin(z/2)}{z/2}\right)^2\frac{5+4\cos z}{9}.
+\]
+Its zero at \(\pi+i\log2\) is simple. The transform of the autocorrelation of any compactly supported real even window is an entire square, so it cannot have this zero. This is the one-dimensional obstruction in the convolution-root criterion of Ehm, Gneiting and Richards \cite[Theorem 2.1(d) and Example 2.3]{egr}. Phillips and Schmidt give an \(L^1\) approximation theorem using convolution squares of \(L^2\) factors \cite[Corollary 5]{ps}.
+
+The obstruction also quantifies the width cost for this fixed input. Write \(z_0=\pi+i\log2\). For \(0<r<1/2\) the disk about \(z_0\) of radius \(r\) contains exactly that simple zero; put \(m_r=\min_{|z-z_0|=r}|\widehat A(z)|>0\). For any real even window \(V\) supported in \([-R,R]\), let \(L=\max(2,2R)\) and \(\eta=\norm{V*V-A}_\infty\). The difference of the autocorrelations is supported in \([-L,L]\). On the circle its Fourier transform has modulus at most \(2L\eta\exp((\log2+r)L)\). If this were smaller than \(m_r\), Rouch\'e's theorem would give exactly one zero, counted with multiplicity, for the entire square \(\widehat V^2\) inside the disk. Hence
+\[
+ \eta\ge \frac{m_r}{2L}\exp\bigl(-(\log2+r)L\bigr).
+\]
+For any sequence with \(\eta_j\to0\), this forces \(R_j\to\infty\). Taking logarithms and then letting \(r\downarrow0\) gives
+\[
+ \liminf_{j\to\infty}\frac{R_j}{\log(1/\eta_j)}\ge\frac1{2\log2}.
+\]
+Akwei and Williams measure the declared, normalized width as the WT \emph{objective} approaches its optimum \cite{aw}.
+
+\section{Spectral compression}
+Pair each centred input atom with its joint reflection at half its probability. This gives \(C_L^+\) and preserves \(A,B,H\). For a fixed \(0<\theta<1\), give total probability \(\theta\) to the window
+\[
+ q(x)=\frac{e^x}{2\sinh(v/2)}\,\ind_{[-v/2,v/2]}(x)
+\]
+and its reflection, each with table \(\ind_{[-L-v/2,L+v/2]}\). Scale the old probabilities by \(1-\theta\). Both new pairs cover \([-L,L]\) with value one. Use subscripts \(\theta\) for the resulting profiles and costs. Thus \(B_\theta\to B,\ H_\theta\to H\), and \(A_\theta\to A\) in \(L^1\) and uniformly. Also \(\sup_L\norm{C_{\theta,L}-C_L^+}_\infty=O(\theta)\), since the window \(L^1\) norms and all table suprema are bounded independently of \(L\).
+
+Use \(\widehat f(\xi)=\int_{\R} e^{-ix\xi}f(x)\,dx\), and write \(p_i\) for the perturbed probabilities. Put \(a=\sum_i p_i|\widehat w_i|^2\). Direct integration gives
+\[
+ |\widehat q(\xi)|^2=
+ \frac{\sinh^2(v/2)+\sin^2(v\xi/2)}{\sinh^2(v/2)(1+\xi^2)},
+ \qquad a(\xi)\ge\frac{\theta}{1+\xi^2}.
+\]
+All derivatives of each \(\widehat w_i\) are bounded by compact support. Differentiating the square root and its reciprocal now gives polynomial bounds for each of their derivatives. Fix an even nonnegative smooth probability density \(\phi\) supported on \([-\delta,\delta]\), obtained by dilating one fixed bump. Write \(\chi=\widehat\phi\) and define
+\[
+ \widehat s=\chi\sqrt a,\qquad
+ \widehat K_i=p_i\chi\,\widehat w_i/\sqrt a,\qquad
+ U_L=\sum_i K_i*t_{i,L}.
+\]
+The functions \(s,K_i\) are real Schwartz functions by conjugate symmetry and Fourier inversion. The window \(s\) is even, \(\int s=1\), and \(\sum_i\int K_i=1\). Reflection invariance makes \(U_L\) even. Multiplication of transforms gives the pointwise identities
+\begin{equation}
+ s*s=(\phi*\phi)*A_\theta\ge0,\qquad
+ s*U_L=(\phi*\phi)*C_{\theta,L}.
+ \label{eq:exact}
+\end{equation}
+The second convolution is at least one for \(|x|\le L-2\delta\). By Cauchy--Schwarz at each frequency,
+\[
+ \left|\sum_i p_i\widehat w_i\widehat t_{i,L}\right|^2
+ \le a\sum_i p_i|\widehat t_{i,L}|^2 .
+\]
+As \(|\chi|\le1\), Plancherel gives
+\begin{equation}
+ \norm{s}_2^2\le B_\theta,\qquad
+ \norm{U_L}_2^2\le 2L+H_\theta .
+ \label{eq:projection}
+\end{equation}
+Uniformly in \(L\), \(\norm{U_L}_\infty\le\sum_i\norm{K_i}_1\norm{t_{i,L}}_\infty=O(1)\). All constants below may depend on the fixed input, \(\theta,\delta\), but are independent of the truncation radius and \(L\).
+
+\section{A compact root and an exact cover}
+\begin{lemma}\label{lem:repair}
+Let \(s\) be real, even and Schwartz, with \(\int s=1\) and \(s*s\ge0\). For sufficiently large \(M\) there are even \(V\in\cc\), supported in \([-M,M]\), with \(\int V=1\), \(V*V\ge0\) everywhere and
+\(\norm{V-s}_1+\norm{V-s}_\infty=O(M^{-3/2})\).
+\end{lemma}
+\begin{proof}
+Set \(R=M/4\). Multiply \(s\) by an even smooth cutoff supported on \([-R,R]\) and equal to one on \([-R/2,R/2]\), then divide by its integral. The result \(s_R\) differs from \(s\) in both norms by \(O_k(M^{-k})\) for every fixed \(k\), and \(\int x^2|s_R(x)|\,dx=O(1)\). Hence \(s_R*s_R\ge-O_k(M^{-k})\).
+
+Choose a smooth even probability density \(u\) supported in \([-1,1]\) and positive in its interior. Write \(u_M(x)=M^{-1}u(x/M)\). Since \(s_R\) has mass one and zero first moment, Taylor's formula with \(\norm{u_M''}_\infty=O(M^{-3})\) gives \(s_R*u_M\ge u_M-O(M^{-3})\) everywhere. Also \(u*u\) has a positive minimum on \([-5/4,5/4]\). Set \(\eta=M^{-3/2}\) and \(V=(1-\eta)s_R+\eta u_M\). On \(|x|\le5M/4\),
+\[
+ V*V\ge c\eta^2/M-O(\eta M^{-3})-O(M^{-6})>0
+\]
+for large \(M\). Outside that range only the nonnegative term \(\eta^2 u_M*u_M\) can survive. The mass and the norm estimates follow from the construction.
+\end{proof}
+
+Take \(L=50M\) and \(D=L-2\delta\). The tails of the fixed kernels \(K_i\) give, for each \(k\),
+\[
+ U_L(x)=
+ \begin{cases}
+  1+O_k(M^{-k}),& |x|\le L-R/2,\\
+  O_k(M^{-k}),& |x|\ge L+R/2 .
+ \end{cases}
+\]
+For example, in the first region shifts of size less than \(R/2-v/2\) sample the unit plateau of every atom. The estimate follows by using \(\sum_i\int K_i=1\) and integrating their tails. The exterior estimate follows from the support condition in the same way. Smoothly blend \(U_L\) to one on \(|x|\le L-R\) and to zero on \(|x|\ge L+R\), with both transitions inside the respective estimated regions. The even result \(T_0\) satisfies
+\[
+ \norm{T_0-U_L}_\infty=O_k(M^{-k}),\quad
+ \norm{T_0}_2^2\le\norm{U_L}_2^2+O_k(LM^{-k}).
+\]
+The outer cutoff only decreases the squared integral. By Lemma~\ref{lem:repair} and \eqref{eq:exact}, \(\norm{V*T_0-(\phi*\phi)*C_{\theta,L}}_\infty=O(\eta)\).
+
+Set \(d=\max_{|x|\le D}(1-(V*T_0)(x))_+\). Then \(d=O(\eta)\), and \(V*T_0=1\) on \(|x|\le L-R-M\). For the two bands \(I=\{y:\bigl||y|-L\bigr|\le4M\}\), put
+\begin{equation}
+ T=T_0+d\,V*\ind_I . \label{eq:fix}
+\end{equation}
+The addition to the cover is \(d(V*V)*\ind_I\ge0\) everywhere. If a point \(x\in[-D,D]\) is deficient, it lies within \(R+M\) of an endpoint of \([-L,L]\). Hence \(x-[-2M,2M]\subset I\) because \(R+3M<4M\). The added cover there equals \(d\int V*V=d\). This proves exact covering on the full closed target.
+
+The correction to the table is smooth, at most \(d\norm V_1\) in size and supported within \(5M\) of the two endpoints. Its contribution to the squared norm, including the cross term with \(T_0\), is \(O(M\eta+M\eta^2)=o(1)\). With declared width \(v'=12M\), \(D\ge v'\) for large \(M\), the window is supported within \([-v'/2,v'/2]\), and
+\[
+ \supp T\subset[-L-5M,L+5M]\subset[-D-v'/2,D+v'/2],
+ \qquad T(x)=1\quad(|x|<D-v'/2).
+\]
+Thus all support and plateau requirements hold pointwise. In particular \eqref{eq:projection} yields
+\begin{equation}
+ \norm T_2^2-2D\le H_\theta+4\delta+o_M(1),\qquad
+ \norm V_2^2\le B_\theta+o_M(1). \label{eq:finalbudget}
+\end{equation}
+The term \(4\delta\) accounts for the loss in covering length. The term \(O(M\eta)\) pays for the increased length of the repaired shoulders.
+
+\begin{proof}[Completion of Theorem~\ref{th:main}]
+Young's inequality, Lemma~\ref{lem:repair} and \eqref{eq:exact} give \(V*V=(\phi*\phi)*A_\theta+o_M(1)\) in both norms. The same estimates and \eqref{eq:fix} give \(V*T=(\phi*\phi)*C_{\theta,L}+o_M(1)\) uniformly on \(\R\).
+
+For the unperturbed reflected law its left-end covering profile \(F\), with the origin at the left endpoint and the unit plateau extended to \(+\infty\), is continuous. It equals zero on \((-\infty,-v]\) and one on \([v,\infty)\). Indeed, convolution at the left end samples only the fixed left shoulder and the plateau, and continuity follows locally from the finite-table convolution. Reflection gives the same profile at the right end. When the two transitions are disjoint,
+\[
+ C_L^+(x)=F(x+L)+F(L-x)-1.
+\]
+Consequently smoothing by \(\phi*\phi\) and changing \(L\) to \(D\) together cost at most \(4\omega_F(2\delta)\) in the uniform norm, where \(\omega_F\) denotes the modulus of continuity. The additional perturbation from the reference law costs \(O(\theta)\). The compactly supported continuous \(A\) is approached by \((\phi*\phi)*A\) in both \(L^1\) and the uniform norm. Also \(B=A(0)\) and \(\norm V_2^2=(V*V)(0)\).
+
+Choose \(\theta,\delta\downarrow0\), and for each choice take \(M\) sufficiently large that all its error terms tend to zero along the resulting sequence, with \(M\to\infty\). Equations \eqref{eq:point}--\eqref{eq:finalbudget} give every assertion. Translating the two functions to centres \(v'/2\) and \((2D-v')/2\) recovers the original coordinates.
+\end{proof}
+
+\section{A finite example}
+The accompanying integer data specify one signed, even pair of step functions on cells of length \(1/20\). It has \(v=6269/20\) and \(\sigma=1056\). The following decimals are rounded for display.
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Witness & \(\alpha\) & \(\beta\) & \(2\sqrt{\alpha\beta}\)\\
+\midrule
+Six atoms of \cite[Appendix A.3]{cot} & 0.944813044 & 0.941258026 & 1.886067720\\
+One even signed pair & 0.944812777 & 0.941258026 & 1.886067454\\
+\bottomrule
+\end{tabular}
+\end{center}
+The exact comparison is with the rational budgets in that appendix. The finite example illustrates the construction. Its sufficient integer threshold in \cite[Theorem 2.3]{cot} is \(394032\), compared with \(483\) for the original six atoms. The two nonnegative symmetric atoms of Akwei and Williams give \(1.88562178309\ldots\) at \(k\ge473\) \cite{aw}.
+
+For verification let \(W_j\) denote the mass of window cell \(j\), \(T_j\) the table height and \(h=1/20\), with cells centred at \(hj\). The nodal autocorrelation and covering are \(h^{-1}\sum_j W_j W_{j-k}\) and \(\sum_j W_jT_{k-j}\). The overlap of two cells is a tent, so linear interpolation is exact between nodes. The energies are \(h^{-1}\sum W_j^2\) and \(h\sum T_j^2\). Integer polynomial multiplication checks every node and verifies
+\[
+ \min_{|hk|\le\sigma/2}(w*t)(hk)=1,\qquad
+ 4\alpha\beta<(188606746/10^8)^2 .
+\]
+The accompanying independent construction starts from the authors' six rational atoms \cite{data}. It uses a fixed-point Fourier transform for discovery, then checks the resulting distinct pair by exact integer arithmetic. The proof of Theorem~\ref{th:main} does not use either finite example.
+
+\section*{An elementary dual certificate}
+For completeness we give a shorter certificate for a weaker universal lower bound. It uses only autocorrelation positivity and a compact test measure. The sharper floor \(8/9\) for the product is due to Akwei and Williams \cite{aw}.
+
+\begin{lemma}
+Every WT witness satisfies \(\alpha\beta\ge495709/562500\).
+\end{lemma}
+\begin{proof}
+Dilate to \(\beta=1\), so the new table budget is \(\alpha\beta\). Denote this budget temporarily by \(a\). In the original left-endpoint coordinates \(A\) is even, integrates to one and satisfies \(A(0)\le1\). Put \(l=14/15,\ b=2/3\). Let \(X\) have mass \(11/20\) at zero and density \(3(7+16x)/100\) on \((0,1)\). Lengthen the table so that \(\sigma>2l+2v\), and put
+\[
+ \mu=\E_X\ind_{[lX,\sigma-lX]}\,dx+b(\delta_0+\delta_\sigma).
+\]
+Pairing the cover with \(\mu\) gives
+\(\E\langle t,\mu*\widetilde w\rangle\ge\mu(\R)\).
+Fubini gives
+\(\E\norm{\mu*\widetilde w}_2^2=\iint A(x-y)\,d\mu(x)d\mu(y)\).
+For \(|s|\le v\), the length of overlap of the two interval terms, shifted by \(s\), is
+\(\sigma-l(X+X')-\max(|s|,l|X-X'|)\), where \(X'\) is an independent copy. Each interval--endpoint interaction contributes \(b\,\E\int_{lX}^\infty A(s)\,ds\), in four orders and positions combined. The two unequal endpoints have zero interaction. Expanding \(\E\norm{t-\mu*\widetilde w}_2^2\ge0\) and using \(A(0)\le1\) therefore gives
+\[
+ a\ge\int A(s)P(|s|/l)\,ds,\quad
+ P(r)=l\bigl(\E\max(r,|X-X'|)-2\E X\bigr)
+             +2b\bigl(1+\Pr(X>r)\bigr)-2b^2 .
+\]
+On \(0\le r\le1\), writing \(F(r)=\Pr(|X-X'|\le r)\), direct integration gives
+\[
+ \E X=\tfrac{53}{200},\quad
+ \Pr(X>r)=\tfrac3{100}(1-r)(8r+15),\quad
+ F(r)=\tfrac{192r^4+39r^2+6744r+3025}{10000}.
+\]
+Indeed if \(h(x)=3(7+16x)/100\), then \(F(0)=(11/20)^2\) and
+\(F'(r)=2(11/20)h(r)+2\int_0^{1-r}h(y)h(y+r)\,dy\).
+Since \(\E\max(r,|X-X'|)=1-\int_r^1F(y)\,dy\), one obtains
+\[
+ P(r)=\frac{991418+r(4032r^4+1365r^2-5940r+2625)}{1125000}.
+\]
+The tangent to \(r^4\) at \(5/8\) bounds the quartic in parentheses below by \(15(5824r^2-8544r+3325)/64>0\). For \(r\ge1\), \(P\) continues affinely with positive slope \(l\). Thus \(P\ge P(0)=495709/562500\). Integrating against \(A\ge0\) of mass one proves the claim.
+\end{proof}
+
+\paragraph{Provenance.}
+This research manuscript was developed with AI systems that constructed the proofs, wrote the formalization and performed the computations under human research direction. An independent Lean~4 proof establishes Theorem~\ref{th:main}, the equality of infima, the elementary lower bound and the original integer witness. The identification of the sharp value uses the analytic theorem of Akwei and Williams \cite{aw}.
+
+\small
+\begin{thebibliography}{9}
+\setlength{\itemsep}{2pt}
+\bibitem{aw} J. Akwei and A. Williams, \emph{The sharp WT-triple bound: stability and witness width}, v05, 17 November 2026, with verification supplement. \href{https://doi.org/10.5281/zenodo.24326518}{Zenodo, 10.5281/zenodo.24326518}.
+\bibitem{cot} D. Carter, K. O'Bryant and T. Tao, \emph{On the diameter and distribution of Sidon sets}, 26 October 2026. \href{https://arxiv.org/abs/2610.36207v1}{arXiv:2610.36207v1}.
+\bibitem{data} D. Carter, K. O'Bryant and T. Tao, \emph{Sidon-error}, rational input, directory \texttt{asymptotic/}, revision \texttt{ff5b032}. \href{https://github.com/dcartermath/sidon-error/tree/ff5b032fc3745140549777a96a9ec3ba7f8dd954/asymptotic}{Authors' repository}.
+\bibitem{egr} W. Ehm, T. Gneiting and D. Richards, \emph{Convolution roots of radial positive definite functions with compact support}, Trans. Amer. Math. Soc. \textbf{356} (2004), 4655--4685. \href{https://doi.org/10.1090/S0002-9947-04-03502-0}{doi:10.1090/S0002-9947-04-03502-0}.
+\bibitem{ps} T. R. L. Phillips and K. M. Schmidt, \emph{On unbounded positive definite functions}, Math. Pannon. \textbf{26} (2018), 33--51. \href{https://orca.cardiff.ac.uk/id/eprint/115573/1/Bochner4c.pdf}{Authors' manuscript}.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,17 @@
+@MathLab.WT.Witness.smooth_profile_approximation : ∀ {v α β : ℝ} (W : MathLab.WT.Witness v α β) {ε : ℝ},
+  0 < ε → ∀ (P : ℝ), Nonempty (MathLab.WT.SmoothProfileWitness W ε P)
+@MathLab.WT.Witness.smooth_profile_sequence : ∀ {v α β : ℝ} (W : MathLab.WT.Witness v α β),
+  Nonempty (MathLab.WT.SmoothProfileSequence W)
+MathLab.WT.smooth_infimum_eq : sInf MathLab.WT.smoothValues = MathLab.WT.infimum MathLab.WT.Kind.unrestricted
+@MathLab.WT.Witness.universal_product_lower : ∀ {v α β : ℝ} (W : MathLab.WT.Witness v α β), 495709 / 562500 ≤ α * β
+MathLab.WT.Certificate.certified_witness : ∃ W,
+  W.Deterministic ∧
+    W.Symmetric ∧
+      W.σ = 1056 ∧
+        MathLab.WT.objective (MathLab.WT.Certificate.alphaGrid / 20) (20 * MathLab.WT.Certificate.betaGrid) <
+          188606746 / 100000000
+'MathLab.WT.Witness.smooth_profile_approximation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MathLab.WT.Witness.smooth_profile_sequence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MathLab.WT.smooth_infimum_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MathLab.WT.Witness.universal_product_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MathLab.WT.Certificate.certified_witness' depends on axioms: [propext, Classical.choice, Quot.sound]

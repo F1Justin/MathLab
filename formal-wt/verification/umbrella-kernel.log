@@ -1,0 +1,7 @@
+replaying exactly MathLab.WT into its import environment
+standard kernel accepted MathLab.WT
+replaying exactly MathLab.WT.AxiomAudit into its import environment
+standard kernel accepted MathLab.WT.AxiomAudit
+replaying exactly MathLab into its import environment
+standard kernel accepted MathLab
+EXIT 0
