@@ -1,0 +1,228 @@
+% Compile with pdflatex twice.
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,amsthm}
+\usepackage[left=0.96in,right=0.96in,top=0.85in,bottom=0.83in]{geometry}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=blue!48!black,urlcolor=blue!48!black]{hyperref}
+\hypersetup{pdftitle={Approximation by compact even convolution squares on the line},pdfauthor={MathLab working manuscript}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\R}{\mathbb R}
+\newcommand{\cV}{\mathcal V}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\ind}{\mathbf 1}
+\title{Approximation by compact even convolution squares on the line}
+\author{MathLab working manuscript}
+\date{29 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let \(A\) be a nonnegative continuous positive definite probability density supported in \([-v,v]\), with \(A(0)\le\beta\). We approximate \(A\) by \(V*V\) for real even smooth mass-one factors supported in \([-R,R]\), requiring \(V*V\ge0\) everywhere. For \(\beta>1/v\) the worst-case error has order \(R^{-2}\) in both the uniform and \(L^1\) norms. For each fixed density it is \(o(R^{-2})\), with arbitrarily slow convergence after multiplication by \(R^2\). The upper bound follows from a cubic Fourier estimate and a compact correction of the autocorrelation. For a finite window--table law in the sense of Carter, O'Bryant and Tao, the same window achieves the pointwise rate while a single even table simultaneously matches the cover and the two actual energy costs in the limit.
+\end{abstract}
+
+\section{The support-radius problem}
+Let \(\cP_{v,\beta}\) denote the continuous, nonnegative, positive definite probability densities \(A\) on \(\R\) with support in \([-v,v]\) and \(A(0)\le\beta\). Thus for any finite choice of \(x_i\in\R\) the matrix \((A(x_i-x_j))_{ij}\) is positive semidefinite. Let \(\cV_R\) consist of real, even \(V\in C_c^\infty(\R)\) of mass one with support in \([-R,R]\) and nonnegative \(V*V\) on the whole line. The factor \(V\) may change sign. Set
+\[
+ e_R(A)=\inf_{V\in\cV_R}\big(\|V*V-A\|_\infty+\|V*V-A\|_1\big).
+\]
+
+\begin{theorem}\label{th:rate}
+For \(v>0\) and \(\beta>1/v\), there are \(c_v,C_{v,\beta}>0\) such that for all sufficiently large \(R\)
+\[
+ c_v R^{-2}\le \sup_{A\in\cP_{v,\beta}} e_R(A)\le C_{v,\beta}R^{-2}.
+\]
+The two bounds also hold for each norm separately. For every fixed \(A\) one has \(R^2e_R(A)\to0\). If \(\beta=1/v\), then \(e_R(A)=0\) for \(R>v/2\).
+\end{theorem}
+
+Boas, Kac and Krein's one-dimensional factorization theorem gives \(A=w*\widetilde w\) with \(w\in L^2\) supported on an interval of length \(v\), where \(\widetilde w(x)=\overline{w(-x)}\). Translate this interval to \([0,v]\) and multiply \(w\) by a phase to make its integral one. The energy is \(\|w\|_2^2=A(0)\). Ehm, Gneiting and Richards characterize exact compact even factors using the complex zeros of \(\widehat A\) \cite[Theorem 2.1]{egr}. Phillips and Schmidt prove a qualitative \(L^1\) approximation statement for general \(L^2\) factors \cite[Corollary 5]{ps}. Theorem~\ref{th:rate} quantifies the simultaneous requirements of evenness, bounded support and pointwise nonnegative autocorrelation.
+
+We allow a finite mixture \(A=\sum_i p_i w_i*\widetilde w_i\) in the upper-bound proof, with \(p_i>0\), \(\sum_i p_i=1\), each \(w_i\) supported in \([0,v]\), and \(\sum_i p_i\|w_i\|_2^2\le\beta\). The factorization above covers all of \(\cP_{v,\beta}\), and this more general formulation will retain the input atoms for the application in Section~\ref{sec:wt}. Cauchy--Schwarz gives \(\|w\|_2^2\ge1/v\). At equality the factor is constant on \([0,v]\). Smooth its centred translate with arbitrarily narrow even probability bumps to obtain the zero infimum asserted in the theorem.
+
+\section{The upper bounds}
+\subsection{A cubic Fourier estimate}
+
+Use \(\widehat f(t)=\int e^{-itx}f(x)\,dx\). Set \(P(t)=(\sqrt{p_i}\widehat w_i(t))_i\) and \(F(t)=\|P(t)\|\), so \(F^2=\widehat A\), \(F(0)=1\). For \(k=0,1,2\),
+\[
+ \int_{\mathbb R}\|P^{(k)}\|^2\le 2\pi v^{2k}\beta
+\]
+by Plancherel. The vector norm is Euclidean on the realification of the complex coordinates. Thus \(|F'|\le\|P'\|\) almost everywhere and \(F\in H^1\). These bounds are independent of the number of atoms.
+
+We use either \(g=F\), or a signed even root \(g^2=F^2\) specified below. First take \(g=F\). Its derivative has locally bounded variation. For an interval \(J\) of length three,
+\[
+   |Dg'|(J)\le 2\sup_{\bar J}\|P'\|+2\int_J\|P''\| .               \tag{1}
+\]
+One can take \(J\) open, or include endpoints by an arbitrarily small enlargement. Indeed \(F_\epsilon=(\|P\|^2+\epsilon^2)^{1/2}\) has \(|F_\epsilon'|\le\|P'\|\) and \(F_\epsilon''\ge-\|P''\|\) by convexity and the bound one on the gradient of the regularized norm. Integrating its second derivative and its negative part proves the variation bound, which passes to the distributional limit. In particular, for \(I_m=[m,m+1]\) and \(J_m=[m-1,m+2]\),
+\[
+ \sum_m\sup_{J_m}\|P'\|\; |Dg'|(J_m)\le C(v,\beta).               \tag{2}
+\]
+For this formula one may use the slightly larger open intervals \((m-2,m+3)\) in (1), with the identical endpoint proof for length five. The one-dimensional local Sobolev inequality bounds \(\sum_m(\sup_{J_m}\|P'\|)^2\) by \(C(\|P'\|_2^2+\|P''\|_2^2)\), and bounded overlap and Cauchy--Schwarz complete (2).
+
+Take a real even \(C^\infty_c\) function \(\chi\), equal to one in a neighborhood of zero and supported in \([-1,1]\). Let \(\psi\) be its inverse Fourier transform and \(\psi_h(t)=h^{-1}\psi(t/h)\). This is a real kernel of integral one, with all strictly positive integer moments zero. For \(h\) sufficiently small depending on \(v\), \(\psi_h*g^2=g^2\): in the inverse transform this multiplies \(A\), supported on \([-v,v]\), by \(\chi(hx)=1\). Put \(G=\psi_h*g\). We claim
+\[
+                         \|G^2-g^2\|_1\le C(v,\beta)h^3 .          \tag{3}
+\]
+By the exact identity
+\[
+ g^2(t)-G(t)^2=\tfrac12\iint\psi_h(y)\psi_h(z)
+                       [g(t-y)-g(t-z)]^2\,dy\,dz,
+\]
+we can subtract \(g'(t)^2(y-z)^2\) inside the right-hand integral without changing its value. For \(\rho=\max(|y|,|z|)\le1\), the absolute difference between the two squares, at almost every \(t\), is bounded by
+\[
+ 2|y-z|^2\sup_{[t-\rho,t+\rho]}\|P'\|\;|Dg'|([t-\rho,t+\rho]).
+\]
+This follows by integrating \(g'\) between the two arguments and comparing its mean there with \(g'(t)\). Integrating over \(I_m\) and using Fubini costs at most \(4\rho |y-z|^2 \sup_{J_m}\|P'\|\, |Dg'|(J_m)\). If \(\rho>1\), translation in \(H^1\) bounds the integrated difference by \(2|y-z|^2\|g'\|_2^2\), also \(O(\rho |y-z|^2)\). Now integrate against \(|\psi_h(y)\psi_h(z)|\). Its moment of \(\rho |y-z|^2\) is \(O(h^3)\). This proves (3).
+
+For each fixed \(A\), there is an even real analytic signed square root \(g\) on the real axis with \(g(0)=1\). Indeed \(\widehat A\) is entire, real nonnegative on \(\mathbb R\), and not identically zero. Its real zeros are isolated and of even multiplicity. Continue the positive square root from zero across each real zero of multiplicity \(2k\) using its local analytic factor \((t-t_0)^k\) times the positive analytic square root of the remaining nonvanishing factor. Uniqueness of the analytic continuation along the real axis gives evenness. This is a real-axis statement. Complex zeros of odd multiplicity can still obstruct compact exact factors.
+
+On zero-free intervals \(g'=\pm F'\). At a zero where \(F'\) jumps, \(g'\) is continuous. Splitting compact intervals at their finitely many zeros therefore shows \(|Dg'|\le |DF'|\) as measures and \(|g'|\le\|P'\|\) almost everywhere. Thus (1)--(3) apply unchanged. In fact \(\|G^2-g^2\|_1=o_A(h^3)\). On each fixed compact interval, Taylor expansion to order three gives \(G-g=O_A(h^4)\) uniformly, since \(g\) is smooth there and globally bounded (\(|g|^2=\widehat A\le1\)). The Schwartz tail outside an enlarged interval is \(O_{A,M}(h^M)\) for each \(M\). Outside a large compact interval and for \(\rho\le1\), the preceding proof of (3) uses only a tail of the convergent series (2). For \(\rho>1\) the integrated bound contributes \(o(h^3)\) by the Schwartz tail. Taking first \(h\to0\) and then the compact interval to \(\mathbb R\) proves the assertion.
+
+\subsection{A compact window with nonnegative autocorrelation}
+
+For the uniform estimate use \(g=F\). For the pointwise estimate use the signed root. Write \(s=\mathcal F^{-1}g\), real and even. Its \(L^1\) norm and \(\|x s(x)\|_2\) are bounded in terms of \(v,\beta\) by \(g\in H^1\), Plancherel and Cauchy--Schwarz with \((1+x^2)^{-1}\). At zero \(G(0)=1+O_v(h^4)\): \(\widehat A(0)=1\), \(|\widehat A^{(j)}|\le v^j\) since \(A\) is a nonnegative probability density on \([-v,v]\), and the square root has uniformly bounded first four derivatives in a fixed neighborhood of zero. Use the Taylor expansion and the vanishing moments as above.
+
+Take \(M=R-1\), \(K=M/200=1/h\) and \(b(x)=\chi(x/K)s(x)/G(0)\). Then \(\int b=1\), \(\|b\|_1+\|xb\|_2\le C(v,\beta)\), and \(b\) is real even and supported in \([-K,K]\). Fourier inversion and (3) give
+\[
+ E=\|b*b-A\|_\infty=O_{v,\beta}(K^{-3}),\qquad
+ E=o_A(K^{-3})\ \text{for the fixed-input signed root}.            \tag{4}
+\]
+The normalization error is \(O_v(h^4)\|G^2\|_1\), with \(\|G^2\|_1=O_{v,\beta}(1)\).
+
+Normalize \(u(x)=Z^{-1}\exp[-\gamma(|x|-3M/4)_+]\mathbf1_{|x|\le M}\), where \(\gamma=40\log(M)/M\) and \(Z\asymp M\). For \(|x|\le M-K\), translation by a distance at most \(K\) stays in the support, and
+\[
+   b*u(x)\ge u(x)\Big(1-\int |b(y)|(e^{\gamma |y|}-1)\,dy\Big)\ge u(x)/2.
+\]
+Indeed the integral is at most \(\gamma e^{\gamma K}(2K)^{1/2}\|yb(y)\|_2=o(1)\). On \(|x|\le2K\) the convolution equals \(1/Z\). In \(M-K<|x|\le M+K\), it has absolute value at most \(C M^{-1}e^{-\gamma(M/4-2K)}\le C M^{-10}\). The overlapping plateaux give \(u*u(x)\ge c/M\) throughout \(|x|\le M+K\).
+
+Set \(\eta=4ZE+M^{-3}\) and \(V_0=(1-\eta)b+\eta u\). Then \(\eta=O(R^{-2})\) uniformly and \(\eta=o_A(R^{-2})\) in the fixed-input construction. For large \(R\), one has \(0<\eta<1/2\). In \(|x|\le2K\), \(b*b\ge-E\) by nonnegativity of \(A\), and the positive mixed term dominates \(E\). In \(2K<|x|\le M-K\), \(b*b=0\) and the mixed term is nonnegative. In the boundary band the mixed term is at least \(-C\eta M^{-10}\), dominated by \(c\eta^2/M\) since \(\eta\ge M^{-3}\). Beyond \(M+K\) only \(\eta^2 u*u\) survives. Thus \(V_0*V_0\ge0\) everywhere. Equations (4), \(\|A\|_\infty\le\beta\), \(\|b*u\|_\infty=O(1/M)\), and \(\|u*u\|_\infty=O(1/M)\) bound the uniform profile error by \(O_{v,\beta}(\eta+E)\).
+
+Convolve \(V_0\) with an even nonnegative smooth probability bump of radius less than one. Its radius can be taken small enough, depending on the continuous input \(A\), that the double smoothing changes \(A\) by at most \(R^{-3}\) uniformly. Contraction in the sup norm preserves the preceding error order. The resulting window \(V\) is smooth of mass one and satisfies every stated support and positivity requirement. Since both profiles are nonnegative with integral one, \(\|V*V-A\|_1=2\int(A-V*V)_+\le4v\|V*V-A\|_\infty\).
+
+
+\section{Sharpness}\label{sec:sharp}
+Let \(w=p\ind_{[0,1)}+(1-p)\ind_{[1,2)}\) with \(p=e^a/(1+e^a)\). Its autocorrelation \(A\) is nonnegative, has support in \([-2,2]\), and satisfies
+\[
+  \widehat A(z)=\left(\frac{\sin(z/2)}{z/2}\right)^2
+                      \frac{\cosh a+\cos z}{1+\cosh a}.
+\]
+For \(R\ge1\), take \(a=(2R)^{-1}\). The circle \(\Gamma:|z-\pi-ia|=a/2\) encloses exactly one zero of \(\widehat A\). Its boundary modulus is at least \(c a^2\), with absolute \(c>0\). Indeed for \(u=z-\pi\), factor the numerator as \(2\sin((u-ia)/2)\sin((u+ia)/2)\). The two distances are at least \(a/2\) and \(3a/2\), the sinc factor is uniformly nonzero there, and \(|\sin z|/|z|\) has positive lower bound on the closed unit disk.
+
+For \(V\in\cV_R\), the transform of \(B=V*V\) is an entire square. Rouché's theorem gives \(ca^2\le\max_{\Gamma}|\widehat A-\widehat B|\le e^{3Ra}\|A-B\|_1\), using the radius \(2R\) for the support of the difference. Nonnegativity and equal masses give \(\|A-B\|_1\le8\|A-B\|_\infty\). Dilation of the cells by \(v/2\) gives a density in \(\cP_{v,\beta}\) for all large \(R\), since its energy \((2/v)(p^2+(1-p)^2)\) tends to \(1/v\). These windows, paired with the table $\ind_{[-2,4]}$ before dilation, are strong window--table inputs as in Section~\ref{sec:wt}. This proves the two minimax lower bounds.
+
+\subsection{Arbitrarily slow convergence for a fixed density}
+Given a nonnegative summable sequence \((u_m)_{m\ge1}\), there is a single bounded positive mass-one window \(w\) on \([0,1]\) such that, with \(A=w*\widetilde w\),
+\[
+      R^2\|A-V*V\|_\infty\ge c\,u_{\lceil\log_2 R\rceil}
+      \qquad (R\ge R_0,\ V\in\cV_R).
+\]
+The constants may depend on \(u\). Set \(a_m=\max(\sqrt{u_m},m^{-3/4})\in\ell^2\). Kislyakov's one-sided Fourier majorant theorem gives a continuous \(H\) on the circle, with no negative Fourier coefficients, satisfying \(|\widehat H(m)|\ge a_m\) \cite[p.~148]{kis}. On \([0,1/2]\) put
+\[
+ g_0(x)=1+\lambda\Re\{e^{2\pi i x}H(e^{4\pi i x})\},\qquad
+ f=g_0\Big/\Big(2\int_0^{1/2}g_0\Big)
+\]
+with \(\lambda\|H\|_\infty\le1/16\) and \(\lambda>0\). Write \(G(z)=\int_0^{1/2}f(x)e^{-izx}dx\), \(N_m=2\pi(2m+1)\), \(G_m=G(N_m)\). Before division by the normalizing constant, the coefficient at \(N_m\) is \(2/(iN_m)+\lambda\widehat H(m)/4\). The reflected term vanishes because \(\widehat H(-m-1)=0\). Therefore \(|G_m|\ge c'a_m\) for large \(m\), and \(|G_m|\le1/2\).
+
+Repeat \(f\) on both halves of \([0,1]\) and add \(2\Re\sum_{m\ge1}\tau_m G_m e^{iN_mx}\), where \(\tau_m=2^{-m}/16\). The resulting \(w\) has mass one and values strictly between zero and two. If \(W=\widehat w\), the repeated part has transform \((1+e^{-iz/2})G(z)\), and the perturbation has derivative contribution \(O(1/m)\) at \(N_m\), by one integration by parts in the transform of \(x\) times the smooth perturbation. Hence
+\[
+ W(N_m)=\tau_mG_m,\qquad W'(N_m)=iG_m/2+o(|G_m|).
+\]
+Putting \(z=N_m+2\tau_m h\), the normalized transforms \(W(z)/(\tau_mG_m)\) and \(W(-z)/(\tau_m\overline{G_m})\) tend to \(1+ih\) and \(1-ih\) uniformly on compact \(h\)-disks. The second derivative is uniformly bounded on the unit strip and \(\tau_m/|G_m|\to0\). The disk \(|h-i|<1/2\) then contains exactly one zero of \(\widehat A=W(z)W(-z)\), with boundary modulus at least \(c''\tau_m^2|G_m|^2\). The preceding square-parity argument and \(m=\lceil\log_2R\rceil\) give the asserted lower bound. This \(A\) is in \(\cP_{1,2}\).
+
+Given any \(q(R)>0\) tending to zero, choose \(m_j\uparrow\infty\) so that \(q(2^{m_j})\le2^{-2j}\). Setting \(u_{m_j}=2^{-j}\) and zero elsewhere gives a fixed \(A\) for which \(R^2e_R(A)/q(R)\) is unbounded along that subsequence.
+
+\section{Simultaneous approximation for window--table laws}\label{sec:wt}
+Carter, O'Bryant and Tao \cite[Definition 2.1]{cot} use a finite joint law of real bounded integrable pairs \((w_i,t_i)\). A window has mass one and support in \([0,v]\). The table is supported in \([-v,\sigma]\) and is one in \((0,\sigma-v)\), where \(\sigma\ge2v\). The mean autocorrelation \(A\) is nonnegative and the mean cover \(\sum_i p_i w_i*t_i\) is at least one on \([0,\sigma]\). Define the actual costs \(B=A(0)\) and \(H=\sum_i p_i\|t_i\|_2^2-\sigma\).
+
+Centre the windows at zero and the tables at zero by separate translations of \(v/2\) and \((\sigma-v)/2\). For \(L\ge\sigma/2\), move the two shoulders of each table with the endpoints of \([-L,L]\), filling the middle with ones. This preserves the surplus \(H\) and gives a mean cover \(C_L\ge1\) on \([-L,L]\) \cite[Lemma 2.7]{cot}. Write \(C_L^+(x)=(C_L(x)+C_L(-x))/2\). It has two fixed continuous shoulder profiles, translated or reflected about the endpoints, and a unit plateau between them. Akwei and Williams determine the sharp unconstrained WT objective and the deterministic and symmetric infima \cite{aw}. Here both profiles and both costs are prescribed by the input law.
+
+\begin{theorem}\label{th:joint}
+For each fixed input and all sufficiently large \(R\), there is a smooth deterministic WT pair \(V_R,T_R\), even in the respective centred coordinates, with \(L=50R\), declared width \(12R\), and actual window support inside \([-R,R]\). It satisfies
+\begin{align*}
+ \|V_R*V_R-A\|_\infty+\|V_R*V_R-A\|_1 &=o_A(R^{-2}),\\
+ \|V_R*T_R-C_L^+\|_\infty &\longrightarrow0,\\
+ \|V_R\|_2^2-B &=o_A(R^{-2}),\qquad \|T_R\|_2^2-2L\longrightarrow H .
+\end{align*}
+The covering inequality and the nonnegativity of the autocorrelation hold pointwise.
+\end{theorem}
+\noindent The energy assertion follows by evaluating the autocorrelation at zero. We give the remaining details.
+\subsection{The window and its primitive}
+
+Pair every centred atom with its jointly reflected atom, with half the old mass each. This gives the reflected cover and preserves the actual costs and autocorrelation. Choose the real analytic even signed root \(g(0)=1\), \(g^2=\widehat A\), from Section~2, and put \(s=\mathcal F^{-1}g\). In addition to \(s\in L^1\cap L^2\), its one-sided tail integrals are \(O_A(|x|^{-2})\). To prove this take a real even smooth compact probability density \(b_*\). The function
+\[
+    Q(t)=\frac{g(t)-\widehat b_*(t)}{it}
+\]
+belongs to \(L^1\). Use local analyticity at zero and \(g\in L^2\) at infinity. Its distributional second derivative is a finite measure: the proof of (1)--(2) in Section~2 gives \(\sum_{m\in\mathbb Z}|Dg'|([m,m+1])^2<\infty\), by the local Sobolev bound and bounded overlap. Thus \(|t|^{-1}|Dg'|\) is integrable outside \([-1,1]\) by Cauchy--Schwarz. The other two terms involve \(g'/t^2\) and \(g/t^3\), both integrable there. The same argument applies to \(\widehat b_*\). Fourier inversion gives \(\mathcal F^{-1}Q=O_A(|x|^{-2})\), with derivative \(s-b_*\). Its limits vanish at both ends. Outside the fixed support of \(b_*\) it therefore gives the asserted tail bounds.
+
+Use the compact window of Section~2, including its signed root. Besides its autocorrelation rate, it obeys
+\[
+  \|V_R\|_1+\|V_R\|_2=O_A(1),\qquad
+  \sup_x\left|\int_{-\infty}^x(V_R-s)\right|=O_A(R^{-2}).          \tag{5}
+\]
+Indeed the cutoff error \((\chi(x/K)-1)s(x)\), with \(K\asymp R\), acts only in the two tails \(|x|\ge cK\). Integrating it by parts using the just-proved primitive bound and the fixed total variation of the dilated cutoff gives \(O_A(K^{-2})\) for every partial integral, including ones that cross both tails. Normalization costs \(O_A(K^{-4})\) in \(L^1\). The positivity repair changes the window by \(o_A(R^{-2})\) in \(L^1\). Choose the last smooth probability bump small enough that its \(L^1\) change to this window is at most \(R^{-3}\), and also meets the modulus-of-continuity choice for \(A\) in Section~2. Translation continuity in \(L^1\) allows both choices.
+
+\subsection{Smoothing the tables alone}
+
+Choose a nonnegative even Schwartz probability density \(\phi\) whose Fourier transform is smooth and compactly supported, for instance a normalized square of a real even inverse transform of a smooth compactly supported function. For \(N\ge1\) put \(\phi_N(x)=N\phi(Nx)\) and \(\chi_N=\widehat\phi_N\). For the paired atom \(i\) define
+\[
+ \widehat K_i=p_i\chi_N\,\widehat w_i/g,\qquad U_L=\sum_i K_i*t_{i,L}.
+\]
+The quotient has removable real singularities. At any real zero of \(g\) of order \(k\), each entire \(\widehat w_i\) with \(p_i>0\) vanishes to order at least \(k\) by the sum of squared moduli on the real axis. All the kernels are therefore Schwartz for fixed \(N\). They are real by the conjugation symmetry. The joint reflection makes \(U_L\) even. The identities \(\sum_i\int K_i=1\) and
+\[
+       s*U_L=\phi_N*C_L^+,\qquad \|U_L\|_2^2\le2L+H
+\]
+follow from the Fourier product and pointwise Cauchy--Schwarz, using \(|\chi_N|\le1\). Extend the frequency inequality across the finitely many zeros on the support of \(\chi_N\) by continuity.
+
+The surplus estimate also needs
+\[
+          \sup_{N\ge1,L\text{ large}}\|U_L-\mathbf1_{[-L,L]}\|_2<\infty. \tag{6}
+\]
+Write \(I_L=\mathbf1_{[-L,L]}\). Each \(t_{i,L}-I_L\) is a fixed pair of bounded shoulders, translated with the endpoints, with uniformly bounded \(L^2\) norm. The contribution of these differences is bounded in \(L^2\) by the same frequency Cauchy--Schwarz. For the remaining term put \(m(t)=\sum_i p_i\widehat w_i(t)/g(t)\) with the same removable values. One has \(|m|\le1,\ m(0)=1\), and \(m\) is smooth near zero. Uniformly for \(N\ge1\), \(|\chi_N(t)m(t)-1|\le C\min(|t|,1)\), adjusting \(C\) for \(|t|\ge1\). Since \(|\widehat I_L(t)|\le 2/|t|\), Plancherel proves (6).
+
+For fixed \(N\), \(U_L\) is smooth with bounded total variation independently of \(L\). The derivative of \(K_i*I_L\) is the difference of two translates of \(K_i\), and the derivative of \(K_i*(t_{i,L}-I_L)\) has \(L^1\) bound \(\|K_i'\|_1\|t_{i,L}-I_L\|_1\). Hence (5) and integration by parts yield \(\|(V_R-s)*U_L\|_\infty=O_N(R^{-2})\). Constants indexed by \(N\) here and below may also depend on the original input.
+
+Put \(L=50R\). Smoothly blend \(U_L\) to one for \(|x|\le L-R/4\) and to zero for \(|x|\ge L+R/4\), with both transitions where the distance to the endpoint is at least \(R/8\). The resulting even \(T_0\) satisfies \(\|T_0-U_L\|_\infty+\|T_0-U_L\|_2=O_{N,k}(R^{-k})\) for every fixed \(k\): each shoulder and each end of the blurred interval has Schwartz tail at its distance from the endpoint, uniformly in \(L\). The inner region has length \(O(R)\) and the exterior tails are square integrable with arbitrarily high power decay. In particular
+\[
+ \|T_0\|_2^2\le2L+H+o_N(1),\qquad
+ \|V_R*T_0-\phi_N*C_L^+\|_\infty\le a_N R^{-2}                  \tag{7}
+\]
+for all sufficiently large \(R\) at fixed \(N\). Equation (6) bounds \(\|T_0-I_L\|_2\) by an input-dependent constant plus \(o_N(1)\).
+
+\subsection{Local payment for the covering deficit}
+
+The two shoulders of \(C_L^+\) are translates or reflections of fixed continuous profiles, with a unit plateau between them. Thus \(\varepsilon_N=\sup_{L\text{ large}}\|\phi_N*C_L^+-C_L^+\|_\infty\to0\). For \(x\in[-L,L]\) and \(t=L-|x|\), nonnegativity of \(\phi_N\) and \(C_L^+\ge1\) on the interval give
+\[
+ (1-\phi_N*C_L^+(x))_+\le m_N(t)
+ :=\min\!\left(\varepsilon_N,(1+\sup_L\|C_L^+\|_\infty)
+                         \int_{|y|\ge t}\phi_N(y)\,dy\right).
+\]
+This nonincreasing envelope has \(\int_0^\infty m_N(t)dt=O(1/N)\) by the first absolute moment of \(\phi\).
+
+With \(a_N\) as in (7), put
+\[
+ E_L(y)=2\sum_{b=\pm L}
+ \mathbf1_{|y-b|\le2R}\big[m_N((|y-b|-v)_+)+a_N R^{-2}\big],
+ \qquad  T_1=T_0+V_R*E_L .
+\]
+The old cover equals one on \(|x|\le L-5R/4\) since \(V_R\) has mass one. Every deficient \(x\) is within \(5R/4\) of its nearest endpoint \(b\). For \(|u|\le v\), \(E_L(x-u)\ge2[m_N(t)+a_N R^{-2}]\) for large \(R\). The nonnegative autocorrelation \(A_R=V_R*V_R\) has \(\int_{-v}^v A_R\to1\) by its \(L^1\) estimate. Consequently \(A_R*E_L\) corrects the entire deficit at each such \(x\), without decreasing the cover anywhere.
+
+Here \(\|E_L\|_\infty=O(\varepsilon_N+a_N R^{-2})\), and
+\[
+ \|E_L\|_1=O(v\varepsilon_N+N^{-1}+a_N/R).
+\]
+The table increment \(\Delta=V_R*E_L\) has \(L^1\) and \(L^2\) norms bounded by \(C_A\|E_L\|_1\). Its cross term with \(T_0\) is at most \(\|\Delta\|_1+\|T_0-I_L\|_2\|\Delta\|_2\) in absolute value. This is where (6) removes dependence on the sup norm of the frequency-smoothed table. By (7) the surplus of \(T_1\) is bounded above by \(H+o(1)\) along a choice \(N=N(R)\to\infty\) sufficiently slowly. The same choice gives \(\|V_R*T_1-C_L^+\|_\infty\to0\) by (7) and \(\|A_R*E_L\|_\infty\le\|E_L\|_\infty\). For example, for each integer \(N\) take an increasing threshold beyond which all its fixed-\(N\) errors and \(a_N/R\) are at most \(1/N\). Between adjacent thresholds keep the lower \(N\).
+
+The smooth even table \(T_1\) equals one for \(|x|<L-3R\) and vanishes for \(|x|>L+3R\), within the required plateau and support for declared width \(12R\). If its surplus is below \(H\), insert two equal even-reflected smooth bumps near \(\pm(L+5R)\), disjoint from the table and at distance greater than \(R\) from the covered interval. Their squared norms can fill the shortfall exactly. For each \(R\) choose their supports narrow enough that their \(L^1\) norms times \(\|V_R\|_\infty\) total at most \(R^{-1}\). The table surplus becomes the maximum of \(H\) and its previous value. The feasibility inequalities and the limiting profile persist. This proves the joint assertion.
+
+
+\paragraph{Research and verification.}
+AI systems constructed the mathematical arguments and checked them in independent contexts under human research direction. The quantitative theorems in this manuscript have natural-language proofs. The companion working paper contains a Lean formalization of the qualitative simultaneous approximation and the cost-closure theorem \cite{ml}.
+
+\begin{thebibliography}{9}
+\bibitem{egr} W. Ehm, T. Gneiting and D. Richards, \emph{Convolution roots of radial positive definite functions with compact support}, Trans. Amer. Math. Soc. \textbf{356} (2004), 4655--4685. \href{https://doi.org/10.1090/S0002-9947-04-03502-0}{DOI}.
+\bibitem{ps} T. R. L. Phillips and K. M. Schmidt, \emph{On unbounded positive definite functions}, Math. Pannon. \textbf{26} (2018), 33--51. \href{https://orca.cardiff.ac.uk/id/eprint/115573/1/Bochner4c.pdf}{Authors' manuscript}.
+\bibitem{kis} S. V. Kislyakov, \emph{Fourier coefficients of continuous functions and a class of multipliers}, Ann. Inst. Fourier \textbf{38} (1988), 147--183. See the discussion of the one-sided majorant theorem on p.~148 and reference [7] therein. \href{https://doi.org/10.5802/aif.1138}{DOI}.
+\bibitem{cot} D. Carter, K. O'Bryant and T. Tao, \emph{On the diameter and distribution of Sidon sets}, 2026. \href{https://arxiv.org/abs/2610.36207v1}{arXiv:2610.36207v1}.
+\bibitem{aw} J. Akwei and A. Williams, \emph{The sharp WT-triple bound: stability and witness width}, version 05, 17 November 2026. \href{https://doi.org/10.5281/zenodo.24326518}{Zenodo record}.
+\bibitem{ml} MathLab, \emph{A single even signed window for WT witnesses}, working manuscript, 2026. \href{https://github.com/F1Justin/MathLab/tree/ae92acdcae0f6bd718a9cdfb3e537606f86f0336/papers/wt-derandomization}{Manuscript and reproduction materials}.
+\end{thebibliography}
+\end{document}
